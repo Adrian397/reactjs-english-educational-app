@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    background-color: rgb(251, 248, 255)
+    background-color: rgb(251, 248, 255);
 }
 `;
 
