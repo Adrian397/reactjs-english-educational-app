@@ -1,0 +1,80 @@
+import styled from "styled-components";
+
+const GamesSection = () => {
+  return (
+    <GamesWrapper id="games">
+      <GamesInfo>
+        <span>Games</span>
+        <h2>
+          As a bonus for completing a{" "}
+          <span>
+            quiz... <img src="./circle.svg" alt="circle" />
+          </span>
+        </h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industryLorem Ipsum is simply dummy text of the printing and
+          typesetting industry Lorem Ipsum is simply dummy text of the printing
+          and typesetting industryLorem Ipsum is simply dummy text of the
+          printing and typesetting industry
+        </p>
+      </GamesInfo>
+      <GamesImg>
+        <img src="./games.svg" alt="games" />
+      </GamesImg>
+    </GamesWrapper>
+  );
+};
+
+const GamesWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 6rem;
+`;
+
+const GamesInfo = styled.div`
+  text-align: center;
+  max-width: 60rem;
+  & > span {
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-weight: 500;
+    color: #825db3;
+  }
+
+  h2 {
+    font-size: 2.625rem;
+    color: #333;
+    margin-bottom: 2rem;
+
+    span {
+      position: relative;
+    }
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    z-index: -1;
+    top: -1rem;
+    right: -1rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    color: #9fa2af;
+  }
+`;
+
+const GamesImg = styled.div`
+  img {
+    width: max-content;
+    height: 37.5rem;
+  }
+`;
+
+export default GamesSection;

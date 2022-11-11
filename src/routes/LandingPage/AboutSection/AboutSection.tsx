@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AboutSection = () => {
   return (
-    <AboutWrapper>
+    <AboutWrapper id="about">
       <AboutInfo>
         <h1>About</h1>
         <p>

@@ -2,10 +2,15 @@ import styled from "styled-components";
 
 const ActivitiesSection = () => {
   return (
-    <ActivitiesWrapper>
+    <ActivitiesWrapper id="activities">
       <ActivitiesInfo>
         <span>Activities</span>
-        <h2>How does the learning look like?</h2>
+        <h2>
+          How does the learning look{" "}
+          <span>
+            like? <img src="./circle.svg" alt="circle" />
+          </span>
+        </h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet,
           consectetur ad Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum
@@ -41,18 +46,30 @@ const ActivitiesWrapper = styled.section`
 `;
 
 const ActivitiesInfo = styled.div`
-  span {
+  & > span {
     text-transform: uppercase;
-    margin-bottom: 1rem;
     letter-spacing: 0.75px;
     font-weight: 500;
     color: #825db3;
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    z-index: -1;
+    top: -1rem;
+    right: -1rem;
   }
 
   h2 {
     font-size: 2.625rem;
     color: #333;
     margin-bottom: 2rem;
+
+    span {
+      position: relative;
+    }
   }
 
   p {

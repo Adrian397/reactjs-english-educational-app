@@ -7,10 +7,18 @@ export const Navbar = () => {
         <h1>LearningApp</h1>
       </Logo>
       <NavList>
-        <li>About</li>
-        <li>Reasons</li>
-        <li>Activities</li>
-        <li>Games</li>
+        <li>
+          <a href="#about">About</a>
+        </li>
+        <li>
+          <a href="#reasons">Reasons</a>
+        </li>
+        <li>
+          <a href="#activities">Activities</a>
+        </li>
+        <li>
+          <a href="#games">Games</a>
+        </li>
       </NavList>
       <NavButtons>
         <button>Log in</button>
@@ -47,13 +55,14 @@ const NavList = styled.ul`
   align-items: center;
   gap: 5rem;
 
-  li {
-    cursor: pointer;
+  a {
+    text-decoration: none;
     color: #9fa2af;
     font-weight: 600;
+    cursor: pointer;
   }
 
-  li:hover {
+  a:hover {
     color: #3c2f60;
   }
 `;
