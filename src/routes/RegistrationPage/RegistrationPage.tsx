@@ -1,25 +1,121 @@
-import { ReactElement } from "react";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useFormik } from "formik";
+import { ReactElement, useState } from "react";
 import styled from "styled-components";
+import * as Yup from "yup";
+import { StyledProps } from "../../utils/styledProps";
+import {
+  emailValidation,
+  passwordValidation,
+  usernameValidation,
+} from "../../utils/validationSchema";
 
 const RegistrationPage = (): ReactElement => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isUsernameTip, setIsUsernameTip] = useState(false);
+  const [isPasswordTip, setIsPasswordTip] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      username: "",
+      password: "",
+    },
+
+    validationSchema: Yup.object({
+      email: emailValidation,
+      username: usernameValidation,
+      password: passwordValidation,
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+    },
+
+    // validateOnBlur: false,
+  });
+
+  const safePasswordValidate = (password: string) => {
+    try {
+      const value = passwordValidation.validateSync(password, {
+        abortEarly: false,
+      });
+      return { status: "succcess", value };
+    } catch (e) {
+      return { status: "error", errors: (e as Yup.ValidationError).errors };
+    }
+  };
+
+  const allErrors = safePasswordValidate(formik.values.password);
+
+  console.log(formik.isValid);
+
   return (
     <RegistrationWrapper>
-      <img src="./england.svg" alt="england" />
-      <RegistrationForm>
+      <img src="./assets/england.svg" alt="england" />
+      <RegistrationForm onSubmit={formik.handleSubmit}>
         <h2>LearningApp</h2>
-        <Email>
+        <Email errors={formik.errors}>
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" />
+          <div>
+            <input
+              placeholder="Wprowadź email..."
+              type="email"
+              id="email"
+              {...formik.getFieldProps("email")}
+            />
+            {formik.values.email.length > 0 && (
+              <button
+                type="button"
+                onClick={() =>
+                  formik.setValues({ ...formik.values, email: "" })
+                }
+              >
+                <CloseRoundedIcon />
+              </button>
+            )}
+          </div>
         </Email>
-        <Username>
+        <Username errors={formik.errors}>
           <label htmlFor="username">Nazwa użytkownika:</label>
-          <input type="username" id="username" />
+          <div>
+            <input
+              placeholder="Wprowadź nazwę użytkownika..."
+              type="username"
+              id="username"
+              {...formik.getFieldProps("username")}
+            />
+
+            {formik.values.username.length > 0 && (
+              <button
+                type="button"
+                onClick={() =>
+                  formik.setValues({ ...formik.values, username: "" })
+                }
+              >
+                <CloseRoundedIcon />
+              </button>
+            )}
+          </div>
         </Username>
-        <Password>
+        <Password errors={formik.errors} isVisible={isVisible}>
           <label htmlFor="password">Hasło:</label>
-          <input type="password" id="password" />
+          <div>
+            <input
+              placeholder="Wprowadź hasło..."
+              type={isVisible ? "text" : "password"}
+              id="password"
+              {...formik.getFieldProps("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setIsVisible((prevState) => !prevState)}
+            />
+          </div>
         </Password>
-        <button>Zarejestuj się</button>
+        <RegistrationButton disabled={!formik.isValid} type="submit">
+          Zarejestuj się
+        </RegistrationButton>
       </RegistrationForm>
       <p>
         Posiadasz już konto? <span>Zaloguj się</span>
@@ -92,30 +188,115 @@ const RegistrationForm = styled.form`
       font-weight: 600;
     }
   }
+`;
 
-  button {
-    width: 100%;
-    padding: 0.5rem 0rem;
-    background-color: #825db3;
-    color: white;
-    font-weight: 700;
-    border: none;
-    border-radius: 6px;
-  }
+const RegistrationButton = styled.button`
+  width: 100%;
+  padding: 0.5rem 0rem;
+  background-color: #825db3;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 
-  button:focus-visible {
+  &:focus-visible {
     outline-color: #825db3;
   }
 `;
 
-const Email = styled.div`
+const Email = styled.div<StyledProps>`
   margin-bottom: 2rem;
+
+  div {
+    position: relative;
+    input {
+      width: 100%;
+    }
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      color: #333;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+    }
+  }
 `;
-const Username = styled.div`
+const Username = styled.div<StyledProps>`
   margin-bottom: 2rem;
+
+  div {
+    position: relative;
+    input {
+      width: 100%;
+    }
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      color: #333;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+    }
+  }
 `;
-const Password = styled.div`
+const Password = styled.div<StyledProps>`
   margin-bottom: 2.5rem;
+
+  div {
+    position: relative;
+    input {
+      width: 100%;
+    }
+
+    input:focus {
+      border-color: ${({ errors }) =>
+        errors?.username || errors?.password ? "#fa233b" : "#dbdeea"};
+    }
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: ${({ isVisible }) =>
+        isVisible
+          ? "transparent url('./assets/view.svg') no-repeat center"
+          : "transparent url('./assets/hide.svg') no-repeat center"};
+      background-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default RegistrationPage;

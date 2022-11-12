@@ -1,0 +1,20 @@
+import * as Yup from "yup";
+
+export const usernameValidation = Yup.string()
+  .matches(/^[a-zA-Z][a-zA-Z0-9.\-_]+$/, "UsernameWrongChar")
+  .max(32, "UsernameToLong")
+  .min(6, "UsernameToShort")
+  .required("Require");
+
+export const passwordValidation =
+  Yup.string().max(64).required("MaxLength") &&
+  Yup.string()
+    .min(8, "MinLength")
+    .matches(/[A-Z]/g, "CapitalLetterError")
+    .matches(/[a-z]/g, "LowerLetterError")
+    .matches(/\d/g, "DigitError")
+    .required("RequiredError");
+
+export const emailValidation = Yup.string()
+  .email("EmailError")
+  .required("EmailError");

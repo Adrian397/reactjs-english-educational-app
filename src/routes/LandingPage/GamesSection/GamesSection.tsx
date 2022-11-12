@@ -8,7 +8,7 @@ const GamesSection = () => {
         <h2>
           As a bonus for completing a{" "}
           <span>
-            quiz... <img src="./circle.svg" alt="circle" />
+            quiz... <img src="./assets/circle.svg" alt="circle" />
           </span>
         </h2>
         <p>
@@ -20,7 +20,7 @@ const GamesSection = () => {
         </p>
       </GamesInfo>
       <GamesImg>
-        <img src="./games.svg" alt="games" />
+        <img src="./assets/games.svg" alt="games" />
       </GamesImg>
     </GamesWrapper>
   );

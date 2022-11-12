@@ -4,7 +4,7 @@ import styled from "styled-components";
 const LoginPage = (): ReactElement => {
   return (
     <LoginWrapper>
-      <img src="./england.svg" alt="england" />
+      <img src="./assets/england.svg" alt="england" />
       <LoginForm>
         <h2>LearningApp</h2>
         <Username>
@@ -165,7 +165,7 @@ const RememberMe = styled.div`
     width: 1rem;
     height: 1rem;
     background-color: #825db3;
-    background-image: url(./check.svg);
+    background-image: url(.assets/check.svg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
     transform: scale(0);

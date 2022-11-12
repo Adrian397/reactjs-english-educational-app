@@ -4,14 +4,14 @@ const ReasonsSection = () => {
   return (
     <ReasonsWrapper id="reasons">
       <ReasonsImg>
-        <img src="./reasons.svg" alt="reasons" />
+        <img src="./assets/reasons.svg" alt="reasons" />
       </ReasonsImg>
       <Reasons>
         <span>REASONS</span>
         <h2>
           Why would you start learning{" "}
           <span>
-            English? <img src="./circle.svg" alt="circle" />
+            English? <img src="./assets/circle.svg" alt="circle" />
           </span>
         </h2>
         <p>

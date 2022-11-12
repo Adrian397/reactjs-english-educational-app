@@ -20,7 +20,7 @@ export const AboutSection = () => {
       <AboutFeatures>
         <Feature>
           <div>
-            <img src="./star.svg" alt="star" />
+            <img src="./assets/star.svg" alt="star" />
           </div>
           <div>
             <h3>Lorem</h3>
@@ -32,7 +32,7 @@ export const AboutSection = () => {
         </Feature>
         <Feature>
           <div>
-            <img src="./star.svg" alt="star" />
+            <img src="./assets/star.svg" alt="star" />
           </div>
           <div>
             <h3>Lorem</h3>
@@ -44,7 +44,7 @@ export const AboutSection = () => {
         </Feature>
         <Feature>
           <div>
-            <img src="./star.svg" alt="star" />
+            <img src="./assets/star.svg" alt="star" />
           </div>
           <div>
             <h3>Lorem</h3>
@@ -56,7 +56,7 @@ export const AboutSection = () => {
         </Feature>
         <Feature>
           <div>
-            <img src="./star.svg" alt="star" />
+            <img src="./assets/star.svg" alt="star" />
           </div>
           <div>
             <h3>Lorem</h3>

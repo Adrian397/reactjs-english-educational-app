@@ -3,8 +3,8 @@ import styled from "styled-components";
 const Footer = () => {
   return (
     <FooterWrapper>
-      <img src="./abstract2.svg" alt="abstract" />
-      <img src="./abstract1.svg" alt="abstract" />
+      <img src="./assets/abstract2.svg" alt="abstract" />
+      <img src="./assets/abstract1.svg" alt="abstract" />
       <FooterInfo>
         <h1>LearningApp</h1>
 
@@ -25,15 +25,15 @@ const Footer = () => {
             <div>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./facebook.svg" alt="facebook" />
+                <img src="./assets/facebook.svg" alt="facebook" />
               </a>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./twitter.svg" alt="twiiter" />
+                <img src="./assets/twitter.svg" alt="twiiter" />
               </a>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./instagram.svg" alt="instagram" />
+                <img src="./assets/instagram.svg" alt="instagram" />
               </a>
             </div>
           </FooterSocials>

@@ -12,7 +12,7 @@ export const HeroSection = () => {
         <button>Learn more</button>
       </HeroInfo>
       <HeroImg>
-        <img src="./hero.svg" alt="hero" />
+        <img src="./assets/hero.svg" alt="hero" />
       </HeroImg>
     </HeroWrapper>
   );

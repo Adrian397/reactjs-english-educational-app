@@ -8,7 +8,7 @@ const ActivitiesSection = () => {
         <h2>
           How does the learning look{" "}
           <span>
-            like? <img src="./circle.svg" alt="circle" />
+            like? <img src="./assets/circle.svg" alt="circle" />
           </span>
         </h2>
         <p>
@@ -22,15 +22,15 @@ const ActivitiesSection = () => {
 
       <Activities>
         <div>
-          <img src="./quiz.svg" alt="test" />
+          <img src="./assets/quiz.svg" alt="test" />
           <h4>QUIZ</h4>
         </div>
         <div>
-          <img src="./vocabulary.svg" alt="test" />
+          <img src="./assets/vocabulary.svg" alt="test" />
           <h4>VOCABULARY</h4>
         </div>
         <div>
-          <img src="./vocabulary.svg" alt="test" />
+          <img src="./assets/vocabulary.svg" alt="test" />
           <h4>LOREM</h4>
         </div>
       </Activities>
