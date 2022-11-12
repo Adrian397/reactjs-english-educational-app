@@ -1,8 +1,10 @@
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
 import styled from "styled-components";
 import * as Yup from "yup";
+import { PasswordTip } from "../../components/PasswordTip/PasswordTip";
 import { StyledProps } from "../../utils/styledProps";
 import {
   emailValidation,
@@ -32,7 +34,7 @@ const RegistrationPage = (): ReactElement => {
       console.log(values);
     },
 
-    // validateOnBlur: false,
+    validateOnChange: false,
   });
 
   const safePasswordValidate = (password: string) => {
@@ -48,7 +50,14 @@ const RegistrationPage = (): ReactElement => {
 
   const allErrors = safePasswordValidate(formik.values.password);
 
-  console.log(formik.isValid);
+  const errorTranslate =
+    formik.errors.username === "UsernameToLong"
+      ? "Wykorzystano maksymalną ilość znaków"
+      : formik.errors.username === "UsernameToShort"
+      ? "Niewystarczająca ilość znaków - min. 6"
+      : formik.errors.username === "UsernameWrongChar"
+      ? "Użyto niedozwolonych znaków"
+      : "Niewystarczająca ilość znaków - min. 6";
 
   return (
     <RegistrationWrapper>
@@ -64,7 +73,11 @@ const RegistrationPage = (): ReactElement => {
               id="email"
               {...formik.getFieldProps("email")}
             />
-            {formik.values.email.length > 0 && (
+            <p>
+              <ErrorOutlineIcon /> Nieprawidłowy format e-mail.
+            </p>
+
+            {formik.values.email.length >= 1 && (
               <button
                 type="button"
                 onClick={() =>
@@ -76,7 +89,10 @@ const RegistrationPage = (): ReactElement => {
             )}
           </div>
         </Email>
-        <Username errors={formik.errors}>
+        <Username
+          errors={formik.errors}
+          isVisible={isUsernameTip || formik.values.username.length >= 1}
+        >
           <label htmlFor="username">Nazwa użytkownika:</label>
           <div>
             <input
@@ -84,9 +100,20 @@ const RegistrationPage = (): ReactElement => {
               type="username"
               id="username"
               {...formik.getFieldProps("username")}
+              onBlur={() => {
+                setIsUsernameTip(false);
+                formik.validateField("username");
+              }}
+              onFocus={() => setIsUsernameTip(true)}
             />
 
-            {formik.values.username.length > 0 && (
+            <p>Min. 6, Max. 32, bez polskich znaków</p>
+
+            <p>
+              <ErrorOutlineIcon /> {errorTranslate}
+            </p>
+
+            {formik.values.username.length >= 1 && (
               <button
                 type="button"
                 onClick={() =>
@@ -106,14 +133,48 @@ const RegistrationPage = (): ReactElement => {
               type={isVisible ? "text" : "password"}
               id="password"
               {...formik.getFieldProps("password")}
+              onBlur={() => {
+                setIsPasswordTip(false);
+                formik.validateField("password");
+              }}
+              onFocus={() => setIsPasswordTip(true)}
             />
+            <PasswordTips
+              isVisible={isPasswordTip || formik.values.password.length >= 1}
+            >
+              <PasswordTip
+                isValidated={allErrors.errors?.includes("CapitalLetterError")}
+                text={"Wielka litera"}
+              />
+              <PasswordTip
+                isValidated={allErrors.errors?.includes("LowerLetterError")}
+                text={"Mała litera"}
+              />
+              <PasswordTip
+                isValidated={allErrors.errors?.includes("DigitError")}
+                text={"Cyfra"}
+              />
+              <PasswordTip
+                isValidated={allErrors.errors?.includes("MinLength")}
+                text={"Min. 8 znaków"}
+              />
+            </PasswordTips>
             <button
               type="button"
               onClick={() => setIsVisible((prevState) => !prevState)}
             />
           </div>
         </Password>
-        <RegistrationButton disabled={!formik.isValid} type="submit">
+        <RegistrationButton
+          disabled={
+            !(
+              formik.values.username &&
+              formik.values.password &&
+              formik.values.email
+            ) || !formik.isValid
+          }
+          type="submit"
+        >
           Zarejestuj się
         </RegistrationButton>
       </RegistrationForm>
@@ -141,7 +202,7 @@ const RegistrationWrapper = styled.div`
     height: 56.25rem;
   }
 
-  p {
+  p:last-child {
     font-size: 14px;
     color: #333;
 
@@ -155,7 +216,7 @@ const RegistrationWrapper = styled.div`
 `;
 
 const RegistrationForm = styled.form`
-  width: 20.3rem;
+  width: 23rem;
   background-color: white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 1.5rem 1.5rem 1rem 1.5rem;
@@ -203,15 +264,36 @@ const RegistrationButton = styled.button`
   &:focus-visible {
     outline-color: #825db3;
   }
+
+  &:disabled {
+    background-color: #b3b6cc;
+    color: #4a4f67;
+  }
 `;
 
 const Email = styled.div<StyledProps>`
-  margin-bottom: 2rem;
-
   div {
     position: relative;
     input {
       width: 100%;
+      margin-bottom: 0.5rem;
+      border-color: ${({ errors }) => (errors?.email ? "#fa233b" : "#dbdeea")};
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 14px;
+      color: #fa233b !important;
+      visibility: ${({ errors }) => (errors?.email ? "visible" : "hidden")};
+
+      svg {
+        width: 17px;
+        height: 17px;
+        margin-right: 4px;
+        fill: #fa233b;
+      }
     }
 
     button {
@@ -236,12 +318,37 @@ const Email = styled.div<StyledProps>`
   }
 `;
 const Username = styled.div<StyledProps>`
-  margin-bottom: 2rem;
-
   div {
     position: relative;
     input {
       width: 100%;
+      margin-bottom: 0.5rem;
+      border-color: ${({ errors }) =>
+        errors?.username ? "#fa233b" : "#dbdeea"};
+    }
+
+    p:nth-of-type(1) {
+      visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+      display: ${({ isVisible, errors }) =>
+        !isVisible && errors?.username ? "none" : "flex"};
+      margin-bottom: 0.5rem;
+      font-size: 14px;
+      color: #333;
+    }
+
+    p:nth-of-type(2) {
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 14px;
+      color: #fa233b !important;
+      display: ${({ errors }) => (errors?.username ? "flex" : "none")};
+
+      svg {
+        width: 17px;
+        height: 17px;
+        margin-right: 4px;
+        fill: #fa233b;
+      }
     }
 
     button {
@@ -266,17 +373,15 @@ const Username = styled.div<StyledProps>`
   }
 `;
 const Password = styled.div<StyledProps>`
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 
   div {
     position: relative;
     input {
       width: 100%;
-    }
-
-    input:focus {
+      margin-bottom: 0.5rem;
       border-color: ${({ errors }) =>
-        errors?.username || errors?.password ? "#fa233b" : "#dbdeea"};
+        errors?.password ? "#fa233b" : "#dbdeea"};
     }
 
     button {
@@ -296,6 +401,16 @@ const Password = styled.div<StyledProps>`
       border: none;
       cursor: pointer;
     }
+  }
+`;
+
+const PasswordTips = styled.div<StyledProps>`
+  display: flex;
+  align-items: center;
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+
+  span:last-child {
+    margin-right: 0rem;
   }
 `;
 
