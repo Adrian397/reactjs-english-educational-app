@@ -18,3 +18,14 @@ export const passwordValidation =
 export const emailValidation = Yup.string()
   .email("EmailError")
   .required("EmailError");
+
+export const safePasswordValidate = (password: string) => {
+  try {
+    const value = passwordValidation.validateSync(password, {
+      abortEarly: false,
+    });
+    return { status: "succcess", value };
+  } catch (e) {
+    return { status: "error", errors: (e as Yup.ValidationError).errors };
+  }
+};

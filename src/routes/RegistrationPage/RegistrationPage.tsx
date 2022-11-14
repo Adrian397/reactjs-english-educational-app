@@ -1,19 +1,24 @@
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+
 import { useFormik } from "formik";
-import { ReactElement, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { PasswordTip } from "../../components/PasswordTip/PasswordTip";
+import { KeyNames } from "../../utils/keyNames";
 import { StyledProps } from "../../utils/styledProps";
 import {
   emailValidation,
   passwordValidation,
+  safePasswordValidate,
   usernameValidation,
 } from "../../utils/validationSchema";
 
 const RegistrationPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isCapsLockOn, setIsCapsLockOn] = useState(false);
+
   const [isUsernameTip, setIsUsernameTip] = useState(false);
   const [isPasswordTip, setIsPasswordTip] = useState(false);
 
@@ -37,14 +42,11 @@ const RegistrationPage = (): ReactElement => {
     validateOnChange: false,
   });
 
-  const safePasswordValidate = (password: string) => {
-    try {
-      const value = passwordValidation.validateSync(password, {
-        abortEarly: false,
-      });
-      return { status: "succcess", value };
-    } catch (e) {
-      return { status: "error", errors: (e as Yup.ValidationError).errors };
+  const checkCapsLock = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.getModifierState(KeyNames.CapsLock)) {
+      setIsCapsLockOn(true);
+    } else {
+      setIsCapsLockOn(false);
     }
   };
 
@@ -57,7 +59,7 @@ const RegistrationPage = (): ReactElement => {
       ? "Niewystarczająca ilość znaków - min. 6"
       : formik.errors.username === "UsernameWrongChar"
       ? "Użyto niedozwolonych znaków"
-      : "Niewystarczająca ilość znaków - min. 6";
+      : undefined;
 
   return (
     <RegistrationWrapper>
@@ -72,9 +74,12 @@ const RegistrationPage = (): ReactElement => {
               type="email"
               id="email"
               {...formik.getFieldProps("email")}
+              onBlur={() => {
+                formik.validateField("email");
+              }}
             />
             <p>
-              <ErrorOutlineIcon /> Nieprawidłowy format e-mail.
+              <ErrorOutlineIcon /> Nieprawidłowy format e-mail
             </p>
 
             {formik.values.email.length >= 1 && (
@@ -125,7 +130,7 @@ const RegistrationPage = (): ReactElement => {
             )}
           </div>
         </Username>
-        <Password errors={formik.errors} isVisible={isVisible}>
+        <Password errors={formik.errors} isCapsLockOn={isCapsLockOn}>
           <label htmlFor="password">Hasło:</label>
           <div>
             <input
@@ -133,6 +138,7 @@ const RegistrationPage = (): ReactElement => {
               type={isVisible ? "text" : "password"}
               id="password"
               {...formik.getFieldProps("password")}
+              onKeyUp={(e) => checkCapsLock(e)}
               onBlur={() => {
                 setIsPasswordTip(false);
                 formik.validateField("password");
@@ -159,10 +165,13 @@ const RegistrationPage = (): ReactElement => {
                 text={"Min. 8 znaków"}
               />
             </PasswordTips>
-            <button
-              type="button"
-              onClick={() => setIsVisible((prevState) => !prevState)}
-            />
+            <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
+              <button
+                type="button"
+                onClick={() => setIsVisible((prevState) => !prevState)}
+              />
+              <span />
+            </TextInfo>
           </div>
         </Password>
         <RegistrationButton
@@ -203,14 +212,16 @@ const RegistrationWrapper = styled.div`
   }
 
   p:last-child {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #333;
+    z-index: 2137;
 
     span {
       text-decoration: underline;
       font-weight: 700;
       margin-left: 0.5rem;
       color: #825db3;
+      cursor: pointer;
     }
   }
 `;
@@ -235,6 +246,7 @@ const RegistrationForm = styled.form`
 
     input {
       padding: 0.5rem;
+      padding-right: 2.5rem;
       border: 1px solid #dbdeea;
       border-radius: 6px;
     }
@@ -377,29 +389,14 @@ const Password = styled.div<StyledProps>`
 
   div {
     position: relative;
+
     input {
       width: 100%;
       margin-bottom: 0.5rem;
+      padding-right: ${({ isCapsLockOn }) =>
+        isCapsLockOn ? "4.5rem" : "2.5rem"};
       border-color: ${({ errors }) =>
         errors?.password ? "#fa233b" : "#dbdeea"};
-    }
-
-    button {
-      width: 2rem;
-      height: 2rem;
-      position: absolute;
-      top: 0;
-      right: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: ${({ isVisible }) =>
-        isVisible
-          ? "transparent url('./assets/view.svg') no-repeat center"
-          : "transparent url('./assets/hide.svg') no-repeat center"};
-      background-size: 18px;
-      border: none;
-      cursor: pointer;
     }
   }
 `;
@@ -414,4 +411,44 @@ const PasswordTips = styled.div<StyledProps>`
   }
 `;
 
+const TextInfo = styled.div<StyledProps>`
+  position: absolute !important;
+  display: flex;
+  align-items: center;
+  top: 0;
+  right: ${({ isCapsLockOn }) => (isCapsLockOn ? "0.5rem" : "0")};
+  padding-right: ${({ isCapsLockOn }) => (!isCapsLockOn ? "0.5rem" : "0rem")};
+
+  button {
+    width: 2rem;
+    height: 2rem;
+    top: 0;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${({ isVisible }) =>
+      isVisible
+        ? "transparent url('./assets/view.svg') no-repeat center"
+        : "transparent url('./assets/hide.svg') no-repeat center"};
+    background-size: 18px;
+    border: none;
+    cursor: pointer;
+  }
+
+  span {
+    width: 32px;
+    height: 32px;
+    background: url("./assets/capsLock.svg") no-repeat center;
+    display: ${({ isCapsLockOn }) => (isCapsLockOn ? "flex" : "none")};
+
+    svg {
+      fill: #333;
+    }
+  }
+  img {
+    width: 18px;
+    height: 18px;
+  }
+`;
 export default RegistrationPage;

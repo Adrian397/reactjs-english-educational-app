@@ -36,7 +36,8 @@ const Text = styled.p<StyledProps>`
 `;
 
 const Success = styled.span`
-  margin-right: 6px;
+  margin-right: 0.375rem;
+  margin-top: 1px;
   svg {
     fill: #00a567;
     width: 0.75rem;
@@ -45,7 +46,8 @@ const Success = styled.span`
 `;
 
 const Error = styled.span`
-  margin-right: 6px;
+  margin-right: 0.375rem;
+  margin-top: 1px;
 
   svg {
     fill: #fa233b;
