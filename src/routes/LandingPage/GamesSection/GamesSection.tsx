@@ -32,6 +32,10 @@ const GamesWrapper = styled.section`
   justify-content: center;
   align-items: center;
   padding: 2rem 6rem;
+
+  @media (max-width: 920px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const GamesInfo = styled.div`
@@ -74,6 +78,20 @@ const GamesImg = styled.div`
   img {
     width: max-content;
     height: 37.5rem;
+  }
+
+  @media (max-width: 900px) {
+    img {
+      width: max-content;
+      height: 28.125rem;
+    }
+  }
+
+  @media (max-width: 665px) {
+    img {
+      width: max-content;
+      height: 18.75rem;
+    }
   }
 `;
 

@@ -72,16 +72,19 @@ export const AboutSection = () => {
 };
 
 const AboutWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 2rem 6rem;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 730px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const AboutInfo = styled.div`
   text-align: center;
-  max-width: 60rem;
+  width: 100%;
+
   h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
@@ -89,17 +92,31 @@ const AboutInfo = styled.div`
   }
 
   p {
-    margin-bottom: 3.5rem;
     line-height: 1.5;
     color: #9fa2af;
     white-space: normal;
+    max-width: 60rem;
+    margin: 3.5rem auto;
   }
 `;
 
 const AboutFeatures = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
   width: 100%;
-  justify-content: space-around;
+
+  @media (max-width: 1235px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    grid-row-gap: 2rem;
+  }
+
+  @media (max-width: 730px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Feature = styled.div`

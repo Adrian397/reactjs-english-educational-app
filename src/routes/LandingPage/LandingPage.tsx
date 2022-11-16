@@ -24,6 +24,7 @@ const LandingPage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 `;
 
 export default LandingPage;

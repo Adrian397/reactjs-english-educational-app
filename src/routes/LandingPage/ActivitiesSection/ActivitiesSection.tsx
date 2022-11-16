@@ -29,23 +29,29 @@ const ActivitiesSection = () => {
           <img src="./assets/vocabulary.svg" alt="test" />
           <h4>VOCABULARY</h4>
         </div>
-        <div>
-          <img src="./assets/vocabulary.svg" alt="test" />
-          <h4>LOREM</h4>
-        </div>
       </Activities>
     </ActivitiesWrapper>
   );
 };
 
 const ActivitiesWrapper = styled.section`
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center; */
+  display: flex;
   align-items: center;
+  justify-content: center;
+
   padding: 2rem 6rem;
+
+  @media (max-width: 1390px) {
+    flex-direction: column;
+    padding: 2rem 1rem;
+  }
 `;
 
 const ActivitiesInfo = styled.div`
+  flex: 1;
   & > span {
     text-transform: uppercase;
     letter-spacing: 0.75px;
@@ -76,10 +82,23 @@ const ActivitiesInfo = styled.div`
     color: #9fa2af;
     line-height: 1.5;
   }
+
+  @media (max-width: 1390px) {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      max-width: 60rem;
+    }
+  }
 `;
 
 const Activities = styled.div`
+  flex: 1;
   display: flex;
+  justify-content: center;
   height: 31.25rem;
 
   div:nth-child(1) {
@@ -87,10 +106,6 @@ const Activities = styled.div`
   }
 
   div:nth-child(2) {
-    align-self: center;
-  }
-
-  div:nth-child(3) {
     align-self: flex-end;
   }
 
@@ -104,6 +119,23 @@ const Activities = styled.div`
   img {
     width: 16.25rem;
     height: 18.75rem;
+  }
+
+  @media (max-width: 1390px) {
+    width: 100%;
+    justify-content: space-evenly;
+
+    div:nth-child(1) {
+      align-self: center;
+    }
+
+    div:nth-child(2) {
+      align-self: center;
+    }
+  }
+
+  @media (max-width: 645px) {
+    flex-direction: column;
   }
 `;
 
