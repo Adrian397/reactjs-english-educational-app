@@ -6,6 +6,7 @@ export type StyledProps = {
   isValidated?: boolean;
   isError?: boolean;
   initialState?: boolean;
+  imgSrc?: string;
   errors?: FormikErrors<{
     email: string;
     username: string;

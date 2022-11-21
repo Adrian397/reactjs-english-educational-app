@@ -3,10 +3,11 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 import { useFormik } from "formik";
 import React, { ReactElement, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { PasswordTip } from "../../components/PasswordTip/PasswordTip";
 import { KeyNames } from "../../utils/keyNames";
+import { paths } from "../../utils/paths";
 import { StyledProps } from "../../utils/styledProps";
 import {
   emailValidation,
@@ -14,6 +15,7 @@ import {
   safePasswordValidate,
   usernameValidation,
 } from "../../utils/validationSchema";
+import { PasswordTip } from "./PasswordTip";
 
 const RegistrationPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,6 +23,8 @@ const RegistrationPage = (): ReactElement => {
 
   const [isUsernameTip, setIsUsernameTip] = useState(false);
   const [isPasswordTip, setIsPasswordTip] = useState(false);
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -188,7 +192,8 @@ const RegistrationPage = (): ReactElement => {
         </RegistrationButton>
       </RegistrationForm>
       <p>
-        Posiadasz już konto? <span>Zaloguj się</span>
+        Posiadasz już konto?{" "}
+        <span onClick={() => navigate(paths.login)}>Zaloguj się</span>
       </p>
     </RegistrationWrapper>
   );

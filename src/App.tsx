@@ -1,14 +1,11 @@
 import GlobalStyles from "./globalStyles";
-import LandingPage from "./routes/LandingPage/LandingPage";
-// import LandingPage from "./routes/LandingPage/LandingPage";
+import { Router } from "./routes/Router";
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <LandingPage />
-      {/* <RegistrationPage /> */}
-      {/* <LoginPage /> */}
+      <Router />
     </>
   );
 };

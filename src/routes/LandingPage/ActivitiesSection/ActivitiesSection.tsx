@@ -35,9 +35,6 @@ const ActivitiesSection = () => {
 };
 
 const ActivitiesWrapper = styled.section`
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center; */
   display: flex;
   align-items: center;
   justify-content: center;

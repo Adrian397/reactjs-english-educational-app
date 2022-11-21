@@ -1,15 +1,19 @@
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { KeyNames } from "../../utils/keyNames";
+import { paths } from "../../utils/paths";
 import { StyledProps } from "../../utils/styledProps";
 
 const LoginPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -91,7 +95,8 @@ const LoginPage = (): ReactElement => {
         </LoginButton>
       </LoginForm>
       <p>
-        Nie posiadasz konta? <span>Zarejestruj się</span>
+        Nie posiadasz konta?{" "}
+        <span onClick={() => navigate(paths.register)}>Zarejestruj się</span>
       </p>
     </LoginWrapper>
   );

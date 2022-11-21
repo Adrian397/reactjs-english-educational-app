@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { paths } from "../../../utils/paths";
 import { StyledProps } from "../../../utils/styledProps";
 
 export const Navbar = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <NavWrapper>
@@ -26,8 +30,8 @@ export const Navbar = () => {
       </NavList>
       <div>
         <NavButtons>
-          <button>Log in</button>
-          <button>Register</button>
+          <button onClick={() => navigate(paths.login)}>Log in</button>
+          <button onClick={() => navigate(paths.register)}>Register</button>
         </NavButtons>
         <NavListMobile isVisible={isMenuVisible}>
           <button onClick={() => setIsMenuVisible((prevState) => !prevState)} />
