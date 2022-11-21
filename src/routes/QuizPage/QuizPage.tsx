@@ -1,4 +1,6 @@
-const QuizPage = () => {
+import { ReactElement } from "react";
+
+const QuizPage = (): ReactElement => {
   return <div>QuizPage</div>;
 };
 

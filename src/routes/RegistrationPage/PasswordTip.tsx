@@ -1,7 +1,7 @@
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { StyledProps } from "@utils/styledProps";
 import styled from "styled-components";
-import { StyledProps } from "../../utils/styledProps";
 
 type Props = {
   initialState?: boolean;

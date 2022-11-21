@@ -1,8 +1,9 @@
+import { paths } from "@utils/paths";
+import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { paths } from "../../utils/paths";
 
-const ChooseActivityPage = () => {
+const ChooseActivityPage = (): ReactElement => {
   const navigate = useNavigate();
 
   return (

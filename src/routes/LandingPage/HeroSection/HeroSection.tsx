@@ -1,5 +1,6 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
-export const HeroSection = () => {
+export const HeroSection = (): ReactElement => {
   return (
     <HeroWrapper>
       <HeroInfo>
@@ -12,7 +13,7 @@ export const HeroSection = () => {
         <button>Learn more</button>
       </HeroInfo>
       <HeroImg>
-        <img src="./assets/hero.svg" alt="hero" />
+        <img alt="hero" src="./assets/hero.svg" />
       </HeroImg>
     </HeroWrapper>
   );

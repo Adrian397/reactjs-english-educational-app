@@ -1,20 +1,21 @@
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { KeyNames } from "@utils/keyNames";
+import { paths } from "@utils/paths";
+import { StyledProps } from "@utils/styledProps";
+import {
+  emailValidation,
+  passwordValidation,
+  safePasswordValidate,
+  usernameValidation,
+} from "@utils/validationSchema";
 
 import { useFormik } from "formik";
 import React, { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { KeyNames } from "../../utils/keyNames";
-import { paths } from "../../utils/paths";
-import { StyledProps } from "../../utils/styledProps";
-import {
-  emailValidation,
-  passwordValidation,
-  safePasswordValidate,
-  usernameValidation,
-} from "../../utils/validationSchema";
+
 import { PasswordTip } from "./PasswordTip";
 
 const RegistrationPage = (): ReactElement => {
@@ -67,16 +68,16 @@ const RegistrationPage = (): ReactElement => {
 
   return (
     <RegistrationWrapper>
-      <img src="./assets/england.svg" alt="england" />
+      <img alt="england" src="./assets/england.svg" />
       <RegistrationForm onSubmit={formik.handleSubmit}>
         <h2>LearningApp</h2>
         <Email errors={formik.errors}>
           <label htmlFor="email">Email:</label>
           <div>
             <input
+              id="email"
               placeholder="Wprowadź email..."
               type="email"
-              id="email"
               {...formik.getFieldProps("email")}
               onBlur={() => {
                 formik.validateField("email");
@@ -88,10 +89,10 @@ const RegistrationPage = (): ReactElement => {
 
             {formik.values.email.length >= 1 && (
               <button
-                type="button"
                 onClick={() =>
                   formik.setValues({ ...formik.values, email: "" })
                 }
+                type="button"
               >
                 <CloseRoundedIcon />
               </button>
@@ -105,9 +106,9 @@ const RegistrationPage = (): ReactElement => {
           <label htmlFor="username">Nazwa użytkownika:</label>
           <div>
             <input
+              id="username"
               placeholder="Wprowadź nazwę użytkownika..."
               type="username"
-              id="username"
               {...formik.getFieldProps("username")}
               onBlur={() => {
                 setIsUsernameTip(false);
@@ -124,10 +125,10 @@ const RegistrationPage = (): ReactElement => {
 
             {formik.values.username.length >= 1 && (
               <button
-                type="button"
                 onClick={() =>
                   formik.setValues({ ...formik.values, username: "" })
                 }
+                type="button"
               >
                 <CloseRoundedIcon />
               </button>
@@ -138,16 +139,16 @@ const RegistrationPage = (): ReactElement => {
           <label htmlFor="password">Hasło:</label>
           <div>
             <input
+              id="password"
               placeholder="Wprowadź hasło..."
               type={isVisible ? "text" : "password"}
-              id="password"
               {...formik.getFieldProps("password")}
-              onKeyUp={(e) => checkCapsLock(e)}
               onBlur={() => {
                 setIsPasswordTip(false);
                 formik.validateField("password");
               }}
               onFocus={() => setIsPasswordTip(true)}
+              onKeyUp={(e) => checkCapsLock(e)}
             />
             <PasswordTips
               isVisible={isPasswordTip || formik.values.password.length >= 1}
@@ -171,8 +172,8 @@ const RegistrationPage = (): ReactElement => {
             </PasswordTips>
             <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
               <button
-                type="button"
                 onClick={() => setIsVisible((prevState) => !prevState)}
+                type="button"
               />
               <span />
             </TextInfo>
@@ -192,7 +193,7 @@ const RegistrationPage = (): ReactElement => {
         </RegistrationButton>
       </RegistrationForm>
       <p>
-        Posiadasz już konto?{" "}
+        Posiadasz już konto? {/* eslint-disable-next-line */}
         <span onClick={() => navigate(paths.login)}>Zaloguj się</span>
       </p>
     </RegistrationWrapper>

@@ -1,6 +1,7 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 
-const GamesSection = () => {
+const GamesSection = (): ReactElement => {
   return (
     <GamesWrapper id="games">
       <GamesInfo>
@@ -8,7 +9,7 @@ const GamesSection = () => {
         <h2>
           As a bonus for completing a{" "}
           <span>
-            quiz... <img src="./assets/circle.svg" alt="circle" />
+            quiz... <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
         <p>
@@ -20,7 +21,7 @@ const GamesSection = () => {
         </p>
       </GamesInfo>
       <GamesImg>
-        <img src="./assets/games.svg" alt="games" />
+        <img alt="games" src="./assets/games.svg" />
       </GamesImg>
     </GamesWrapper>
   );

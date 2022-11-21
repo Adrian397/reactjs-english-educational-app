@@ -1,5 +1,11 @@
 import * as Yup from "yup";
 
+type ValidationValues = {
+  errors?: string[];
+  status: string;
+  value?: string;
+};
+
 export const usernameValidation = Yup.string()
   .matches(/^[a-zA-Z][a-zA-Z0-9.\-_]+$/, "UsernameWrongChar")
   .max(32, "UsernameToLong")
@@ -19,7 +25,7 @@ export const emailValidation = Yup.string()
   .email("EmailError")
   .required("EmailError");
 
-export const safePasswordValidate = (password: string) => {
+export const safePasswordValidate = (password: string): ValidationValues => {
   try {
     const value = passwordValidation.validateSync(password, {
       abortEarly: false,

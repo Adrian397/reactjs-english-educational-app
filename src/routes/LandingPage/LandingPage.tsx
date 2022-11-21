@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 import { AboutSection } from "./AboutSection/AboutSection";
 import ActivitiesSection from "./ActivitiesSection/ActivitiesSection";
@@ -7,7 +8,7 @@ import { HeroSection } from "./HeroSection/HeroSection";
 import { Navbar } from "./Navbar/Navbar";
 import ReasonsSection from "./ReasonsSection/ReasonsSection";
 
-const LandingPage = () => {
+const LandingPage = (): ReactElement => {
   return (
     <Wrapper>
       <Navbar />

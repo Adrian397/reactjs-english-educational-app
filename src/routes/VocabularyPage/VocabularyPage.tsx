@@ -1,4 +1,6 @@
-const VocabularyPage = () => {
+import { ReactElement } from "react";
+
+const VocabularyPage = (): ReactElement => {
   return <div>VocabularyPage</div>;
 };
 

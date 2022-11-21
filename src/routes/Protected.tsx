@@ -1,9 +1,10 @@
+import { imgBasePath } from "@utils/imgs";
+import { StyledProps } from "@utils/styledProps";
+import { ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { imgBasePath } from "../utils/imgs";
-import { StyledProps } from "../utils/styledProps";
 
-const Root = () => {
+const Protected = (): ReactElement => {
   return (
     <div>
       <Logout imgSrc={imgBasePath + "/logout.svg"} />
@@ -24,4 +25,4 @@ const Logout = styled.button<StyledProps>`
   cursor: pointer;
 `;
 
-export default Root;
+export default Protected;

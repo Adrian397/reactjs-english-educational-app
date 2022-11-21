@@ -1,10 +1,11 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 
-const Footer = () => {
+const Footer = (): ReactElement => {
   return (
     <FooterWrapper>
-      <img src="./assets/abstract2.svg" alt="abstract" />
-      <img src="./assets/abstract1.svg" alt="abstract" />
+      <img alt="abstract" src="./assets/abstract2.svg" />
+      <img alt="abstract" src="./assets/abstract1.svg" />
       <FooterInfo>
         <h1>LearningApp</h1>
 
@@ -25,15 +26,15 @@ const Footer = () => {
             <div>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./assets/facebook.svg" alt="facebook" />
+                <img alt="facebook" src="./assets/facebook.svg" />
               </a>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./assets/twitter.svg" alt="twiiter" />
+                <img alt="twiiter" src="./assets/twitter.svg" />
               </a>
               {/* eslint-disable-next-line */}
               <a href="#">
-                <img src="./assets/instagram.svg" alt="instagram" />
+                <img alt="instagram" src="./assets/instagram.svg" />
               </a>
             </div>
           </FooterSocials>

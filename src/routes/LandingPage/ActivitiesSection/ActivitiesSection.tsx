@@ -1,6 +1,7 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 
-const ActivitiesSection = () => {
+const ActivitiesSection = (): ReactElement => {
   return (
     <ActivitiesWrapper id="activities">
       <ActivitiesInfo>
@@ -8,7 +9,7 @@ const ActivitiesSection = () => {
         <h2>
           How does the learning look{" "}
           <span>
-            like? <img src="./assets/circle.svg" alt="circle" />
+            like? <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
         <p>
@@ -22,11 +23,11 @@ const ActivitiesSection = () => {
 
       <Activities>
         <div>
-          <img src="./assets/quiz.svg" alt="test" />
+          <img alt="test" src="./assets/quiz.svg" />
           <h4>QUIZ</h4>
         </div>
         <div>
-          <img src="./assets/vocabulary.svg" alt="test" />
+          <img alt="test" src="./assets/vocabulary.svg" />
           <h4>VOCABULARY</h4>
         </div>
       </Activities>

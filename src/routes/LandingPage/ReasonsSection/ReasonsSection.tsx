@@ -1,17 +1,18 @@
+import { ReactElement } from "react";
 import styled from "styled-components";
 
-const ReasonsSection = () => {
+const ReasonsSection = (): ReactElement => {
   return (
     <ReasonsWrapper id="reasons">
       <ReasonsImg>
-        <img src="./assets/reasons.svg" alt="reasons" />
+        <img alt="reasons" src="./assets/reasons.svg" />
       </ReasonsImg>
       <Reasons>
         <span>REASONS</span>
         <h2>
           Why would you start learning{" "}
           <span>
-            English? <img src="./assets/circle.svg" alt="circle" />
+            English? <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
         <p>

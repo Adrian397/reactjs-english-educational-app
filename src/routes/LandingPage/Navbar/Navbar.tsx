@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { paths } from "@utils/paths";
+import { StyledProps } from "@utils/styledProps";
+import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { paths } from "../../../utils/paths";
-import { StyledProps } from "../../../utils/styledProps";
 
-export const Navbar = () => {
+export const Navbar = (): ReactElement => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const navigate = useNavigate();

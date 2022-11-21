@@ -1,12 +1,12 @@
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { KeyNames } from "@utils/keyNames";
+import { paths } from "@utils/paths";
+import { StyledProps } from "@utils/styledProps";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { KeyNames } from "../../utils/keyNames";
-import { paths } from "../../utils/paths";
-import { StyledProps } from "../../utils/styledProps";
 
 const LoginPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,26 +44,26 @@ const LoginPage = (): ReactElement => {
 
   return (
     <LoginWrapper>
-      <img src="./assets/england.svg" alt="england" />
+      <img alt="england" src="./assets/england.svg" />
       <LoginForm onSubmit={formik.handleSubmit}>
         <h2>LearningApp</h2>
         <Username isError={isError}>
           <label htmlFor="username">Nazwa użytkownika:</label>
           <input
-            type="username"
             id="username"
             placeholder="Wprowadź nazwę użytkownika..."
+            type="username"
             {...formik.getFieldProps("username")}
           />
         </Username>
-        <Password isError={isError} isCapsLockOn={isCapsLockOn}>
+        <Password isCapsLockOn={isCapsLockOn} isError={isError}>
           <label htmlFor="password">Hasło:</label>
           <div>
             <input
               id="password"
+              onKeyUp={(e) => checkCapsLock(e)}
               placeholder="Wprowadź hasło..."
               type={isVisible ? "text" : "password"}
-              onKeyUp={(e) => checkCapsLock(e)}
               {...formik.getFieldProps("password")}
             />
             <p>
@@ -71,8 +71,8 @@ const LoginPage = (): ReactElement => {
             </p>
             <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
               <button
-                type="button"
                 onClick={() => setIsVisible((prevState) => !prevState)}
+                type="button"
               />
               <span />
             </TextInfo>
@@ -80,7 +80,7 @@ const LoginPage = (): ReactElement => {
           <span>Zapomniałeś hasła?</span>
         </Password>
         <RememberMe>
-          <input type="checkbox" id="rememberMe" />
+          <input id="rememberMe" type="checkbox" />
           <label htmlFor="rememberMe">Zapamiętaj mnie w przeglądarce</label>
         </RememberMe>
 
@@ -95,7 +95,7 @@ const LoginPage = (): ReactElement => {
         </LoginButton>
       </LoginForm>
       <p>
-        Nie posiadasz konta?{" "}
+        Nie posiadasz konta? {/* eslint-disable-next-line */}
         <span onClick={() => navigate(paths.register)}>Zarejestruj się</span>
       </p>
     </LoginWrapper>

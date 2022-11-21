@@ -1,7 +1,7 @@
+import { paths } from "@utils/paths";
 import { lazy, ReactElement, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { paths } from "../utils/paths";
-import Root from "./Root";
+import Protected from "./Protected";
 
 const ChooseActivityPage = lazy(
   () => import("./ChooseActivityPage/ChooseActivityPage")
@@ -30,7 +30,7 @@ export const Router = (): ReactElement => {
         <Route
           element={
             <Suspense fallback={null}>
-              <Root />
+              <Protected />
             </Suspense>
           }
           path={paths.mainApp}
