@@ -1,3 +1,4 @@
+import { NotebookWidget } from "@components/NotebookWidget/NotebookWidget";
 import { imgBasePath } from "@utils/imgs";
 import { StyledProps } from "@utils/styledProps";
 import { ReactElement } from "react";
@@ -7,6 +8,7 @@ import styled from "styled-components";
 const Protected = (): ReactElement => {
   return (
     <div>
+      <NotebookWidget />
       <Logout imgSrc={imgBasePath + "/logout.svg"} />
       <Outlet />
     </div>
