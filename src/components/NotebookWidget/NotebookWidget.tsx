@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Notebook } from "./Notebook/Notebook";
 
 export const NotebookWidget = (): ReactElement => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <WidgetWrapper>

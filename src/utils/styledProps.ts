@@ -1,6 +1,8 @@
+import { NoteType } from "@components/NotebookWidget/Notebook/Notebook.utils";
 import { FormikErrors } from "formik/dist/types";
 
 export type StyledProps = {
+  data?: NoteType[];
   errors?: FormikErrors<{
     email: string;
     password: string;
@@ -10,6 +12,7 @@ export type StyledProps = {
   initialState?: boolean;
   isCapsLockOn?: boolean;
   isError?: boolean;
+  isExpanded?: boolean;
   isValidated?: boolean;
   isVisible?: boolean;
 };

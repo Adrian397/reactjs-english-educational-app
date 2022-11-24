@@ -1,28 +1,82 @@
 import { StyledProps } from "@utils/styledProps";
-import { ReactElement } from "react";
+import { nanoid } from "nanoid";
+import { ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
+import Note from "./Note/Note";
+import { NoteType } from "./Notebook.utils";
 
 type Props = {
   isVisible: boolean;
 };
 
 export const Notebook = ({ isVisible }: Props): ReactElement => {
+  const [data, setData] = useState<NoteType[]>(
+    JSON.parse(localStorage.getItem("notes") ?? "[]")
+  );
+  const [isExpandedCheck, setIsExpandedCheck] = useState(false);
+
+  useEffect(() => {
+    window.localStorage.setItem("notes", JSON.stringify(data));
+  }, [data]);
+
+  const handleNoteSave = (text: string, id: string) => {
+    const updatedNote = data.map((note) => {
+      if (note.id === id) {
+        return { ...note, text };
+      }
+      return note;
+    });
+
+    setData(updatedNote);
+  };
+
+  const handleNoteAdd = () => {
+    setData((prevState) => [...prevState, { text: "", id: nanoid() }]);
+  };
+
+  const handleNoteDelete = (id: string) => {
+    const updatedNote = data.filter((note) => note.id !== id);
+
+    setData(updatedNote);
+  };
+
   return (
     <NotebookWrapper isVisible={isVisible}>
       <img alt="notebook decoration" src="./assets/notebookDecoration.svg" />
       <InputWrapper>
         <SearchNotes />
       </InputWrapper>
-      <NotesWrapper>
-        <Scroll>
-          <Note />
-          <Note />
-          <Note />
+      <NotesList>
+        <Scroll data={data} isExpanded={isExpandedCheck}>
+          {(!isExpandedCheck || data.length === 0) && (
+            <AddNote onClick={handleNoteAdd}>Dodaj notatkę</AddNote>
+          )}
+          {data.map((note) => (
+            <Note
+              key={note.id}
+              note={note}
+              onExpandCheck={setIsExpandedCheck}
+              onNoteDelete={handleNoteDelete}
+              onNoteSave={handleNoteSave}
+            />
+          ))}
         </Scroll>
-      </NotesWrapper>
+      </NotesList>
     </NotebookWrapper>
   );
 };
+
+const AddNote = styled.button`
+  width: 100%;
+  padding: 0.5rem 0rem;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  background-color: #825db3;
+  margin-bottom: 1rem;
+  cursor: pointer;
+`;
 
 const NotebookWrapper = styled.div<StyledProps>`
   img {
@@ -57,7 +111,7 @@ const SearchNotes = styled.input`
   border: none;
   border-radius: 8px;
   margin-bottom: 1rem;
-  border: 1px solid black;
+  border: 1px solid #dbdeea;
 
   &:focus-visible {
     outline-color: #825db3;
@@ -68,17 +122,20 @@ const InputWrapper = styled.div`
   padding: 0rem 1.5rem;
 `;
 
-const NotesWrapper = styled.div`
+const NotesList = styled.div`
   width: 100%;
   height: calc(100% - 71px);
   padding-right: 0.5rem;
 `;
 
-const Scroll = styled.div`
+const Scroll = styled.div<StyledProps>`
   width: 100%;
   height: 100%;
   padding-left: 1.5rem;
-  padding-right: 0.6rem;
+  padding-right: ${({ data }) =>
+    data && data.length > 1
+      ? "0.6rem"
+      : "1rem"}; // change when notes.length > 2 to 1rem
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -90,11 +147,4 @@ const Scroll = styled.div`
     background-color: #c8b1e6;
     border-radius: 4px;
   }
-`;
-
-const Note = styled.div`
-  background-color: lightyellow;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  height: 15rem;
-  margin-bottom: 1rem;
 `;
