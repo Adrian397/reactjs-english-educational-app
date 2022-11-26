@@ -13,6 +13,7 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
   const [data, setData] = useState<NoteType[]>(
     JSON.parse(localStorage.getItem("notes") ?? "[]")
   );
+  const [inputValue, setInputValue] = useState("");
   const [isExpandedCheck, setIsExpandedCheck] = useState(false);
 
   useEffect(() => {
@@ -20,14 +21,14 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
   }, [data]);
 
   const handleNoteSave = (text: string, id: string) => {
-    const updatedNote = data.map((note) => {
+    const updatedNotes = data.map((note) => {
       if (note.id === id) {
         return { ...note, text };
       }
       return note;
     });
 
-    setData(updatedNote);
+    setData(updatedNotes);
   };
 
   const handleNoteAdd = () => {
@@ -35,31 +36,35 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
   };
 
   const handleNoteDelete = (id: string) => {
-    const updatedNote = data.filter((note) => note.id !== id);
-
-    setData(updatedNote);
+    const newNotes = data.filter((note) => note.id !== id);
+    setData(newNotes);
   };
 
   return (
     <NotebookWrapper isVisible={isVisible}>
       <img alt="notebook decoration" src="./assets/notebookDecoration.svg" />
       <InputWrapper>
-        <SearchNotes />
+        <SearchNotes
+          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue}
+        />
       </InputWrapper>
       <NotesList>
         <Scroll data={data} isExpanded={isExpandedCheck}>
           {(!isExpandedCheck || data.length === 0) && (
             <AddNote onClick={handleNoteAdd}>Dodaj notatkę</AddNote>
           )}
-          {data.map((note) => (
-            <Note
-              key={note.id}
-              note={note}
-              onExpandCheck={setIsExpandedCheck}
-              onNoteDelete={handleNoteDelete}
-              onNoteSave={handleNoteSave}
-            />
-          ))}
+          {data
+            .filter((val) => val.text.toLowerCase().includes(inputValue))
+            .map((note) => (
+              <Note
+                key={note.id}
+                note={note}
+                onExpandCheck={setIsExpandedCheck}
+                onNoteDelete={handleNoteDelete}
+                onNoteSave={handleNoteSave}
+              />
+            ))}
         </Scroll>
       </NotesList>
     </NotebookWrapper>
