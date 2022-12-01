@@ -1,6 +1,8 @@
 import { paths } from "@utils/paths";
 import { lazy, ReactElement, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import QuizDifficulties from "./QuizPage/QuizDifficulties/QuizDifficulties";
+import QuizQuestions from "./QuizPage/QuizQuestions/QuizQuestions";
 
 const Protected = lazy(() => import("./Protected/Protected"));
 const ChooseActivityPage = lazy(
@@ -50,7 +52,25 @@ export const Router = (): ReactElement => {
               </Suspense>
             }
             path={paths.quiz}
-          />
+          >
+            <Route
+              element={
+                <Suspense fallback={null}>
+                  <QuizDifficulties />
+                </Suspense>
+              }
+              index
+            />
+
+            <Route
+              element={
+                <Suspense fallback={null}>
+                  <QuizQuestions />
+                </Suspense>
+              }
+              path={paths.quizQuestions}
+            />
+          </Route>
 
           <Route
             element={

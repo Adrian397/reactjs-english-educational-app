@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
+import { Outlet } from "react-router-dom";
 
 const QuizPage = (): ReactElement => {
-  return <div>QuizPage</div>;
+  return <Outlet />;
 };
 
 export default QuizPage;

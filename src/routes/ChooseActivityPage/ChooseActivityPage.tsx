@@ -1,4 +1,6 @@
+import { imgBasePath } from "@utils/imgs";
 import { paths } from "@utils/paths";
+import { StyledProps } from "@utils/styledProps";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -8,11 +10,11 @@ const ChooseActivityPage = (): ReactElement => {
 
   return (
     <Wrapper>
-      <Quiz>
+      <Quiz imgSrc={imgBasePath + "/quiz.svg"}>
         <button onClick={() => navigate(paths.quiz)} />
         <span>Quiz</span>
       </Quiz>
-      <Vocabulary>
+      <Vocabulary imgSrc={imgBasePath + "/vocabulary.svg"}>
         <button onClick={() => navigate(paths.vocabulary)} />
         <span>Nauka Słownictwa</span>
       </Vocabulary>
@@ -28,7 +30,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-const Quiz = styled.div`
+const Quiz = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,14 +51,14 @@ const Quiz = styled.div`
   button {
     width: 15rem;
     height: 15rem;
-    background: transparent url("./assets/quiz.svg") no-repeat center;
+    background: transparent url(${({ imgSrc }) => imgSrc}) no-repeat center;
     background-size: 15rem;
     border: none;
     cursor: pointer;
   }
 `;
 
-const Vocabulary = styled.div`
+const Vocabulary = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +79,7 @@ const Vocabulary = styled.div`
   button {
     width: 15rem;
     height: 15rem;
-    background: transparent url("./assets/vocabulary.svg") no-repeat center;
+    background: transparent url(${({ imgSrc }) => imgSrc}) no-repeat center;
     background-size: 15rem;
     border: none;
     cursor: pointer;
