@@ -11,6 +11,8 @@ export type StyledProps = {
   imgSrc?: string;
   initialState?: boolean;
   isCapsLockOn?: boolean;
+  isCompleted?: boolean;
+  isCorrect?: boolean;
   isError?: boolean;
   isExpanded?: boolean;
   isValidated?: boolean;

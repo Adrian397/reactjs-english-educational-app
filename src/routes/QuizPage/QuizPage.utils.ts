@@ -1,3 +1,10 @@
+export type ArgsType = {
+  currentPage: number;
+  isCompleted: boolean;
+  isCorrect: boolean;
+  score: number;
+};
+
 export type DifficultyType = keyof typeof questions;
 
 export const questions = {

@@ -1,56 +1,138 @@
+import { StyledProps } from "@utils/styledProps";
 import { ReactElement, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { DifficultyType, questions } from "../QuizPage.utils";
-import { Timer } from "./Timer/Timer.jsx";
+import { ArgsType, DifficultyType, questions } from "../QuizPage.utils";
 
 const QuizQuestions = (): ReactElement => {
-  const [currentPage, setCurrentPage] = useState(0);
   const [searchParams] = useSearchParams();
+  const [args, setArgs] = useState<ArgsType>({
+    currentPage: 0,
+    score: 0,
+    isCompleted: false,
+    isCorrect: false,
+  });
+  const [resetTimer, setResetTimer] = useState(0);
 
+  const navigate = useNavigate();
   const difficulty = searchParams.get("difficulty");
-
   const questionsLength = questions[difficulty as DifficultyType].length;
 
-  const handleAnswerCorrectness = () => {
-    if (currentPage + 1 < questionsLength) {
-      setCurrentPage((prevState) => prevState + 1);
+  const handleAnswerCorrectness = (isCorrect: boolean) => {
+    if (isCorrect && args.currentPage + 1 < questionsLength) {
+      setArgs({
+        ...args,
+        currentPage: args.currentPage + 1,
+        score: args.score + 1,
+      });
+      setResetTimer((prevKey) => prevKey + 1);
+    } else if (!isCorrect && args.currentPage + 1 < questionsLength) {
+      setArgs({
+        ...args,
+        currentPage: args.currentPage + 1,
+      });
+      setResetTimer((prevKey) => prevKey + 1);
+    } else if (isCorrect && args.currentPage + 1 === questionsLength) {
+      setArgs({
+        ...args,
+        isCompleted: true,
+        score: args.score + 1,
+      });
+      setResetTimer((prevKey) => prevKey + 1);
+    } else if (!isCorrect && args.currentPage + 1 === questionsLength) {
+      setArgs({
+        ...args,
+        isCompleted: true,
+      });
+      setResetTimer((prevKey) => prevKey + 1);
     }
   };
 
-  console.log("rerender");
-
   return (
     <Wrapper>
-      {difficulty && (
-        <Quiz>
-          <div>
-            <h3>
-              Pytanie {currentPage + 1}/{questionsLength}
-            </h3>
-            <Timer
-              currentPage={currentPage}
-              onCurrentPagePage={setCurrentPage}
-              questionsLenght={questionsLength}
-            />
-          </div>
-          <p>
-            {questions[difficulty as DifficultyType][currentPage].questionText}
-          </p>
-          <Questions>
-            {questions[difficulty as DifficultyType][
-              currentPage
-            ].answerOptions.map((answerOption) => (
-              <button key={answerOption.id} onClick={handleAnswerCorrectness}>
-                {answerOption.answerText}
-              </button>
-            ))}
-          </Questions>
-        </Quiz>
-      )}
+      <Quiz isCompleted={args.isCompleted}>
+        {args.isCompleted ? (
+          <Score>
+            <p>
+              You scored {args.score} out of {questionsLength}
+            </p>
+            <p>
+              Based on your result, we encourage you to continue working on your
+              progress at <strong>beginner</strong> difficulty.
+            </p>
+            <button onClick={() => navigate(-1)}>Finish</button>
+          </Score>
+        ) : (
+          <>
+            <Heading>
+              <h3>
+                Question {args.currentPage + 1}/{questionsLength}
+              </h3>
+              <CountdownCircleTimer
+                colors="#be63f9"
+                duration={10}
+                isPlaying
+                key={resetTimer}
+                onComplete={() => {
+                  if (args.currentPage + 1 < questionsLength) {
+                    setArgs((prevState) => ({
+                      ...prevState,
+                      currentPage: prevState.currentPage + 1,
+                    }));
+                  } else {
+                    setArgs({ ...args, isCompleted: true });
+                  }
+
+                  return { shouldRepeat: true };
+                }}
+                size={60}
+                strokeWidth={6}
+              >
+                {({ remainingTime }) => remainingTime}
+              </CountdownCircleTimer>
+            </Heading>
+            <p>
+              {
+                questions[difficulty as DifficultyType][args.currentPage]
+                  .questionText
+              }
+            </p>
+            <Questions>
+              {questions[difficulty as DifficultyType][
+                args.currentPage
+              ].answerOptions.map((answerOption) => (
+                <button
+                  key={answerOption.id}
+                  onClick={() =>
+                    handleAnswerCorrectness(answerOption.isCorrect)
+                  }
+                >
+                  {answerOption.answerText}
+                </button>
+              ))}
+            </Questions>
+          </>
+        )}
+      </Quiz>
     </Wrapper>
   );
 };
+
+const Score = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  p:nth-of-type(1) {
+    font-size: 1.7rem;
+  }
+
+  strong {
+    color: #be63f9;
+  }
+`;
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -60,17 +142,32 @@ const Wrapper = styled.div`
   padding: 0 1rem;
 `;
 
-const Quiz = styled.div`
+const Heading = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Quiz = styled.div<StyledProps>`
+  position: relative;
   width: 60rem;
+  height: ${({ isCompleted }) => (isCompleted ? "436px" : "auto")};
   background-color: #eee5fd;
   border-radius: 8px;
   padding: 2rem;
 
-  & > div:nth-of-type(1) {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  button {
+    padding: 0.5rem 1.5rem;
+    letter-spacing: 0.2px;
+    border-radius: 8px;
+    border: none;
+    background-color: #be63f9;
+    color: #f5e6fe;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 120ms ease;
+    text-transform: uppercase;
   }
 
   h3 {
@@ -86,7 +183,7 @@ const Quiz = styled.div`
   }
 `;
 
-const Questions = styled.div`
+const Questions = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -95,7 +192,6 @@ const Questions = styled.div`
     text-align: left;
     padding: 1rem;
     background-color: white;
-    border: none;
     line-height: 1.5;
     font-weight: bold;
     border-radius: 8px;
