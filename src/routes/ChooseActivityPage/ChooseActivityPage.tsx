@@ -16,7 +16,7 @@ const ChooseActivityPage = (): ReactElement => {
       </Quiz>
       <Vocabulary imgSrc={imgBasePath + "/vocabulary.svg"}>
         <button onClick={() => navigate(paths.vocabulary)} />
-        <span>Nauka Słownictwa</span>
+        <span>Vocabulary</span>
       </Vocabulary>
     </Wrapper>
   );

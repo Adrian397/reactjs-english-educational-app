@@ -1,6 +1,7 @@
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { StyledProps } from "@utils/styledProps";
+import { ReactElement } from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -9,10 +10,14 @@ type Props = {
   text: string;
 };
 
-export const PasswordTip = ({ initialState, isValidated, text }: Props) => {
+export const PasswordTip = ({
+  initialState,
+  isValidated,
+  text,
+}: Props): ReactElement => {
   return (
     <>
-      <Text isValidated={isValidated} initialState={initialState}>
+      <Text initialState={initialState} isValidated={isValidated}>
         {text}
       </Text>
       {!isValidated ? (

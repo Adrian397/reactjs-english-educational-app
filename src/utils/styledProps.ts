@@ -10,6 +10,7 @@ export type StyledProps = {
   }>;
   imgSrc?: string;
   initialState?: boolean;
+  isAnimated?: boolean;
   isCapsLockOn?: boolean;
   isCompleted?: boolean;
   isCorrect?: boolean;
