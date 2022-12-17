@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
-import styled from "styled-components";
 import { AboutSection } from "./AboutSection/AboutSection";
-import ActivitiesSection from "./ActivitiesSection/ActivitiesSection";
-import Footer from "./Footer/Footer";
-import GamesSection from "./GamesSection/GamesSection";
+import { ActivitiesSection } from "./ActivitiesSection/ActivitiesSection";
+import { Footer } from "./Footer/Footer";
+import { GamesSection } from "./GamesSection/GamesSection";
 import { HeroSection } from "./HeroSection/HeroSection";
+import { Wrapper } from "./LandingPage.styled";
 import { Navbar } from "./Navbar/Navbar";
-import ReasonsSection from "./ReasonsSection/ReasonsSection";
+import { ReasonsSection } from "./ReasonsSection/ReasonsSection";
 
 const LandingPage = (): ReactElement => {
   return (
@@ -21,11 +21,5 @@ const LandingPage = (): ReactElement => {
     </Wrapper>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-`;
 
 export default LandingPage;

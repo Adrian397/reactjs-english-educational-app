@@ -1,14 +1,18 @@
 import { paths } from "@utils/paths";
 import { lazy, ReactElement, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import QuizDifficulties from "./QuizPage/QuizDifficulties/QuizDifficulties";
-import QuizQuestions from "./QuizPage/QuizQuestions/QuizQuestions";
 
 const Protected = lazy(() => import("./Protected/Protected"));
 const ChooseActivityPage = lazy(
   () => import("./ChooseActivityPage/ChooseActivityPage")
 );
 const QuizPage = lazy(() => import("./QuizPage/QuizPage"));
+const QuizDifficulties = lazy(
+  () => import("./QuizPage/QuizDifficulties/QuizDifficulties")
+);
+const QuizQuestions = lazy(
+  () => import("./QuizPage/QuizQuestions/QuizQuestions")
+);
 const VocabularyPage = lazy(() => import("./VocabularyPage/VocabularyPage"));
 const LandingPage = lazy(() => import("./LandingPage/LandingPage"));
 const LoginPage = lazy(() => import("./LoginPage/LoginPage"));
