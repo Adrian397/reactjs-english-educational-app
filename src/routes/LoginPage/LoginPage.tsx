@@ -1,13 +1,12 @@
 import axios from "@api/axios";
+import { useAuth } from "@hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
-
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as Yup from "yup";
 import {
   LoginButton,
@@ -21,6 +20,8 @@ import {
 import { LoginArgs } from "./LoginPage.utils";
 
 const LoginPage = (): ReactElement => {
+  const { setSessionState } = useAuth();
+
   const [isVisible, setIsVisible] = useState(false);
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -57,6 +58,15 @@ const LoginPage = (): ReactElement => {
           setIsError(true);
           formik.resetForm();
         },
+
+        onSuccess: (response) => {
+          formik.resetForm();
+
+          const accessToken = response.data.token;
+          setSessionState({ status: "auth", accessToken, refreshToken: "" });
+
+          navigate(paths.app);
+        },
       });
     },
 
@@ -75,7 +85,7 @@ const LoginPage = (): ReactElement => {
   return (
     <LoginWrapper>
       <img alt="england" src="./assets/england.svg" />
-      <LoginForm onSubmit={formik.handleSubmit}>
+      <LoginForm autoComplete="off" onSubmit={formik.handleSubmit}>
         <h2>Logowanie</h2>
         <Username isError={isError}>
           <label htmlFor="username">Nazwa użytkownika:</label>

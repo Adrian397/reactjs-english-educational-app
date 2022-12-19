@@ -31,26 +31,26 @@ const QuizQuestions = (): ReactElement => {
         currentPage: args.currentPage + 1,
         score: args.score + 1,
       });
-      setResetTimer((prevKey) => prevKey + 1);
+      setResetTimer((prevState) => prevState + 1);
     } else if (!isCorrect && args.currentPage + 1 < questionsLength) {
       setArgs({
         ...args,
         currentPage: args.currentPage + 1,
       });
-      setResetTimer((prevKey) => prevKey + 1);
+      setResetTimer((prevState) => prevState + 1);
     } else if (isCorrect && args.currentPage + 1 === questionsLength) {
       setArgs({
         ...args,
         isCompleted: true,
         score: args.score + 1,
       });
-      setResetTimer((prevKey) => prevKey + 1);
+      setResetTimer((prevState) => prevState + 1);
     } else if (!isCorrect && args.currentPage + 1 === questionsLength) {
       setArgs({
         ...args,
         isCompleted: true,
       });
-      setResetTimer((prevKey) => prevKey + 1);
+      setResetTimer((prevState) => prevState + 1);
     }
   };
 

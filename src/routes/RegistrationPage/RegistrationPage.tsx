@@ -1,5 +1,7 @@
+import axios from "@api/axios";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
 import {
@@ -24,6 +26,7 @@ import {
   TextInfo,
   Username,
 } from "./Registration.styled";
+import { RegisterArgs } from "./RegistrationPage.utils";
 
 const RegistrationPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,6 +36,22 @@ const RegistrationPage = (): ReactElement => {
   const [isPasswordTip, setIsPasswordTip] = useState(false);
 
   const navigate = useNavigate();
+
+  const register = async (args: RegisterArgs) => {
+    const response = await axios.post("/users/register", {
+      username: args.username,
+      email: args.email,
+      password: args.password,
+    });
+
+    console.log(response.data);
+
+    return response;
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: register,
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -48,7 +67,11 @@ const RegistrationPage = (): ReactElement => {
     }),
 
     onSubmit: (values) => {
-      console.log(values);
+      mutate(values, {
+        onSuccess: () => {
+          navigate(paths.app);
+        },
+      });
     },
 
     validateOnChange: false,
