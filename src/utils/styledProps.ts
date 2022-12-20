@@ -12,6 +12,7 @@ export type StyledProps = {
   initialState?: boolean;
   isAnimated?: boolean;
   isCapsLockOn?: boolean;
+  isChecked?: boolean;
   isCompleted?: boolean;
   isCorrect?: boolean;
   isError?: boolean;

@@ -3,7 +3,7 @@ import { StyledProps } from "@utils/styledProps";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { NoteType } from "../Notebook.utils";
-import { DeletionConfirmModal } from "./DeletionConfirmModal/DeletionConfirmModal";
+import { DeleteConfirmationModal } from "./DeleteConfirmationModal/DeleteConfirmationModal";
 import { ExportFileNameModal } from "./ExportFileNameModal/ExportFileNameModal";
 
 type Props = {
@@ -74,7 +74,7 @@ const Note = ({
   return (
     <>
       {isVisible.deleteModal && (
-        <DeletionConfirmModal
+        <DeleteConfirmationModal
           noteId={note.id}
           onNoteDelete={onNoteDelete}
           onVisibilityChange={setIsVisible}

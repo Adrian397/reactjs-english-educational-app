@@ -3,7 +3,9 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArgsType, DifficultyType, questions } from "../QuizPage.utils";
 import {
+  AnswerButton,
   Heading,
+  NextQuestion,
   Questions,
   Quiz,
   Score,
@@ -16,8 +18,9 @@ const QuizQuestions = (): ReactElement => {
     currentPage: 0,
     score: 0,
     isCompleted: false,
-    isCorrect: false,
+    isCorrect: undefined,
   });
+  const [isChecked, setIsChecked] = useState(false);
   const [resetTimer, setResetTimer] = useState(0);
 
   const navigate = useNavigate();
@@ -25,34 +28,56 @@ const QuizQuestions = (): ReactElement => {
   const questionsLength = questions[difficulty as DifficultyType].length;
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
-    if (isCorrect && args.currentPage + 1 < questionsLength) {
+    if (isCorrect) {
       setArgs({
         ...args,
-        currentPage: args.currentPage + 1,
         score: args.score + 1,
+        isCorrect: true,
       });
-      setResetTimer((prevState) => prevState + 1);
-    } else if (!isCorrect && args.currentPage + 1 < questionsLength) {
+      setIsChecked(true);
+    } else {
       setArgs({
         ...args,
-        currentPage: args.currentPage + 1,
+        isCorrect: false,
       });
-      setResetTimer((prevState) => prevState + 1);
-    } else if (isCorrect && args.currentPage + 1 === questionsLength) {
-      setArgs({
-        ...args,
-        isCompleted: true,
-        score: args.score + 1,
-      });
-      setResetTimer((prevState) => prevState + 1);
-    } else if (!isCorrect && args.currentPage + 1 === questionsLength) {
-      setArgs({
-        ...args,
-        isCompleted: true,
-      });
-      setResetTimer((prevState) => prevState + 1);
+      setIsChecked(true);
     }
   };
+
+  const isResponseCorrect = (isAnswerCorrect: boolean) => {
+    if (args.isCorrect === undefined) {
+      return;
+    }
+    if (args.isCorrect) {
+      return isAnswerCorrect ? true : undefined;
+    }
+
+    return isAnswerCorrect;
+  };
+
+  const handleNextPage = () => {
+    if (args.currentPage + 1 < questionsLength) {
+      setArgs({
+        ...args,
+        currentPage: args.currentPage + 1,
+        isCorrect: undefined,
+      });
+      setResetTimer((prevState) => prevState + 1);
+      setIsChecked(false);
+    }
+
+    if (args.currentPage + 1 === questionsLength) {
+      setArgs({
+        ...args,
+        isCompleted: true,
+        isCorrect: undefined,
+      });
+      setResetTimer((prevState) => prevState + 1);
+      setIsChecked(false);
+    }
+  };
+
+  console.log(args);
 
   return (
     <Wrapper>
@@ -74,28 +99,27 @@ const QuizQuestions = (): ReactElement => {
               <h3>
                 Question {args.currentPage + 1}/{questionsLength}
               </h3>
-              <CountdownCircleTimer
-                colors="#be63f9"
-                duration={10}
-                isPlaying
-                key={resetTimer}
-                onComplete={() => {
-                  if (args.currentPage + 1 < questionsLength) {
+              {!isChecked && (
+                <CountdownCircleTimer
+                  colors="#be63f9"
+                  duration={10}
+                  isPlaying
+                  key={resetTimer}
+                  onComplete={() => {
                     setArgs((prevState) => ({
                       ...prevState,
-                      currentPage: prevState.currentPage + 1,
+                      isCorrect: false,
                     }));
-                  } else {
-                    setArgs({ ...args, isCompleted: true });
-                  }
+                    setIsChecked(true);
 
-                  return { shouldRepeat: true };
-                }}
-                size={60}
-                strokeWidth={6}
-              >
-                {({ remainingTime }) => remainingTime}
-              </CountdownCircleTimer>
+                    return { shouldRepeat: true };
+                  }}
+                  size={60}
+                  strokeWidth={6}
+                >
+                  {({ remainingTime }) => remainingTime}
+                </CountdownCircleTimer>
+              )}
             </Heading>
             <p>
               {
@@ -103,20 +127,25 @@ const QuizQuestions = (): ReactElement => {
                   .questionText
               }
             </p>
-            <Questions>
+            <Questions isChecked={isChecked}>
               {questions[difficulty as DifficultyType][
                 args.currentPage
               ].answerOptions.map((answerOption) => (
-                <button
+                <AnswerButton
+                  disabled={isChecked}
+                  isCorrect={isResponseCorrect(answerOption.isCorrect)}
                   key={answerOption.id}
-                  onClick={() =>
-                    handleAnswerCorrectness(answerOption.isCorrect)
+                  onClick={
+                    () => handleAnswerCorrectness(answerOption.isCorrect) // TODO
                   }
                 >
                   {answerOption.answerText}
-                </button>
+                </AnswerButton>
               ))}
             </Questions>
+            {isChecked && (
+              <NextQuestion onClick={handleNextPage}>Next</NextQuestion>
+            )}
           </>
         )}
       </Quiz>

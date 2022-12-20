@@ -17,7 +17,7 @@ type Props = {
   >;
 };
 
-export const DeletionConfirmModal = ({
+export const DeleteConfirmationModal = ({
   onNoteDelete,
   noteId,
   onVisibilityChange,
