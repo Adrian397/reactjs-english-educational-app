@@ -54,7 +54,7 @@ export const Modal = styled.div`
       border-radius: 8px;
       font-weight: bold;
       color: white;
-      background-color: #be63f9;
+      background-color: #fa233b;
     }
   }
   position: relative;
@@ -75,17 +75,17 @@ export const Close = styled.button`
   }
 `;
 
-export const Logout = styled.div`
+export const Warning = styled.div`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: #f5e6fe;
+  background-color: #ffeeea;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 `;

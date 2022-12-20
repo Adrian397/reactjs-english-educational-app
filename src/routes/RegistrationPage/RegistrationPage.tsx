@@ -89,24 +89,24 @@ const RegistrationPage = (): ReactElement => {
 
   const errorTranslate =
     formik.errors.username === "UsernameToLong"
-      ? "Wykorzystano maksymalną ilość znaków"
+      ? "Maximum number of characters used"
       : formik.errors.username === "UsernameToShort"
-      ? "Niewystarczająca ilość znaków - min. 6"
+      ? "Insufficient number of characters - min. 6"
       : formik.errors.username === "UsernameWrongChar"
-      ? "Użyto niedozwolonych znaków"
+      ? "Unauthorized characters were used"
       : undefined;
 
   return (
     <RegistrationWrapper>
       <img alt="england" src="./assets/england.svg" />
       <RegistrationForm onSubmit={formik.handleSubmit}>
-        <h2>Rejestracja</h2>
+        <h2>Registration</h2>
         <Email errors={formik.errors}>
           <label htmlFor="email">Email:</label>
           <div>
             <input
               id="email"
-              placeholder="Wprowadź email..."
+              placeholder="Enter your email..."
               type="email"
               {...formik.getFieldProps("email")}
               onBlur={() => {
@@ -114,7 +114,7 @@ const RegistrationPage = (): ReactElement => {
               }}
             />
             <p>
-              <ErrorOutlineIcon /> Nieprawidłowy format e-mail
+              <ErrorOutlineIcon /> Incorrect e-mail format
             </p>
 
             {formik.values.email.length >= 1 && (
@@ -133,11 +133,11 @@ const RegistrationPage = (): ReactElement => {
           errors={formik.errors}
           isVisible={isUsernameTip || formik.values.username.length >= 1}
         >
-          <label htmlFor="username">Nazwa użytkownika:</label>
+          <label htmlFor="username">Username:</label>
           <div>
             <input
               id="username"
-              placeholder="Wprowadź nazwę użytkownika..."
+              placeholder="Enter your username..."
               type="username"
               {...formik.getFieldProps("username")}
               onBlur={() => {
@@ -147,7 +147,7 @@ const RegistrationPage = (): ReactElement => {
               onFocus={() => setIsUsernameTip(true)}
             />
 
-            <p>Min. 6, Max. 32, bez polskich znaków</p>
+            <p>Min. 6, Max. 32, without Polish characters</p>
 
             <p>
               <ErrorOutlineIcon /> {errorTranslate}
@@ -166,11 +166,11 @@ const RegistrationPage = (): ReactElement => {
           </div>
         </Username>
         <Password errors={formik.errors} isCapsLockOn={isCapsLockOn}>
-          <label htmlFor="password">Hasło:</label>
+          <label htmlFor="password">Password:</label>
           <div>
             <input
               id="password"
-              placeholder="Wprowadź hasło..."
+              placeholder="Enter your password..."
               type={isVisible ? "text" : "password"}
               {...formik.getFieldProps("password")}
               onBlur={() => {
@@ -219,12 +219,12 @@ const RegistrationPage = (): ReactElement => {
           }
           type="submit"
         >
-          Zarejestuj się
+          Register
         </RegistrationButton>
       </RegistrationForm>
       <p>
-        Posiadasz już konto? {/* eslint-disable-next-line */}
-        <span onClick={() => navigate(paths.login)}>Zaloguj się</span>
+        Already have an account? {/* eslint-disable-next-line */}
+        <span onClick={() => navigate(paths.login)}>Log in</span>
       </p>
     </RegistrationWrapper>
   );

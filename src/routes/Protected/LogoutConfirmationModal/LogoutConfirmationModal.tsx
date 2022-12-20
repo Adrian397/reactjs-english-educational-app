@@ -4,9 +4,9 @@ import { imgBasePath } from "@utils/imgs";
 import { ReactElement } from "react";
 import {
   Close,
+  Logout,
   Modal,
   ModalWrapper,
-  Warning,
 } from "./LogoutConfirmationModal.styles";
 
 type Props = {
@@ -24,10 +24,10 @@ export const LogoutConfirmationModal = ({
         <Close onClick={() => onVisibilityChange(false)}>
           <CloseIcon />
         </Close>
-        <Warning>
+        <Logout>
           <img alt="logout icon" src={imgBasePath + "/logoutModal.svg"} />
-        </Warning>
-        <h3>Log out</h3>
+        </Logout>
+        <h3>Logout</h3>
         <p>Are you sure you want to log out?</p>
         <div>
           <button onClick={() => onVisibilityChange(false)}>Cancel</button>

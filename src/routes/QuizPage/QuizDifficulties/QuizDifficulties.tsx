@@ -21,28 +21,29 @@ const QuizDifficulties = (): ReactElement => {
   return (
     <Wrapper>
       <QuizIntroduction>
-        <h1>Witaj w Quizie!</h1>
+        <h1>Welcome to the quiz!</h1>
         <p>
-          Quiz składa się z 3 poziomów trudności i 10 pytań na każdy z nich.
+          The quiz consists of 3 levels of difficulty and 10 questions for each
+          level.
         </p>
         <p>
-          Możesz bezpośrednio wybrać jeden z poziomów lub dostosować go po
-          odpowiedzeniu na wymieszaną partię pytań.
+          You can directly select one of the levels or adjust it after answering
+          a mixed batch of questions.
         </p>
         <Difficulties>
           <div>
             <button onClick={() => handleDifficultyChoice("beginner")}>
-              Początkujący
+              Beginner
             </button>
             <button onClick={() => handleDifficultyChoice("intermediate")}>
-              Średnio zaawansowany
+              Intermediate
             </button>
             <button onClick={() => handleDifficultyChoice("advanced")}>
-              Zaawansowany
+              Advanced
             </button>
           </div>
           <button onClick={() => handleDifficultyChoice("beginner")}>
-            Zacznij bez wybierania poziomu
+            Adjust the difficulty level to my skills
           </button>
         </Difficulties>
       </QuizIntroduction>

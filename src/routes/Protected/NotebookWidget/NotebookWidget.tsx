@@ -1,8 +1,7 @@
 import { imgBasePath } from "@utils/imgs";
-import { StyledProps } from "@utils/styledProps";
 import { ReactElement, useState } from "react";
-import styled from "styled-components";
 import { Notebook } from "./Notebook/Notebook";
+import { WidgetButton, WidgetWrapper } from "./NotebookWidget.styled";
 
 export const NotebookWidget = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,18 +16,3 @@ export const NotebookWidget = (): ReactElement => {
     </WidgetWrapper>
   );
 };
-
-const WidgetWrapper = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-`;
-
-const WidgetButton = styled.button<StyledProps>`
-  width: 4rem;
-  height: 4rem;
-  background: transparent url(${({ imgSrc }) => imgSrc}) no-repeat center;
-  background-size: 4rem;
-  border: none;
-  cursor: pointer;
-`;

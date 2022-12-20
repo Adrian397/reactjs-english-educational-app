@@ -86,28 +86,28 @@ const LoginPage = (): ReactElement => {
     <LoginWrapper>
       <img alt="england" src="./assets/england.svg" />
       <LoginForm autoComplete="off" onSubmit={formik.handleSubmit}>
-        <h2>Logowanie</h2>
+        <h2>Login</h2>
         <Username isError={isError}>
-          <label htmlFor="username">Nazwa użytkownika:</label>
+          <label htmlFor="username">Username:</label>
           <input
             id="username"
-            placeholder="Wprowadź nazwę użytkownika..."
+            placeholder="Enter your username..."
             type="username"
             {...formik.getFieldProps("username")}
           />
         </Username>
         <Password isCapsLockOn={isCapsLockOn} isError={isError}>
-          <label htmlFor="password">Hasło:</label>
+          <label htmlFor="password">Password:</label>
           <div>
             <input
               id="password"
               onKeyUp={(e) => checkCapsLock(e)}
-              placeholder="Wprowadź hasło..."
+              placeholder="Enter your password..."
               type={isVisible ? "text" : "password"}
               {...formik.getFieldProps("password")}
             />
             <p>
-              <ErrorOutlineIcon /> Błędne hasło lub nazwa użytkownika
+              <ErrorOutlineIcon /> Wrong username or password
             </p>
             <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
               <button
@@ -117,11 +117,11 @@ const LoginPage = (): ReactElement => {
               <span />
             </TextInfo>
           </div>
-          <span>Zapomniałeś hasła?</span>
+          <span>Forgot a password?</span>
         </Password>
         <RememberMe>
           <input id="rememberMe" type="checkbox" />
-          <label htmlFor="rememberMe">Zapamiętaj mnie w przeglądarce</label>
+          <label htmlFor="rememberMe">Remember me</label>
         </RememberMe>
 
         <LoginButton
@@ -131,12 +131,13 @@ const LoginPage = (): ReactElement => {
           }
           type="submit"
         >
-          Zaloguj się
+          Log in
         </LoginButton>
       </LoginForm>
       <p>
-        Nie posiadasz konta? {/* eslint-disable-next-line */}
-        <span onClick={() => navigate(paths.register)}>Zarejestruj się</span>
+        Don't have an account? {/* eslint-disable-line */}
+        {/* eslint-disable-next-line */}
+        <span onClick={() => navigate(paths.register)}>Register</span>
       </p>
     </LoginWrapper>
   );

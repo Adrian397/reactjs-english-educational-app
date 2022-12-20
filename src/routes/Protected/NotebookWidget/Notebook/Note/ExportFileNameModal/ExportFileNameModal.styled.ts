@@ -31,32 +31,50 @@ export const Modal = styled.div`
     color: #333;
   }
 
-  & > div:nth-of-type(2) {
+  input {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #dbdeea;
+    border-radius: 6px;
+  }
+
+  form {
+    gap: 1.5rem;
     display: flex;
-    gap: 3rem;
+    flex-direction: column;
 
-    button {
-      cursor: pointer;
-    }
+    div {
+      display: flex;
+      gap: 3rem;
 
-    button:nth-of-type(1) {
-      border: none;
-      padding: 0;
-      text-decoration: underline;
-      background-color: transparent;
-      color: #4a4f67;
-      font-weight: bold;
-    }
+      button {
+        cursor: pointer;
+      }
 
-    button:nth-of-type(2) {
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      color: white;
-      background-color: #be63f9;
+      button:nth-of-type(1) {
+        border: none;
+        padding: 0;
+        text-decoration: underline;
+        background-color: transparent;
+        color: #4a4f67;
+        font-weight: bold;
+      }
+
+      button:nth-of-type(2) {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        color: white;
+        background-color: #117960;
+
+        &:disabled {
+          background-color: #b3b6cc;
+          color: #4a4f67;
+        }
+      }
     }
   }
+
   position: relative;
 `;
 
@@ -75,17 +93,17 @@ export const Close = styled.button`
   }
 `;
 
-export const Logout = styled.div`
+export const Export = styled.div`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: #f5e6fe;
+  background-color: #e8faf0;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
