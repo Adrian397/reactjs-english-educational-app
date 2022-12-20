@@ -11,7 +11,7 @@ type Props = {
   children: ReactNode;
 };
 
-type SessionStateType =
+export type SessionStateType =
   | {
       accessToken: string;
       refreshToken: string;
