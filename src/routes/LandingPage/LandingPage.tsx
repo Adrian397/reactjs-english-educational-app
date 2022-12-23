@@ -1,4 +1,7 @@
+import { useAuth } from "@hooks/useAuth";
+import { paths } from "@utils/paths";
 import { ReactElement } from "react";
+import { Navigate } from "react-router-dom";
 import { AboutSection } from "./AboutSection/AboutSection";
 import { ActivitiesSection } from "./ActivitiesSection/ActivitiesSection";
 import { Footer } from "./Footer/Footer";
@@ -9,6 +12,12 @@ import { Navbar } from "./Navbar/Navbar";
 import { ReasonsSection } from "./ReasonsSection/ReasonsSection";
 
 const LandingPage = (): ReactElement => {
+  const { sessionState } = useAuth();
+
+  if (sessionState.status === "auth") {
+    return <Navigate replace to={paths.app} />;
+  }
+
   return (
     <Wrapper>
       <Navbar />

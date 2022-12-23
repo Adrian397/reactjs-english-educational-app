@@ -6,7 +6,7 @@ import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
   LoginButton,
@@ -20,7 +20,7 @@ import {
 import { LoginArgs } from "./LoginPage.utils";
 
 const LoginPage = (): ReactElement => {
-  const { setSessionState } = useAuth();
+  const { sessionState, setSessionState } = useAuth();
 
   const [isVisible, setIsVisible] = useState(false);
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
@@ -82,6 +82,9 @@ const LoginPage = (): ReactElement => {
     }
   };
 
+  if (sessionState.status === "auth") {
+    return <Navigate replace to={paths.app} />;
+  }
   return (
     <LoginWrapper>
       <img alt="england" src="./assets/england.svg" />

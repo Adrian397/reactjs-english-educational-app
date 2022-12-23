@@ -43,7 +43,7 @@ const QuizDifficulties = (): ReactElement => {
             </button>
           </div>
           <button onClick={() => handleDifficultyChoice("beginner")}>
-            Adjust the difficulty level to my skills
+            Adjust the level
           </button>
         </Difficulties>
       </QuizIntroduction>

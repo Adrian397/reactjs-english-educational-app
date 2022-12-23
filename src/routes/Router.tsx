@@ -1,71 +1,29 @@
 import { paths } from "@utils/paths";
 import { lazy, ReactElement, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ChooseActivityPage from "./ChooseActivityPage/ChooseActivityPage";
+import LandingPage from "./LandingPage/LandingPage";
+import LoginPage from "./LoginPage/LoginPage";
+import Protected from "./Protected/Protected";
+import QuizDifficulties from "./QuizPage/QuizDifficulties/QuizDifficulties";
+import QuizPage from "./QuizPage/QuizPage";
+import RegistrationPage from "./RegistrationPage/RegistrationPage";
+import ResetPasswordPage from "./ResetPasswordPage/ResetPasswordPage";
 
-const Protected = lazy(() => import("./Protected/Protected"));
-const ChooseActivityPage = lazy(
-  () => import("./ChooseActivityPage/ChooseActivityPage")
-);
-const QuizPage = lazy(() => import("./QuizPage/QuizPage"));
-const QuizDifficulties = lazy(
-  () => import("./QuizPage/QuizDifficulties/QuizDifficulties")
-);
 const QuizQuestions = lazy(
   () => import("./QuizPage/QuizQuestions/QuizQuestions")
 );
 const VocabularyPage = lazy(() => import("./VocabularyPage/VocabularyPage"));
-const LandingPage = lazy(() => import("./LandingPage/LandingPage"));
-const LoginPage = lazy(() => import("./LoginPage/LoginPage"));
-const RegistrationPage = lazy(
-  () => import("./RegistrationPage/RegistrationPage")
-);
 
 export const Router = (): ReactElement => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          element={
-            <Suspense fallback={null}>
-              <LandingPage />
-            </Suspense>
-          }
-          path={paths.root}
-        />
-
-        <Route
-          element={
-            <Suspense fallback={null}>
-              <Protected />
-            </Suspense>
-          }
-          path={paths.app}
-        >
-          <Route
-            element={
-              <Suspense fallback={null}>
-                <ChooseActivityPage />
-              </Suspense>
-            }
-            index
-          />
-          <Route
-            element={
-              <Suspense fallback={null}>
-                <QuizPage />
-              </Suspense>
-            }
-            path={paths.quiz}
-          >
-            <Route
-              element={
-                <Suspense fallback={null}>
-                  <QuizDifficulties />
-                </Suspense>
-              }
-              index
-            />
-
+        <Route element={<LandingPage />} path={paths.root} />
+        <Route element={<Protected />} path={paths.app}>
+          <Route element={<ChooseActivityPage />} index />
+          <Route element={<QuizPage />} path={paths.quiz}>
+            <Route element={<QuizDifficulties />} index />
             <Route
               element={
                 <Suspense fallback={null}>
@@ -75,7 +33,6 @@ export const Router = (): ReactElement => {
               path={paths.quizQuestions}
             />
           </Route>
-
           <Route
             element={
               <Suspense fallback={null}>
@@ -85,24 +42,9 @@ export const Router = (): ReactElement => {
             path={paths.vocabulary}
           />
         </Route>
-
-        <Route
-          element={
-            <Suspense fallback={null}>
-              <LoginPage />
-            </Suspense>
-          }
-          path={paths.login}
-        />
-
-        <Route
-          element={
-            <Suspense fallback={null}>
-              <RegistrationPage />
-            </Suspense>
-          }
-          path={paths.register}
-        />
+        <Route element={<LoginPage />} path={paths.login} />
+        <Route element={<RegistrationPage />} path={paths.register} />
+        <Route element={<ResetPasswordPage />} path={paths.resetPassword} />
       </Routes>
     </BrowserRouter>
   );

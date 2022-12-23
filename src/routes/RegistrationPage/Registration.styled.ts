@@ -40,6 +40,7 @@ export const RegistrationForm = styled.form`
   padding: 1.5rem 1.5rem 1rem 1.5rem;
   margin-bottom: 1rem;
   z-index: 2137;
+  border-radius: 10px;
 
   h2 {
     text-align: center;

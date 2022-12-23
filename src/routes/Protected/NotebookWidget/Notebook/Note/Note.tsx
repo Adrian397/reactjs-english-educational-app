@@ -88,29 +88,31 @@ export const Note = ({
       )}
       <NoteWrapper isExpanded={isExpanded} onClick={handleOpenNote}>
         {isExpanded && (
-          <Close
-            imgSrc={imgBasePath + "/close.svg"}
-            onClick={(e) => handleCloseNote(e)}
-          />
+          <>
+            <Close
+              imgSrc={imgBasePath + "/close.svg"}
+              onClick={(e) => handleCloseNote(e)}
+            />
+            <Save
+              imgSrc={imgBasePath + "/save.svg"}
+              onClick={() => onNoteSave(textValue, note.id)}
+            />
+          </>
         )}
-        {isExpanded && (
-          <Save
-            imgSrc={imgBasePath + "/save.svg"}
-            onClick={() => onNoteSave(textValue, note.id)}
-          />
-        )}
+
         {!isExpanded && (
-          <Delete
-            imgSrc={imgBasePath + "/trash.svg"}
-            onClick={(e) => handleDeleteModalOpen(e)}
-          />
+          <>
+            <Delete
+              imgSrc={imgBasePath + "/trash.svg"}
+              onClick={(e) => handleDeleteModalOpen(e)}
+            />
+            <Export
+              imgSrc={imgBasePath + "/export.svg"}
+              onClick={(e) => handleExportModalOpen(e)}
+            />
+          </>
         )}
-        {!isExpanded && (
-          <Export
-            imgSrc={imgBasePath + "/export.svg"}
-            onClick={(e) => handleExportModalOpen(e)}
-          />
-        )}
+
         <textarea
           defaultValue={note.text}
           disabled={!isExpanded}
