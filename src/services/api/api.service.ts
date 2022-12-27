@@ -14,8 +14,6 @@ const apiServiceDef = () => {
         password: args.password,
       });
 
-      // zpaisanie dolocalstora
-      //response.data.token
       const { data } = response;
       const { token } = data;
 
@@ -34,18 +32,14 @@ const apiServiceDef = () => {
     try {
       const response = await axios.get("/users", {
         headers: {
-          Token,
+          Authorization: Token,
         },
       });
+      console.log(response);
       return await getDataFromResponse(response, "getAllUsers");
     } catch (e) {
       console.log(e);
     }
-    // return axios.get("/users", {
-    //   headers: {
-    //     Token,
-    //   },
-    // });
   };
 
   const refreshToken = async () => {
