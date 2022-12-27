@@ -1,7 +1,7 @@
-import axios from "@api/axios";
+import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { PasswordTip } from "@routes/RegistrationPage/PasswordTip/PasswordTip";
 import { PasswordTips } from "@routes/RegistrationPage/Registration.styled";
+import axios from "@services/api/axios";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { passwordValidation } from "@utils/validationSchema";

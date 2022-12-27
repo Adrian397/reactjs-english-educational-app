@@ -11,15 +11,12 @@ type Props = {
   children: ReactNode;
 };
 
-export type SessionStateType =
-  | {
-      accessToken: string;
-      refreshToken: string;
-      status: "auth";
-    }
-  | {
-      status: "anon";
-    };
+type StatusType = "auth" | "anon";
+
+export type SessionStateType = {
+  accessToken: string | null;
+  status: StatusType;
+};
 
 export type ContextType = {
   sessionState: SessionStateType;
@@ -27,16 +24,15 @@ export type ContextType = {
 };
 
 const AuthContext = createContext<ContextType>({
-  sessionState: { status: "anon" },
+  sessionState: { status: "anon", accessToken: null },
   setSessionState: () => {} /* eslint-disable-line*/,
 });
 
 export const AuthProvider = ({ children }: Props): ReactElement => {
   const [sessionState, setSessionState] = useState<SessionStateType>({
     status: "anon",
+    accessToken: null,
   });
-
-  console.log(sessionState);
 
   return (
     <AuthContext.Provider value={{ sessionState, setSessionState }}>

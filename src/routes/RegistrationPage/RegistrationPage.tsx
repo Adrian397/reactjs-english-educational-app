@@ -1,6 +1,7 @@
-import axios from "@api/axios";
+import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import axios from "@services/api/axios";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
@@ -15,7 +16,7 @@ import { useFormik } from "formik";
 import React, { ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { PasswordTip } from "./PasswordTip/PasswordTip";
+
 import {
   Email,
   Password,

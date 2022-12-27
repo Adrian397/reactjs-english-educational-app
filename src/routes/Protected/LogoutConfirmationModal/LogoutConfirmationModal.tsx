@@ -18,6 +18,11 @@ export const LogoutConfirmationModal = ({
   onVisibilityChange,
   onSessionStateChange,
 }: Props): ReactElement => {
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    onSessionStateChange({ status: "anon", accessToken: null });
+  };
+
   return (
     <ModalWrapper>
       <Modal>
@@ -31,9 +36,7 @@ export const LogoutConfirmationModal = ({
         <p>Are you sure you want to log out?</p>
         <div>
           <button onClick={() => onVisibilityChange(false)}>Cancel</button>
-          <button onClick={() => onSessionStateChange({ status: "anon" })}>
-            Log out
-          </button>
+          <button onClick={handleLogout}>Log out</button>
         </div>
       </Modal>
     </ModalWrapper>

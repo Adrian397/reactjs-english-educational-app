@@ -1,6 +1,6 @@
-import axios from "@api/axios";
 import { useAuth } from "@hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { apiService } from "@services/api/api.service";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
@@ -17,7 +17,6 @@ import {
   TextInfo,
   Username,
 } from "./LoginPage.styled";
-import { LoginArgs } from "./LoginPage.utils";
 
 const LoginPage = (): ReactElement => {
   const { sessionState, setSessionState } = useAuth();
@@ -28,17 +27,8 @@ const LoginPage = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const login = async (args: LoginArgs) => {
-    const response = await axios.post("/users/login", {
-      username: args.username,
-      password: args.password,
-    });
-
-    return response;
-  };
-
   const { mutate } = useMutation({
-    mutationFn: login,
+    mutationFn: apiService.login,
   });
 
   const formik = useFormik({
@@ -63,7 +53,7 @@ const LoginPage = (): ReactElement => {
           formik.resetForm();
 
           const accessToken = response.data.token;
-          setSessionState({ status: "auth", accessToken, refreshToken: "" });
+          setSessionState({ status: "auth", accessToken });
 
           navigate(paths.app);
         },
