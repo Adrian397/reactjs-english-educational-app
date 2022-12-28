@@ -83,7 +83,7 @@ export const Username = styled.div<StyledProps>`
 `;
 
 export const Password = styled.div<StyledProps>`
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 
   div:first-of-type {
     position: relative;

@@ -13,7 +13,6 @@ import {
   LoginForm,
   LoginWrapper,
   Password,
-  RememberMe,
   TextInfo,
   Username,
 } from "./LoginPage.styled";
@@ -112,10 +111,6 @@ const LoginPage = (): ReactElement => {
           </div>
           <span>Forgot a password?</span>
         </Password>
-        <RememberMe>
-          <input id="rememberMe" type="checkbox" />
-          <label htmlFor="rememberMe">Remember me</label>
-        </RememberMe>
 
         <LoginButton
           disabled={
