@@ -35,14 +35,12 @@ const apiServiceDef = () => {
         Authorization: token,
       },
     });
-    console.log(response);
 
     return response;
   });
 
   const refreshToken = async () => {
     try {
-      console.log("fetch new access token");
       const response = await axios.get("/refreshToken");
 
       const { data } = response;
