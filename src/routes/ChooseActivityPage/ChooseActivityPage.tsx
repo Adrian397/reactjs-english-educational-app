@@ -10,7 +10,7 @@ const ChooseActivityPage = (): ReactElement => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: apiService.getAllUsers,
+    mutationFn: () => apiService.getAllUsers(),
   });
 
   return (

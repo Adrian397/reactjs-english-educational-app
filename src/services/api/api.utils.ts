@@ -1,32 +1,18 @@
-import { AxiosResponse } from "axios";
-import { apiService } from "./api.service";
 /*eslint-disable*/
-type ApiServiceMethods = keyof typeof apiService;
+import { apiService } from "./api.service";
 
-export const getDataFromResponse = async (
-  response: AxiosResponse,
-  funName: ApiServiceMethods,
-  ...args: any
-): Promise<any> => {
-  if (response.status === 401) {
-    console.log("error");
-    await apiService.refreshToken();
-    return await apiService[funName](args);
+type HandlerType = () => Promise<any>;
+
+export const asyncWrapper = (handler: HandlerType) => async () => {
+  try {
+    const result = await handler();
+    return result;
+  } catch (err: any) {
+    if (err.response.status === 401) {
+      // refresh token then again call handler
+      await apiService.refreshToken();
+      const result = await handler();
+      return result;
+    }
   }
-
-  return response.data;
 };
-
-// type HandlerType = () => Promise<any>;
-
-// export const asyncWrapper = async (handler: HandlerType) => {
-//   try {
-//     return handler();
-//   } catch (err: any) {
-//     if (err.response.status === 401) {
-//       // refresh token then again call handler
-//       await apiService.refreshToken();
-//       return handler();
-//     }
-//   }
-// };

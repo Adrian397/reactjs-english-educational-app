@@ -4,6 +4,7 @@ import {
   ReactElement,
   ReactNode,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
 
@@ -33,6 +34,30 @@ export const AuthProvider = ({ children }: Props): ReactElement => {
     status: "anon",
     accessToken: null,
   });
+
+  // persist user on page refresh
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setSessionState({ status: "auth", accessToken: token });
+    }
+  }, []);
+
+  // logout user when token expires
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    if (!token) {
+      setSessionState({ status: "anon", accessToken: null });
+    }
+
+    window.addEventListener("storage", () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) {
+        setSessionState({ status: "anon", accessToken: null });
+      }
+    });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ sessionState, setSessionState }}>
