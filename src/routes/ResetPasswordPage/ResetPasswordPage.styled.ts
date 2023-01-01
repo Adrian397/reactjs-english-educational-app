@@ -68,8 +68,8 @@ export const NewPassword = styled.div<StyledProps>`
       margin-bottom: 0.5rem;
       padding-right: ${({ isCapsLockOn }) =>
         isCapsLockOn ? "4.5rem" : "2.5rem"};
-      border-color: ${({ errors, isError }) =>
-        errors?.newPassword || isError ? "#fa233b" : "#dbdeea"};
+      border-color: ${({ errors, errorMsg }) =>
+        errors?.newPassword || errorMsg ? "#fa233b" : "#dbdeea"};
     }
   }
 `;
@@ -77,7 +77,7 @@ export const NewPassword = styled.div<StyledProps>`
 export const RepeatNewPassword = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   position: relative;
 
   div {
@@ -85,11 +85,11 @@ export const RepeatNewPassword = styled.div<StyledProps>`
 
     input {
       width: 100%;
-      margin-bottom: 0.5rem;
+      margin-bottom: ${({ errorMsg }) => (errorMsg ? "8px" : "45px")};
       padding-right: ${({ isCapsLockOn }) =>
         isCapsLockOn ? "4.5rem" : "2.5rem"};
-      border-color: ${({ errors, isError }) =>
-        errors?.newPasswordRepeat || isError ? "#fa233b" : "#dbdeea"};
+      border-color: ${({ errors, errorMsg }) =>
+        errors?.newPasswordRepeat || errorMsg ? "#fa233b" : "#dbdeea"};
     }
   }
 
@@ -99,7 +99,7 @@ export const RepeatNewPassword = styled.div<StyledProps>`
     align-items: center;
     gap: 0.75rem;
     font-size: 0.875rem;
-    margin: 0.5rem 0rem;
+    margin-bottom: 19px;
 
     svg {
       width: 18px;
@@ -140,10 +140,11 @@ export const TextInfo = styled.div<StyledProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${({ isVisible }) =>
+
+    background: ${({ isVisible, imgSrc }) =>
       isVisible
-        ? "transparent url('./assets/view.svg') no-repeat center"
-        : "transparent url('./assets/hide.svg') no-repeat center"};
+        ? `transparent url(${imgSrc + "view.svg"}) no-repeat center`
+        : `transparent url(${imgSrc + "hide.svg"}) no-repeat center`};
     background-size: 18px;
     border: none;
     cursor: pointer;
@@ -152,7 +153,8 @@ export const TextInfo = styled.div<StyledProps>`
   span {
     width: 32px;
     height: 32px;
-    background: url("./assets/capsLock.svg") no-repeat center;
+    background: transparent url(${({ imgSrc }) => imgSrc + "capsLock.svg"})
+      no-repeat center;
     display: ${({ isCapsLockOn }) => (isCapsLockOn ? "flex" : "none")};
 
     svg {

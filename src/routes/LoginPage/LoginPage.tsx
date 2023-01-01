@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { ForgotPasswordModal } from "./ForgotPasswordModal/ForgotPasswordModal";
 import {
   LoginButton,
   LoginForm,
@@ -23,6 +24,8 @@ const LoginPage = (): ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -76,6 +79,7 @@ const LoginPage = (): ReactElement => {
   }
   return (
     <LoginWrapper>
+      {isOpen && <ForgotPasswordModal onOpenChange={setIsOpen} />}
       <img alt="england" src="./assets/england.svg" />
       <LoginForm autoComplete="off" onSubmit={formik.handleSubmit}>
         <h2>Login</h2>
@@ -109,7 +113,8 @@ const LoginPage = (): ReactElement => {
               <span />
             </TextInfo>
           </div>
-          <span>Forgot a password?</span>
+          {/* eslint-disable-next-line */}
+          <span onClick={() => setIsOpen(true)}>Forgot a password?</span>
         </Password>
 
         <LoginButton

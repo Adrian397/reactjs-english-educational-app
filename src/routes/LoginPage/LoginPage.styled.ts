@@ -11,7 +11,7 @@ export const LoginWrapper = styled.div`
   background-color: rgb(251, 248, 255);
   overflow: hidden;
 
-  img {
+  & > img {
     position: absolute;
     bottom: -0.625rem;
     right: -0.625rem;
@@ -52,7 +52,7 @@ export const LoginForm = styled.form`
 
   & > div:not(:nth-of-type(3)) input {
     padding: 0.5rem;
-    border: 1px solid #dbdeea;
+    border: 2px solid #dbdeea;
     border-radius: 6px;
   }
 
@@ -83,7 +83,7 @@ export const Username = styled.div<StyledProps>`
 `;
 
 export const Password = styled.div<StyledProps>`
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 
   div:first-of-type {
     position: relative;
@@ -132,57 +132,18 @@ export const Password = styled.div<StyledProps>`
   }
 `;
 
-export const RememberMe = styled.div`
-  align-items: center;
-  margin-bottom: 1.5rem;
-
-  label {
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-  }
-  input {
-    appearance: none;
-    margin-right: 1rem;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #dbdeea;
-    cursor: pointer;
-    display: grid;
-    place-content: center;
-    border-radius: 2px;
-  }
-
-  input::before {
-    content: "";
-    width: 1rem;
-    height: 1rem;
-    background-color: #825db3;
-    background-image: url(./assets/check.svg);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    transform: scale(0);
-    transition: transform 120ms ease-in-out;
-    border-radius: 2px;
-  }
-
-  input:checked::before {
-    transform: scale(1);
-  }
-`;
-
 export const TextInfo = styled.div<StyledProps>`
   position: absolute !important;
   display: flex;
   align-items: center;
-  top: 0;
+  top: 2px;
   right: ${({ isCapsLockOn }) => (isCapsLockOn ? "0.5rem" : "0")};
   padding-right: ${({ isCapsLockOn }) => (!isCapsLockOn ? "0.5rem" : "0rem")};
 
   button {
     width: 2rem;
     height: 2rem;
-    top: 0;
+    top: 0px;
     right: 10px;
     display: flex;
     align-items: center;

@@ -6,6 +6,18 @@ type LoginArgs = {
   username: string;
 };
 
+type RegistrationArgs = {
+  email: string;
+  password: string;
+  username: string;
+};
+
+type ResetPasswordArgs = {
+  newPassword: string;
+  newPasswordRepeat: string;
+  token: string;
+};
+
 const apiServiceDef = () => {
   const login = async (args: LoginArgs) => {
     try {
@@ -27,6 +39,50 @@ const apiServiceDef = () => {
     }
   };
 
+  const register = async (args: RegistrationArgs) => {
+    try {
+      const response = await axios.post("/register", {
+        email: args.email,
+        username: args.username,
+        password: args.password,
+      });
+
+      const { data } = response;
+      const { token } = data;
+
+      localStorage.setItem("accessToken", "Bearer " + token);
+      console.log(response);
+
+      return response;
+    } catch (e) {
+      throw new Error("Custom");
+    }
+  };
+
+  const forgotPassword = async (email: string) => {
+    try {
+      const response = await axios.post("/forgotPassword", {
+        email,
+      });
+
+      console.log(response);
+
+      return response;
+    } catch (e) {
+      throw new Error("Custom");
+    }
+  };
+
+  const resetPassword = async (args: ResetPasswordArgs) => {
+    const response = await axios.patch(`/resetPassword/${args.token}`, {
+      password: args.newPassword,
+      passwordConfirm: args.newPasswordRepeat,
+    });
+
+    console.log(response);
+    return response;
+  };
+
   const getAllUsers = asyncWrapper(async () => {
     const token = localStorage.getItem("accessToken");
 
@@ -35,6 +91,8 @@ const apiServiceDef = () => {
         Authorization: token,
       },
     });
+
+    console.log(response);
 
     return response;
   });
@@ -55,7 +113,14 @@ const apiServiceDef = () => {
     }
   };
 
-  return { login, refreshToken, getAllUsers };
+  return {
+    login,
+    register,
+    forgotPassword,
+    resetPassword,
+    refreshToken,
+    getAllUsers,
+  };
 };
 
 export const apiService = apiServiceDef();

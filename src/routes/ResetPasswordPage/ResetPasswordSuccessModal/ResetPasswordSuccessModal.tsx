@@ -2,9 +2,9 @@ import { imgBasePath } from "@utils/imgs";
 import { paths } from "@utils/paths";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
-import { Modal, Success } from "./ResetPasswordConfirmationModal.styled";
+import { Modal, Success } from "./ResetPasswordSuccessModal.styled";
 
-export const ResetPasswordConfirmationModal = (): ReactElement => {
+export const ResetPasswordSuccessModal = (): ReactElement => {
   const navigate = useNavigate();
 
   return (

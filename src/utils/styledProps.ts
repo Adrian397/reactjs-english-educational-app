@@ -3,6 +3,7 @@ import { FormikErrors } from "formik/dist/types";
 
 export type StyledProps = {
   data?: NoteType[];
+  errorMsg?: string;
   errors?: FormikErrors<{
     email?: string;
     newPassword?: string;

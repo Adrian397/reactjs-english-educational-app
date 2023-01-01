@@ -55,7 +55,7 @@ export const RegistrationForm = styled.form`
     input {
       padding: 0.5rem;
       padding-right: 2.5rem;
-      border: 1px solid #dbdeea;
+      border: 2px solid #dbdeea;
       border-radius: 6px;
     }
 
@@ -94,10 +94,13 @@ export const RegistrationButton = styled.button`
 export const Email = styled.div<StyledProps>`
   div {
     position: relative;
+    margin-bottom: ${({ errors, isError }) =>
+      errors?.email || isError ? "0px" : "25px"};
     input {
       width: 100%;
       margin-bottom: 0.5rem;
-      border-color: ${({ errors }) => (errors?.email ? "#fa233b" : "#dbdeea")};
+      border-color: ${({ errors, isError }) =>
+        errors?.email || isError ? "#fa233b" : "#dbdeea"};
     }
 
     p {
@@ -106,7 +109,6 @@ export const Email = styled.div<StyledProps>`
       margin-bottom: 0.5rem;
       font-size: 14px;
       color: #fa233b !important;
-      visibility: ${({ errors }) => (errors?.email ? "visible" : "hidden")};
 
       svg {
         width: 17px;
@@ -223,7 +225,7 @@ export const TextInfo = styled.div<StyledProps>`
   position: absolute !important;
   display: flex;
   align-items: center;
-  top: 0;
+  top: 2px;
   right: ${({ isCapsLockOn }) => (isCapsLockOn ? "0.5rem" : "0")};
   padding-right: ${({ isCapsLockOn }) => (!isCapsLockOn ? "0.5rem" : "0rem")};
 

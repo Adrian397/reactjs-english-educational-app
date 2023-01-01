@@ -1,7 +1,8 @@
 import { PasswordTip } from "@components/PasswordTip/PasswordTip";
+import { useAuth } from "@hooks/useAuth";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import axios from "@services/api/axios";
+import { apiService } from "@services/api/api.service";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
@@ -14,7 +15,7 @@ import {
 
 import { useFormik } from "formik";
 import React, { ReactElement, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import {
@@ -27,31 +28,21 @@ import {
   TextInfo,
   Username,
 } from "./Registration.styled";
-import { RegisterArgs } from "./RegistrationPage.utils";
 
 const RegistrationPage = (): ReactElement => {
+  const { sessionState, setSessionState } = useAuth();
+
   const [isVisible, setIsVisible] = useState(false);
   const [isCapsLockOn, setIsCapsLockOn] = useState(false);
 
   const [isUsernameTip, setIsUsernameTip] = useState(false);
   const [isPasswordTip, setIsPasswordTip] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const navigate = useNavigate();
 
-  const register = async (args: RegisterArgs) => {
-    const response = await axios.post("/users/register", {
-      username: args.username,
-      email: args.email,
-      password: args.password,
-    });
-
-    console.log(response.data);
-
-    return response;
-  };
-
   const { mutate } = useMutation({
-    mutationFn: register,
+    mutationFn: apiService.register,
   });
 
   const formik = useFormik({
@@ -69,12 +60,23 @@ const RegistrationPage = (): ReactElement => {
 
     onSubmit: (values) => {
       mutate(values, {
-        onSuccess: () => {
+        onError: () => {
+          setIsError(true);
+          formik.resetForm();
+        },
+
+        onSuccess: (response) => {
+          formik.resetForm();
+
+          const accessToken = response.data.token;
+          setSessionState({ status: "auth", accessToken });
+
           navigate(paths.app);
         },
       });
     },
 
+    validateOnBlur: false,
     validateOnChange: false,
   });
 
@@ -97,12 +99,16 @@ const RegistrationPage = (): ReactElement => {
       ? "Unauthorized characters were used"
       : undefined;
 
+  if (sessionState.status === "auth") {
+    return <Navigate replace to={paths.app} />;
+  }
+
   return (
     <RegistrationWrapper>
       <img alt="england" src="./assets/england.svg" />
       <RegistrationForm onSubmit={formik.handleSubmit}>
         <h2>Registration</h2>
-        <Email errors={formik.errors}>
+        <Email errors={formik.errors} isError={isError}>
           <label htmlFor="email">Email:</label>
           <div>
             <input
@@ -114,9 +120,17 @@ const RegistrationPage = (): ReactElement => {
                 formik.validateField("email");
               }}
             />
-            <p>
-              <ErrorOutlineIcon /> Incorrect e-mail format
-            </p>
+            {formik.errors.email && (
+              <p>
+                <ErrorOutlineIcon /> Incorrect e-mail format
+              </p>
+            )}
+
+            {isError && (
+              <p>
+                <ErrorOutlineIcon /> This email is already taken
+              </p>
+            )}
 
             {formik.values.email.length >= 1 && (
               <button

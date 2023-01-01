@@ -2,7 +2,7 @@ export const paths = {
   root: "/",
   login: "/login",
   register: "/register",
-  resetPassword: "resetPassword",
+  resetPassword: "/resetPassword/:token",
   app: "/app",
   quiz: "/app/quiz",
   vocabulary: "/app/vocabulary",

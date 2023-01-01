@@ -1,12 +1,14 @@
 import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { PasswordTips } from "@routes/RegistrationPage/Registration.styled";
-import axios from "@services/api/axios";
+import { apiService } from "@services/api/api.service";
 import { useMutation } from "@tanstack/react-query";
+import { imgBasePath } from "@utils/imgs";
 import { KeyNames } from "@utils/keyNames";
 import { passwordValidation } from "@utils/validationSchema";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
+import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import {
   NewPassword,
@@ -15,13 +17,8 @@ import {
   ResetButton,
   ResetForm,
   TextInfo,
-} from "./ResetPassword.styled";
-import { ResetPasswordConfirmationModal } from "./ResetPasswordConfirmationModal/ResetPasswordConfirmationModal";
-
-type ResetPasswordArgs = {
-  newPassword: string;
-  newPasswordRepeat: string;
-};
+} from "./ResetPasswordPage.styled";
+import { ResetPasswordSuccessModal } from "./ResetPasswordSuccessModal/ResetPasswordSuccessModal";
 
 const ResetPasswordPage = (): ReactElement => {
   const [isPasswordVisible, setIsPasswordVisible] = useState({
@@ -33,23 +30,13 @@ const ResetPasswordPage = (): ReactElement => {
     repeat: false,
   });
   const [isPasswordTip, setIsPasswordTip] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [isSuccess, setSuccess] = useState(false);
 
-  const resetPassword = async (args: ResetPasswordArgs) => {
-    const response = await axios.patch(
-      "/users/resetPassword/43160eecb59da6b4e5763f107f936cef53a9a933f668bdf50414f5eb3036ee24",
-      {
-        password: args.newPassword,
-        passwordConfirm: args.newPasswordRepeat,
-      }
-    );
-
-    return response;
-  };
+  const { token } = useParams();
 
   const { mutate } = useMutation({
-    mutationFn: resetPassword,
+    mutationFn: apiService.resetPassword,
   });
 
   const formik = useFormik({
@@ -64,15 +51,22 @@ const ResetPasswordPage = (): ReactElement => {
     }),
 
     onSubmit: (values) => {
-      mutate(values, {
-        onError() {
-          setIsError(true);
-          formik.resetForm();
+      mutate(
+        {
+          ...values,
+          token: token ? token : "",
         },
-        onSuccess: () => {
-          setSuccess(true);
-        },
-      });
+        {
+          /*eslint-disable-next-line*/
+          onError(error: any) {
+            setErrorMsg(error.response.data.message);
+            formik.resetForm();
+          },
+          onSuccess: () => {
+            setSuccess(true);
+          },
+        }
+      );
     },
 
     validateOnChange: false,
@@ -108,16 +102,16 @@ const ResetPasswordPage = (): ReactElement => {
 
   return (
     <PasswordResetWrapper>
-      <img alt="england" src="./assets/england.svg" />
+      <img alt="england" src={imgBasePath + "/england.svg"} />
       {isSuccess ? (
-        <ResetPasswordConfirmationModal />
+        <ResetPasswordSuccessModal />
       ) : (
         <ResetForm onSubmit={formik.handleSubmit}>
           <h3>Password Reset</h3>
           <NewPassword
+            errorMsg={errorMsg}
             errors={formik.errors}
             isCapsLockOn={isCapsLockOn.new}
-            isError={isError}
           >
             <label htmlFor="newPassword">New Password: </label>
             <div>
@@ -155,6 +149,7 @@ const ResetPasswordPage = (): ReactElement => {
                 />
               </PasswordTips>
               <TextInfo
+                imgSrc={imgBasePath}
                 isCapsLockOn={isCapsLockOn.new}
                 isVisible={isPasswordVisible.new}
               >
@@ -172,19 +167,23 @@ const ResetPasswordPage = (): ReactElement => {
             </div>
           </NewPassword>
           <RepeatNewPassword
+            errorMsg={errorMsg}
             errors={formik.errors}
             isCapsLockOn={isCapsLockOn.repeat}
-            isError={isError}
           >
             <label htmlFor="newPasswordRepeat">Repeat new password: </label>
             <div>
               <input
                 id="newPasswordRepeat"
                 {...formik.getFieldProps("newPasswordRepeat")}
+                onBlur={() => {
+                  formik.validateField("newPasswordRepeat");
+                }}
                 onKeyUp={(e) => checkCapsLock(e)}
                 type={isPasswordVisible.repeat ? "text" : "password"}
               />
               <TextInfo
+                imgSrc={imgBasePath}
                 isCapsLockOn={isCapsLockOn.repeat}
                 isVisible={isPasswordVisible.repeat}
               >
@@ -200,10 +199,10 @@ const ResetPasswordPage = (): ReactElement => {
                 <span />
               </TextInfo>
             </div>
-            {isError && (
+            {errorMsg && (
               <p>
                 <ErrorOutlineIcon />
-                Passwords are not the same!
+                {errorMsg}
               </p>
             )}
           </RepeatNewPassword>
