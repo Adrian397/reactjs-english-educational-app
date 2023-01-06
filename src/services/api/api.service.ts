@@ -31,8 +31,6 @@ const apiServiceDef = () => {
 
       localStorage.setItem("accessToken", "Bearer " + token);
 
-      console.log(response.data);
-
       return response;
     } catch (e) {
       throw new Error("Custom");
@@ -51,7 +49,6 @@ const apiServiceDef = () => {
       const { token } = data;
 
       localStorage.setItem("accessToken", "Bearer " + token);
-      console.log(response);
 
       return response;
     } catch (e) {
@@ -65,8 +62,6 @@ const apiServiceDef = () => {
         email,
       });
 
-      console.log(response);
-
       return response;
     } catch (e) {
       throw new Error("Custom");
@@ -79,7 +74,6 @@ const apiServiceDef = () => {
       passwordConfirm: args.newPasswordRepeat,
     });
 
-    console.log(response);
     return response;
   };
 
@@ -91,8 +85,6 @@ const apiServiceDef = () => {
         Authorization: token,
       },
     });
-
-    console.log(response);
 
     return response;
   });
@@ -113,12 +105,21 @@ const apiServiceDef = () => {
     }
   };
 
+  const getQuizDifficulty = asyncWrapper(async (difficulty: string) => {
+    const response = await axios.get(`/questions`, { params: { difficulty } });
+
+    console.log("test");
+
+    return response;
+  });
+
   return {
     login,
     register,
     forgotPassword,
     resetPassword,
     refreshToken,
+    getQuizDifficulty,
     getAllUsers,
   };
 };

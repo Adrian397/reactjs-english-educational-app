@@ -1,3 +1,5 @@
+import { apiService } from "@services/api/api.service";
+import { useQuery } from "@tanstack/react-query";
 import { ReactElement, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -26,6 +28,14 @@ const QuizQuestions = (): ReactElement => {
   const navigate = useNavigate();
   const difficulty = searchParams.get("difficulty");
   const questionsLength = questions[difficulty as DifficultyType].length;
+
+  console.log(difficulty);
+
+  const { data } = useQuery(["questions", difficulty], () =>
+    apiService.getQuizDifficulty(difficulty)
+  );
+
+  console.log(data);
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -76,8 +86,6 @@ const QuizQuestions = (): ReactElement => {
       setIsChecked(false);
     }
   };
-
-  console.log(args);
 
   return (
     <Wrapper>

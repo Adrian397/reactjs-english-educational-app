@@ -35,8 +35,6 @@ export const AuthProvider = ({ children }: Props): ReactElement => {
     accessToken: null,
   });
 
-  console.log(sessionState);
-
   // persist user on page refresh
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
