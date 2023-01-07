@@ -1,6 +1,6 @@
 import CloseIcon from "@mui/icons-material/Close";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { apiService } from "@services/api/api.service";
+import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { emailValidation } from "@utils/validationSchema";
 import { useFormik } from "formik";
@@ -25,7 +25,7 @@ export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
   const [isError, setIsError] = useState(false);
 
   const { mutate } = useMutation({
-    mutationFn: apiService.forgotPassword,
+    mutationFn: sessionService.forgotPassword,
   });
 
   const formik = useFormik({

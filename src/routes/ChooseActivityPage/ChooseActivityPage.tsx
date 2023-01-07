@@ -1,4 +1,4 @@
-import { apiService } from "@services/api/api.service";
+import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { paths } from "@utils/paths";
@@ -10,7 +10,7 @@ const ChooseActivityPage = (): ReactElement => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: () => apiService.getAllUsers(),
+    mutationFn: () => sessionService.getAllUsers(),
   });
 
   return (

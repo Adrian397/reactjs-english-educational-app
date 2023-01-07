@@ -1,7 +1,7 @@
 import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { PasswordTips } from "@routes/RegistrationPage/Registration.styled";
-import { apiService } from "@services/api/api.service";
+import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { KeyNames } from "@utils/keyNames";
@@ -36,7 +36,7 @@ const ResetPasswordPage = (): ReactElement => {
   const { token } = useParams();
 
   const { mutate } = useMutation({
-    mutationFn: apiService.resetPassword,
+    mutationFn: sessionService.resetPassword,
   });
 
   const formik = useFormik({

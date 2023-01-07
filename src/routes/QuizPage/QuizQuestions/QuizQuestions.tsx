@@ -1,9 +1,10 @@
-import { apiService } from "@services/api/api.service";
+import { QuestionsType, quizService } from "@services/QuizService";
 import { useQuery } from "@tanstack/react-query";
+import { paths } from "@utils/paths";
 import { ReactElement, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArgsType, DifficultyType, questions } from "../QuizPage.utils";
+import { ArgsType } from "../QuizPage.utils";
 import {
   AnswerButton,
   Heading,
@@ -27,15 +28,10 @@ const QuizQuestions = (): ReactElement => {
 
   const navigate = useNavigate();
   const difficulty = searchParams.get("difficulty");
-  const questionsLength = questions[difficulty as DifficultyType].length;
-
-  console.log(difficulty);
 
   const { data } = useQuery(["questions", difficulty], () =>
-    apiService.getQuizDifficulty(difficulty)
+    quizService.getQuestions(difficulty)
   );
-
-  console.log(data);
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -66,7 +62,7 @@ const QuizQuestions = (): ReactElement => {
   };
 
   const handleNextPage = () => {
-    if (args.currentPage + 1 < questionsLength) {
+    if (args.currentPage + 1 < data.length) {
       setArgs({
         ...args,
         currentPage: args.currentPage + 1,
@@ -76,7 +72,7 @@ const QuizQuestions = (): ReactElement => {
       setIsChecked(false);
     }
 
-    if (args.currentPage + 1 === questionsLength) {
+    if (args.currentPage + 1 === data.length) {
       setArgs({
         ...args,
         isCompleted: true,
@@ -89,74 +85,75 @@ const QuizQuestions = (): ReactElement => {
 
   return (
     <Wrapper>
-      <Quiz isCompleted={args.isCompleted}>
-        {args.isCompleted ? (
-          <Score>
-            <p>
-              You scored {args.score} out of {questionsLength}
-            </p>
-            <p>
-              Based on your result, we encourage you to continue working on your
-              progress at <strong>beginner</strong> difficulty.
-            </p>
-            <button onClick={() => navigate(-1)}>Finish</button>
-          </Score>
-        ) : (
-          <>
-            <Heading>
-              <h3>
-                Question {args.currentPage + 1}/{questionsLength}
-              </h3>
-              {!isChecked && (
-                <CountdownCircleTimer
-                  colors="#be63f9"
-                  duration={10}
-                  isPlaying
-                  key={resetTimer}
-                  onComplete={() => {
-                    setArgs((prevState) => ({
-                      ...prevState,
-                      isCorrect: false,
-                    }));
-                    setIsChecked(true);
+      {data && (
+        <>
+          <Quiz isCompleted={args.isCompleted}>
+            {args.isCompleted ? (
+              <Score>
+                <p>
+                  You scored {args.score} out of {data.length}
+                </p>
+                <p>
+                  Based on your result, we encourage you to continue working on
+                  your progress at <strong>beginner</strong> difficulty.
+                </p>
+                <button onClick={() => navigate(paths.app, { replace: true })}>
+                  Finish
+                </button>
+              </Score>
+            ) : (
+              <>
+                <Heading>
+                  <h3>
+                    Question {args.currentPage + 1}/{data.length}
+                  </h3>
+                  {!isChecked && (
+                    <CountdownCircleTimer
+                      colors="#be63f9"
+                      duration={10}
+                      isPlaying
+                      key={resetTimer}
+                      onComplete={() => {
+                        setArgs((prevState) => ({
+                          ...prevState,
+                          isCorrect: false,
+                        }));
+                        setIsChecked(true);
 
-                    return { shouldRepeat: true };
-                  }}
-                  size={60}
-                  strokeWidth={6}
-                >
-                  {({ remainingTime }) => remainingTime}
-                </CountdownCircleTimer>
-              )}
-            </Heading>
-            <p>
-              {
-                questions[difficulty as DifficultyType][args.currentPage]
-                  .questionText
-              }
-            </p>
-            <Questions isChecked={isChecked}>
-              {questions[difficulty as DifficultyType][
-                args.currentPage
-              ].answerOptions.map((answerOption) => (
-                <AnswerButton
-                  disabled={isChecked}
-                  isCorrect={isResponseCorrect(answerOption.isCorrect)}
-                  key={answerOption.id}
-                  onClick={
-                    () => handleAnswerCorrectness(answerOption.isCorrect) // TODO
-                  }
-                >
-                  {answerOption.answerText}
-                </AnswerButton>
-              ))}
-            </Questions>
-            {isChecked && (
-              <NextQuestion onClick={handleNextPage}>Next</NextQuestion>
+                        return { shouldRepeat: true };
+                      }}
+                      size={60}
+                      strokeWidth={6}
+                    >
+                      {({ remainingTime }) => remainingTime}
+                    </CountdownCircleTimer>
+                  )}
+                </Heading>
+                <p>{data[args.currentPage].questionText}</p>
+                <Questions isChecked={isChecked}>
+                  {data[args.currentPage].answerOptions.map(
+                    (answerOption: QuestionsType["answerOptions"]) => (
+                      <AnswerButton
+                        disabled={isChecked}
+                        isCorrect={isResponseCorrect(answerOption.isCorrect)}
+                        key={answerOption.id}
+                        onClick={() =>
+                          handleAnswerCorrectness(answerOption.isCorrect)
+                        }
+                      >
+                        {answerOption.answerText}
+                      </AnswerButton>
+                    )
+                  )}
+                </Questions>
+                {isChecked && (
+                  <NextQuestion onClick={handleNextPage}>Next</NextQuestion>
+                )}
+              </>
             )}
-          </>
-        )}
-      </Quiz>
+          </Quiz>
+        </>
+      )}
     </Wrapper>
   );
 };

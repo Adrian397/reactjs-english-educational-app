@@ -2,7 +2,7 @@ import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import { useAuth } from "@hooks/useAuth";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { apiService } from "@services/api/api.service";
+import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
@@ -42,7 +42,7 @@ const RegistrationPage = (): ReactElement => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: apiService.register,
+    mutationFn: sessionService.register,
   });
 
   const formik = useFormik({

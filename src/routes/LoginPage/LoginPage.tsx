@@ -1,6 +1,6 @@
 import { useAuth } from "@hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { apiService } from "@services/api/api.service";
+import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
@@ -30,7 +30,7 @@ const LoginPage = (): ReactElement => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: apiService.login,
+    mutationFn: sessionService.login,
   });
 
   const formik = useFormik({

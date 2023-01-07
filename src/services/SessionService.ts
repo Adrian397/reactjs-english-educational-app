@@ -1,5 +1,5 @@
-import { asyncWrapper } from "./api.utils";
-import axios from "./axios";
+import { asyncWrapper } from "./api/api.utils";
+import axios from "./api/axios";
 
 type LoginArgs = {
   password: string;
@@ -18,7 +18,7 @@ type ResetPasswordArgs = {
   token: string;
 };
 
-const apiServiceDef = () => {
+const sessionServiceDef = () => {
   const login = async (args: LoginArgs) => {
     try {
       const response = await axios.post("/login", {
@@ -105,23 +105,14 @@ const apiServiceDef = () => {
     }
   };
 
-  const getQuizDifficulty = asyncWrapper(async (difficulty: string) => {
-    const response = await axios.get(`/questions`, { params: { difficulty } });
-
-    console.log("test");
-
-    return response;
-  });
-
   return {
     login,
     register,
     forgotPassword,
     resetPassword,
     refreshToken,
-    getQuizDifficulty,
     getAllUsers,
   };
 };
 
-export const apiService = apiServiceDef();
+export const sessionService = sessionServiceDef();
