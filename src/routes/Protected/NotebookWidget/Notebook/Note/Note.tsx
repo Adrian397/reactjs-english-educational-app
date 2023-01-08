@@ -1,6 +1,7 @@
+import { notesService, NoteType } from "@services/NotesService";
+import { useMutation } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import React, { ReactElement, useState } from "react";
-import { NoteType } from "../Notebook.utils";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal/DeleteConfirmationModal";
 import { ExportFileNameModal } from "./ExportFileNameModal/ExportFileNameModal";
 import { Close, Delete, Export, NoteWrapper, Save } from "./Note.styled";
@@ -8,19 +9,9 @@ import { Close, Delete, Export, NoteWrapper, Save } from "./Note.styled";
 type Props = {
   note: NoteType;
   onExpandCheck: React.Dispatch<React.SetStateAction<boolean>>;
-  onNoteDelete: (
-    id: string,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onNoteSave: (text: string, id: string) => void;
 };
 
-export const Note = ({
-  note,
-  onExpandCheck,
-  onNoteSave,
-  onNoteDelete,
-}: Props): ReactElement => {
+export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [textValue, setTextValue] = useState("");
 
@@ -28,6 +19,14 @@ export const Note = ({
     deleteModal: false,
     exportModal: false,
   });
+
+  const { mutate } = useMutation({
+    mutationFn: notesService.updateNote,
+  });
+
+  const handleNoteUpdate = (values: NoteType) => {
+    mutate(values);
+  };
 
   const handleCloseNote = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -70,12 +69,12 @@ export const Note = ({
     setIsVisible({ ...isVisible, exportModal: true });
   };
 
+  console.log(textValue);
   return (
     <>
       {isVisible.deleteModal && (
         <DeleteConfirmationModal
           noteId={note.id}
-          onNoteDelete={onNoteDelete}
           onVisibilityChange={setIsVisible}
         />
       )}
@@ -95,7 +94,7 @@ export const Note = ({
             />
             <Save
               imgSrc={imgBasePath + "/save.svg"}
-              onClick={() => onNoteSave(textValue, note.id)}
+              onClick={() => handleNoteUpdate({ text: textValue, id: note.id })}
             />
           </>
         )}

@@ -1,5 +1,5 @@
 import { QuestionsType, quizService } from "@services/QuizService";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { paths } from "@utils/paths";
 import { ReactElement, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
@@ -32,6 +32,10 @@ const QuizQuestions = (): ReactElement => {
   const { data } = useQuery(["questions", difficulty], () =>
     quizService.getQuestions(difficulty)
   );
+
+  const { mutate } = useMutation({
+    mutationFn: quizService.setUserScore,
+  });
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -83,6 +87,11 @@ const QuizQuestions = (): ReactElement => {
     }
   };
 
+  const handleUserScore = () => {
+    mutate(args.score);
+    navigate(paths.app, { replace: true });
+  };
+
   return (
     <Wrapper>
       {data && (
@@ -97,9 +106,7 @@ const QuizQuestions = (): ReactElement => {
                   Based on your result, we encourage you to continue working on
                   your progress at <strong>beginner</strong> difficulty.
                 </p>
-                <button onClick={() => navigate(paths.app, { replace: true })}>
-                  Finish
-                </button>
+                <button onClick={handleUserScore}>Finish</button>
               </Score>
             ) : (
               <>

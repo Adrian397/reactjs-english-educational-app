@@ -1,4 +1,3 @@
-import { asyncWrapper } from "./api/api.utils";
 import axios from "./api/axios";
 
 type LoginArgs = {
@@ -69,25 +68,16 @@ const sessionServiceDef = () => {
   };
 
   const resetPassword = async (args: ResetPasswordArgs) => {
-    const response = await axios.patch(`/resetPassword/${args.token}`, {
-      password: args.newPassword,
-      passwordConfirm: args.newPasswordRepeat,
-    });
-
-    return response;
+    try {
+      const response = await axios.patch(`/resetPassword/${args.token}`, {
+        password: args.newPassword,
+        passwordConfirm: args.newPasswordRepeat,
+      });
+      return response;
+    } catch (e) {
+      throw new Error("Custom");
+    }
   };
-
-  const getAllUsers = asyncWrapper(async () => {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.get("/users", {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    return response;
-  });
 
   const refreshToken = async () => {
     try {
@@ -111,7 +101,6 @@ const sessionServiceDef = () => {
     forgotPassword,
     resetPassword,
     refreshToken,
-    getAllUsers,
   };
 };
 

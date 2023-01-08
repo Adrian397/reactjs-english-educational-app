@@ -1,6 +1,7 @@
+import { notesService, NoteType } from "@services/NotesService";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
-import { nanoid } from "nanoid";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { Note } from "./Note/Note";
 import {
   AddNote,
@@ -10,45 +11,25 @@ import {
   Scroll,
   SearchNotes,
 } from "./Notebook.styled";
-import { NoteType } from "./Notebook.utils";
 
 type Props = {
   isVisible: boolean;
 };
 
 export const Notebook = ({ isVisible }: Props): ReactElement => {
-  const [data, setData] = useState<NoteType[]>(
-    JSON.parse(localStorage.getItem("notes") ?? "[]")
-  );
   const [inputValue, setInputValue] = useState("");
   const [isExpandedCheck, setIsExpandedCheck] = useState(false);
 
-  useEffect(() => {
-    window.localStorage.setItem("notes", JSON.stringify(data));
-  }, [data]);
+  const { data } = useQuery(["notes"], notesService.getNotes);
 
-  const handleNoteSave = (text: string, id: string) => {
-    const updatedNotes = data.map((note) => {
-      if (note.id === id) {
-        return { ...note, text };
-      }
-      return note;
-    });
+  const { mutate } = useMutation({
+    mutationFn: notesService.createNote,
+  });
 
-    setData(updatedNotes);
-  };
+  console.log(data);
 
   const handleNoteAdd = () => {
-    setData((prevState) => [...prevState, { text: "", id: nanoid() }]);
-  };
-
-  const handleNoteDelete = (
-    id: string,
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.stopPropagation();
-    const newNotes = data.filter((note) => note.id !== id);
-    setData(newNotes);
+    mutate({});
   };
 
   return (
@@ -69,17 +50,18 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
             <AddNote onClick={handleNoteAdd}>Add a note</AddNote>
           )}
 
-          {data
-            .filter((val) => val.text.toLowerCase().includes(inputValue))
-            .map((note) => (
-              <Note
-                key={note.id}
-                note={note}
-                onExpandCheck={setIsExpandedCheck}
-                onNoteDelete={handleNoteDelete}
-                onNoteSave={handleNoteSave}
-              />
-            ))}
+          {data &&
+            data
+              .filter((val: NoteType) =>
+                val.text.toLowerCase().includes(inputValue)
+              )
+              .map((note: NoteType) => (
+                <Note
+                  key={note.id}
+                  note={note}
+                  onExpandCheck={setIsExpandedCheck}
+                />
+              ))}
         </Scroll>
       </NotesList>
     </NotebookWrapper>

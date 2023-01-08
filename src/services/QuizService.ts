@@ -15,19 +15,43 @@ const quizServiceDef = () => {
     async (difficulty: string): Promise<QuestionsType> => {
       const token = localStorage.getItem("accessToken");
 
-      const response = await axios.get(`/questions`, {
-        params: { difficulty },
-        headers: {
-          Authorization: token,
-        },
-      });
+      try {
+        const response = await axios.get("/questions", {
+          params: { difficulty },
+          headers: {
+            Authorization: token,
+          },
+        });
 
-      return response.data;
+        return response.data;
+      } catch (e) {
+        throw new Error("Custom");
+      }
     }
   );
 
+  const setUserScore = asyncWrapper(async (score: number) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await axios.post(
+        "/questions/setScore",
+        { score },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      return response;
+    } catch (e) {
+      throw new Error("Custom");
+    }
+  });
+
   return {
     getQuestions,
+    setUserScore,
   };
 };
 
