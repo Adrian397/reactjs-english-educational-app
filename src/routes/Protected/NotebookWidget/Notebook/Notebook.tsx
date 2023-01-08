@@ -30,8 +30,6 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
     },
   });
 
-  console.log(data);
-
   const handleNoteAdd = () => {
     mutate({});
   };
