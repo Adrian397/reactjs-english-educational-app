@@ -29,9 +29,7 @@ const LoginPage = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const { mutate } = useMutation({
-    mutationFn: sessionService.login,
-  });
+  const { mutate } = useMutation(sessionService.login);
 
   const formik = useFormik({
     initialValues: {

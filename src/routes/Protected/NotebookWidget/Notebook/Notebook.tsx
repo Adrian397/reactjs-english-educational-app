@@ -1,5 +1,5 @@
 import { notesService, NoteType } from "@services/NotesService";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement, useState } from "react";
 import { Note } from "./Note/Note";
@@ -22,8 +22,12 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
 
   const { data } = useQuery(["notes"], notesService.getNotes);
 
-  const { mutate } = useMutation({
-    mutationFn: notesService.createNote,
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(notesService.createNote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["notes"]);
+    },
   });
 
   console.log(data);

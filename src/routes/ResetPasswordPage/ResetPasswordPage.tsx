@@ -35,9 +35,7 @@ const ResetPasswordPage = (): ReactElement => {
 
   const { token } = useParams();
 
-  const { mutate } = useMutation({
-    mutationFn: sessionService.resetPassword,
-  });
+  const { mutate } = useMutation(sessionService.resetPassword);
 
   const formik = useFormik({
     initialValues: {

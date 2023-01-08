@@ -33,9 +33,7 @@ const QuizQuestions = (): ReactElement => {
     quizService.getQuestions(difficulty)
   );
 
-  const { mutate } = useMutation({
-    mutationFn: quizService.setUserScore,
-  });
+  const { mutate } = useMutation(quizService.setUserScore);
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
     if (isCorrect) {

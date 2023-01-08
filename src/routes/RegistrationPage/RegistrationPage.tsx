@@ -41,9 +41,7 @@ const RegistrationPage = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const { mutate } = useMutation({
-    mutationFn: sessionService.register,
-  });
+  const { mutate } = useMutation(sessionService.register);
 
   const formik = useFormik({
     initialValues: {

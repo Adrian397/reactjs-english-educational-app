@@ -24,9 +24,7 @@ export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const { mutate } = useMutation({
-    mutationFn: sessionService.forgotPassword,
-  });
+  const { mutate } = useMutation(sessionService.forgotPassword);
 
   const formik = useFormik({
     initialValues: {

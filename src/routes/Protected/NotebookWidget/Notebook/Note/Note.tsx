@@ -1,5 +1,5 @@
 import { notesService, NoteType } from "@services/NotesService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import React, { ReactElement, useState } from "react";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal/DeleteConfirmationModal";
@@ -20,8 +20,12 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
     exportModal: false,
   });
 
-  const { mutate } = useMutation({
-    mutationFn: notesService.updateNote,
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(notesService.updateNote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["notes"]);
+    },
   });
 
   const handleNoteUpdate = (values: NoteType) => {
