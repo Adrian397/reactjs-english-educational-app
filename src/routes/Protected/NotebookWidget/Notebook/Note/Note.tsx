@@ -69,7 +69,6 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
     setIsVisible({ ...isVisible, exportModal: true });
   };
 
-  console.log(textValue);
   return (
     <>
       {isVisible.deleteModal && (

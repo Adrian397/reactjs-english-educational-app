@@ -3,8 +3,8 @@ import axios from "./api/axios";
 
 export type QuestionsType = {
   answerOptions: {
+    _id: string;
     answerText: string;
-    id: number;
     isCorrect: boolean;
   };
   questionText: string;

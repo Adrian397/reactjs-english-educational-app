@@ -143,7 +143,7 @@ const QuizQuestions = (): ReactElement => {
                       <AnswerButton
                         disabled={isChecked}
                         isCorrect={isResponseCorrect(answerOption.isCorrect)}
-                        key={answerOption.id}
+                        key={answerOption._id}
                         onClick={() =>
                           handleAnswerCorrectness(answerOption.isCorrect)
                         }
