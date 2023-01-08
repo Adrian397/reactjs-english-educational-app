@@ -22,7 +22,7 @@ export const AboutInfo = styled.div`
 
   p {
     line-height: 1.5;
-    color: #9fa2af;
+    color: #524f4f;
     white-space: normal;
     max-width: 60rem;
     margin: 3.5rem auto;

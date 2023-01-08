@@ -12,19 +12,14 @@ export const Footer = (): ReactElement => {
       <img alt="abstract" src="./assets/abstract2.svg" />
       <img alt="abstract" src="./assets/abstract1.svg" />
       <FooterInfo>
-        <h1>LearningApp</h1>
+        <h1>Englify</h1>
         <div>
           <FooterContact>
             <div>
               <h4>E-mail</h4>
-              <p>learningapp@gmail.com</p>
-            </div>
-            <div>
-              <h4>Phone</h4>
-              <p>+48 123 123 123</p>
+              <p>englify@gmail.com</p>
             </div>
           </FooterContact>
-
           <FooterSocials>
             <h4>Socials</h4>
             <div>

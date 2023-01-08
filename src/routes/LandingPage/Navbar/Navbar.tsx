@@ -17,7 +17,7 @@ export const Navbar = (): ReactElement => {
   return (
     <NavWrapper>
       <Logo>
-        <h1>LearningApp</h1>
+        <h1>Englify</h1>
       </Logo>
       <NavList>
         <li>

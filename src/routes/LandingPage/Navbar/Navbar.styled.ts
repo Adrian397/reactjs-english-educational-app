@@ -94,6 +94,7 @@ export const Logo = styled.div`
   h1 {
     color: white;
     font-size: 1.5rem;
+    letter-spacing: 0.5px;
   }
 `;
 export const NavList = styled.ul`
@@ -104,13 +105,9 @@ export const NavList = styled.ul`
 
   a {
     text-decoration: none;
-    color: #9fa2af;
+    color: #524f4f;
     font-weight: 600;
     cursor: pointer;
-  }
-
-  a:hover {
-    color: #3c2f60;
   }
 
   @media (max-width: 992px) {

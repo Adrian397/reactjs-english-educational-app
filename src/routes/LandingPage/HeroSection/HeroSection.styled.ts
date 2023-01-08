@@ -20,15 +20,20 @@ export const HeroWrapper = styled.section`
 export const HeroInfo = styled.div`
   flex: 1;
   h1 {
-    font-size: 2rem;
-    color: #825db3;
+    font-size: 3rem;
+    color: #333;
     margin-bottom: 3rem;
+
+    span {
+      color: #825db3;
+    }
   }
 
   p {
     margin-bottom: 2rem;
     line-height: 1.5;
-    color: #9fa2af;
+    font-size: 20px;
+    color: #524f4f;
   }
 
   button {
@@ -39,6 +44,7 @@ export const HeroInfo = styled.div`
     border: none;
     padding: 0.7rem 1.7rem;
     border-radius: 10px;
+    cursor: pointer;
   }
 
   @media (max-width: 1241px) {
@@ -47,8 +53,13 @@ export const HeroInfo = styled.div`
     flex-direction: column;
     align-items: center;
 
+    h1 {
+      font-size: 2rem;
+    }
+
     p {
       max-width: 35rem;
+      font-size: 16px;
     }
   }
 
