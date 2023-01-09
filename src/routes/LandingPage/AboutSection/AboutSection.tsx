@@ -4,6 +4,7 @@ import {
   AboutInfo,
   AboutWrapper,
   Feature,
+  Star,
 } from "./AboutSection.styled";
 
 export const AboutSection = (): ReactElement => {
@@ -28,49 +29,49 @@ export const AboutSection = (): ReactElement => {
       <AboutFeatures>
         <Feature>
           <div>
-            <img alt="star" src="./assets/star.svg" />
+            <img alt="quality" src="./assets/quality.svg" />
           </div>
           <div>
-            <h3>Lorem</h3>
+            <h3>Quality</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit
-              amet, consectetur ad
+              Guarantee of good quality of the transferred material, checked by
+              an English native speaker
             </p>
           </div>
         </Feature>
         <Feature>
           <div>
-            <img alt="star" src="./assets/star.svg" />
+            <img alt="star" src="./assets/runner.svg" />
           </div>
           <div>
-            <h3>Lorem</h3>
+            <h3>Up-to-date</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit
-              amet, consectetur ad
+              Rapidly developing application with systematic updates and news
             </p>
           </div>
         </Feature>
         <Feature>
           <div>
-            <img alt="star" src="./assets/star.svg" />
+            <Star alt="star" src="./assets/star.svg" />
           </div>
           <div>
-            <h3>Lorem</h3>
+            <h3>Rating</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit
-              amet, consectetur ad
+              Letting user know what level they are currently at based on their
+              performance
             </p>
           </div>
         </Feature>
+
         <Feature>
           <div>
-            <img alt="star" src="./assets/star.svg" />
+            <img alt="entertainment" src="./assets/confetti.svg" />
           </div>
           <div>
-            <h3>Lorem</h3>
+            <h3>Entertainment</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit
-              amet, consectetur ad
+              Activities made not only to test yourself but to compete with your
+              friends and have fun together
             </p>
           </div>
         </Feature>

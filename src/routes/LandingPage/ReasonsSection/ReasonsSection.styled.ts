@@ -69,6 +69,7 @@ export const Reasons = styled.div`
     align-items: center;
     gap: 1rem;
     color: #524f4f;
+    font-size: 20px;
 
     span {
       min-width: 2rem;

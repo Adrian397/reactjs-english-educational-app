@@ -44,6 +44,7 @@ export const ActivitiesInfo = styled.div`
   p {
     color: #524f4f;
     line-height: 1.5;
+    font-size: 20px;
   }
 
   @media (max-width: 1390px) {

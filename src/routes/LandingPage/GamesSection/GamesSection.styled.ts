@@ -45,6 +45,7 @@ export const GamesInfo = styled.div`
     margin-bottom: 2rem;
     line-height: 1.5;
     color: #524f4f;
+    font-size: 20px;
   }
 `;
 

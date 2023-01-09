@@ -12,6 +12,7 @@ export const NavListMobile = styled.div<StyledProps>`
     background-size: 1.125rem;
     border-radius: 10px;
     cursor: pointer;
+    fill: red;
   }
 
   ul {
@@ -46,17 +47,13 @@ export const NavListMobile = styled.div<StyledProps>`
       border-bottom: 2px solid #825db3;
     }
 
-    li:hover a {
-      color: #3c2f60;
-    }
-
     a {
       display: flex;
       justify-content: center;
       width: 100%;
       height: 100%;
       text-decoration: none;
-      color: #9fa2af;
+      color: #524f4f;
       font-weight: 600;
     }
   }
@@ -108,6 +105,7 @@ export const NavList = styled.ul`
     color: #524f4f;
     font-weight: 600;
     cursor: pointer;
+    font-size: 18px;
   }
 
   @media (max-width: 992px) {

@@ -46,6 +46,7 @@ export const AboutInfo = styled.div`
     white-space: normal;
     max-width: 60rem;
     margin: 3.5rem auto;
+    font-size: 20px;
   }
 `;
 
@@ -86,11 +87,11 @@ export const Feature = styled.div`
     justify-content: center;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
+  }
 
-    img {
-      width: 24px;
-      height: 24px;
-    }
+  img {
+    width: 28px;
+    height: 28px;
   }
 
   h3 {
@@ -102,4 +103,9 @@ export const Feature = styled.div`
     color: #674692;
     font-weight: 500;
   }
+`;
+
+export const Star = styled.img`
+  width: 24px !important;
+  height: 24px !important;
 `;

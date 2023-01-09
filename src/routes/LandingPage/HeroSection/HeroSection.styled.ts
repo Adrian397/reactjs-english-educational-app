@@ -60,7 +60,6 @@ export const HeroInfo = styled.div`
 
     p {
       max-width: 35rem;
-      font-size: 16px;
     }
   }
 
