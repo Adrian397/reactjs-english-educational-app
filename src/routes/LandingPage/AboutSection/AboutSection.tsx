@@ -10,16 +10,18 @@ export const AboutSection = (): ReactElement => {
   return (
     <AboutWrapper id="about">
       <AboutInfo>
-        <h1>About</h1>
+        <span>ABOUT</span>
+        <h2>
+          What is{" "}
+          <span>
+            Englify? <img alt="circle" src="./assets/circle.svg" />
+          </span>
+        </h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint dolores
-          velit at, praesentium incidunt eligendi dolore, adipisci voluptate
-          asperiores nobis cumque obcaecati, officia consectetur perspiciatis
-          dolorum commodi quibusdam excepturi sapiente. Lorem ipsum dolor sit
-          amet, consectetur adipisicing elit. Sint dolores velit at, praesentium
-          incidunt eligendi dolore, adipisci voluptate asperiores nobis cumque
-          obcaecati, officia consectetur perspiciatis dolorum commodi quibusdam
-          excepturi sapiente.
+          It is a service that provides an educational activities for people who
+          want step up with their english skills based on their actual level.
+          Proven and qualitative educational materials are our hallmark. Feel
+          free to explore!
         </p>
       </AboutInfo>
 

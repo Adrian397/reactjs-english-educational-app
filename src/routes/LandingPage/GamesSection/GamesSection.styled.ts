@@ -44,7 +44,7 @@ export const GamesInfo = styled.div`
   p {
     margin-bottom: 2rem;
     line-height: 1.5;
-    color: #9fa2af;
+    color: #524f4f;
   }
 `;
 

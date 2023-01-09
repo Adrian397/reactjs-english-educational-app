@@ -36,7 +36,7 @@ export const HeroInfo = styled.div`
     color: #524f4f;
   }
 
-  button {
+  a {
     background-color: #825db3;
     font-weight: bold;
     color: white;
@@ -45,6 +45,7 @@ export const HeroInfo = styled.div`
     padding: 0.7rem 1.7rem;
     border-radius: 10px;
     cursor: pointer;
+    text-decoration: none;
   }
 
   @media (max-width: 1241px) {

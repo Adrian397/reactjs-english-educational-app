@@ -17,11 +17,10 @@ export const ActivitiesSection = (): ReactElement => {
           </span>
         </h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet,
-          consectetur ad Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum
-          dolor sit amet, consectetur ad Lorem ipsum dolor sit amet, consectetur
-          ad Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit
-          amet, consectetur ad Lorem ipsum dolor sit amet, consectetur ad
+          Take part in a grammar quiz or test your knowladge of vocabulary. In
+          both cases you have access to the notebook widget that allows you to
+          make important notes and then export them in .txt files if needed.{" "}
+          <strong>Go challange yourself!</strong>
         </p>
       </ActivitiesInfo>
 

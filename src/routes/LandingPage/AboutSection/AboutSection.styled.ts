@@ -14,10 +14,30 @@ export const AboutInfo = styled.div`
   text-align: center;
   width: 100%;
 
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  & > span {
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-weight: 500;
     color: #825db3;
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    z-index: -1;
+    top: -1rem;
+    right: -1rem;
+  }
+
+  h2 {
+    font-size: 2.625rem;
+    color: #333;
+    margin-bottom: 2rem;
+
+    span {
+      position: relative;
+    }
   }
 
   p {

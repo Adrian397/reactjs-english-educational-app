@@ -8,7 +8,7 @@ export const HeroSection = (): ReactElement => {
           Learning English can be <span>easy</span> and <span>enjoyable</span>
         </h1>
         <p>It is simply about what materials you use and how you learn...</p>
-        <button>Read more</button>
+        <a href="#about">Read more</a>
       </HeroInfo>
       <HeroImg>
         <img alt="hero" src="./assets/hero.svg" />

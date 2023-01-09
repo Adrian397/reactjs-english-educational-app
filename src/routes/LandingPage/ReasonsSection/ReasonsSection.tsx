@@ -15,22 +15,24 @@ export const ReasonsSection = (): ReactElement => {
             English? <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
-        <p>
-          <span>1</span>
-          Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet
-        </p>
-        <p>
-          <span>2</span>
-          Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet
-        </p>
-        <p>
-          <span>3</span>
-          Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet
-        </p>
-        <p>
-          <span>4</span>
-          Lorem ipsum dolor sit amet, consectetur ad Lorem ipsum dolor sit amet
-        </p>
+        <div>
+          <p>
+            <span>1</span>
+            It is most widely spoken language in the world
+          </p>
+          <p>
+            <span>2</span>
+            It is a language of the media
+          </p>
+          <p>
+            <span>3</span>
+            Increase your chances of getting a good job
+          </p>
+          <p>
+            <span>4</span>
+            Travel around the world with no worry of being misunderstood
+          </p>
+        </div>
       </Reasons>
     </ReasonsWrapper>
   );

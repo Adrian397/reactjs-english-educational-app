@@ -13,11 +13,10 @@ export const GamesSection = (): ReactElement => {
           </span>
         </h2>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industryLorem Ipsum is simply dummy text of the printing and
-          typesetting industry Lorem Ipsum is simply dummy text of the printing
-          and typesetting industryLorem Ipsum is simply dummy text of the
-          printing and typesetting industry
+          After finishing a quiz you will be awarded with availability to sign
+          in into our external games section. You will be able to play the games
+          whose level of difficulty are adjusted to the score you achieved in
+          the quiz.
         </p>
       </GamesInfo>
       <GamesImg>

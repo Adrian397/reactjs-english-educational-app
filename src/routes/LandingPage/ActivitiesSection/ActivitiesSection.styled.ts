@@ -42,7 +42,7 @@ export const ActivitiesInfo = styled.div`
   }
 
   p {
-    color: #9fa2af;
+    color: #524f4f;
     line-height: 1.5;
   }
 
