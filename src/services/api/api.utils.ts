@@ -9,7 +9,6 @@ export const asyncWrapper =
       const result = await handler(args);
       return result;
     } catch (err: any) {
-      console.log(err);
       if (err.response.status === 401) {
         // refresh token then again call handler
         await sessionService.refreshToken();
