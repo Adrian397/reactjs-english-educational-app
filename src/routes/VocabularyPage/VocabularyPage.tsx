@@ -1,7 +1,7 @@
 import { vocabularyService } from "@services/VocabularyService";
 import { useQuery } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
-import { ReactElement, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 import {
   Heading,
   Sentence,
@@ -14,6 +14,7 @@ const VocabularyPage = (): ReactElement => {
   const [isAnimated, setIsAnimated] = useState(false);
   const [isCorrect, setIsCorrect] = useState({});
   const [isChecked, setIsChecked] = useState(false);
+  const selectsRef = useRef<(HTMLSelectElement | null)[]>([]);
 
   const { data, refetch } = useQuery(
     ["vocabulary"],
@@ -23,11 +24,17 @@ const VocabularyPage = (): ReactElement => {
     }
   );
 
-  const handleRandomSentencesFetch = () => {
+  const handleReset = () => {
     setIsAnimated(true);
     refetch();
     setIsChecked(false);
     setIsCorrect({});
+    selectsRef.current.forEach((item) => {
+      if (!item) {
+        return;
+      }
+      item.value = "";
+    });
   };
 
   const handleValueChange = (value: string, id: string) => {
@@ -44,7 +51,7 @@ const VocabularyPage = (): ReactElement => {
           <h3>Choose the correct option for each blank...</h3>
           <button
             onAnimationEnd={() => setIsAnimated(false)}
-            onClick={handleRandomSentencesFetch}
+            onClick={handleReset}
           />
         </Heading>
         <Sentences>
@@ -52,7 +59,7 @@ const VocabularyPage = (): ReactElement => {
             data.map((sentence, index) => (
               <Sentence
                 isChecked={isChecked}
-                isCorrect={isCorrect[sentence._id]}
+                isCorrect={isCorrect[sentence._id as keyof typeof isCorrect]}
                 key={sentence._id}
               >
                 <span>
@@ -62,6 +69,7 @@ const VocabularyPage = (): ReactElement => {
                   onChange={(e) =>
                     handleValueChange(e.target.value, sentence._id)
                   }
+                  ref={(node) => (selectsRef.current[index] = node)}
                 >
                   {sentence.answerOptions.map((option) => (
                     <option
