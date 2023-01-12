@@ -2,15 +2,14 @@
 
 import { sessionService } from "@services/SessionService";
 
-type HandlerType = (args?: any) => Promise<any>;
-
 export const asyncWrapper =
-  (handler: HandlerType) =>
-  async (args?: any): Promise<any> => {
+  <A, R>(handler: (args: A) => Promise<R>) =>
+  async (args: A): Promise<R> => {
     try {
       const result = await handler(args);
       return result;
     } catch (err: any) {
+      console.log(err);
       if (err.response.status === 401) {
         // refresh token then again call handler
         await sessionService.refreshToken();
@@ -18,4 +17,6 @@ export const asyncWrapper =
         return result;
       }
     }
+
+    throw new Error("Handle this");
   };

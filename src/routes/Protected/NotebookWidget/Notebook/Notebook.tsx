@@ -1,4 +1,4 @@
-import { notesService, NoteType } from "@services/NotesService";
+import { notesService } from "@services/NotesService";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement, useState } from "react";
@@ -48,18 +48,16 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
       </InputWrapper>
       <NotesList>
         <Scroll data={data} isExpanded={isExpandedCheck}>
-          {(!isExpandedCheck || data.length === 0) && (
+          {(!isExpandedCheck || (data && data.length === 0)) && (
             <AddNote onClick={handleNoteAdd}>Add a note</AddNote>
           )}
 
           {data &&
             data
-              .filter((val: NoteType) =>
-                val.text.toLowerCase().includes(inputValue)
-              )
-              .map((note: NoteType) => (
+              .filter((val) => val.text.toLowerCase().includes(inputValue))
+              .map((note) => (
                 <Note
-                  key={note.id}
+                  key={note._id}
                   note={note}
                   onExpandCheck={setIsExpandedCheck}
                 />

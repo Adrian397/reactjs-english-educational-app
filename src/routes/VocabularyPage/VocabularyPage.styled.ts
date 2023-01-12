@@ -10,10 +10,12 @@ export const Sentence = styled.div<StyledProps>`
 
   select {
     margin: 0 0.5rem;
-    border: none;
+    border: 1px solid;
     padding: 0.2rem;
     border-radius: 4px;
     font-weight: 500;
+    border-color: ${({ isChecked, isCorrect }) =>
+      !isChecked ? "currentColor" : isCorrect ? "green" : "red"};
   }
 `;
 

@@ -77,13 +77,13 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
     <>
       {isVisible.deleteModal && (
         <DeleteConfirmationModal
-          noteId={note.id}
+          noteId={note._id}
           onVisibilityChange={setIsVisible}
         />
       )}
       {isVisible.exportModal && (
         <ExportFileNameModal
-          noteId={note.id}
+          noteId={note._id}
           onNoteExport={handleExportText}
           onVisibilityChange={setIsVisible}
         />
@@ -97,7 +97,9 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
             />
             <Save
               imgSrc={imgBasePath + "/save.svg"}
-              onClick={() => handleNoteUpdate({ text: textValue, id: note.id })}
+              onClick={() =>
+                handleNoteUpdate({ text: textValue, _id: note._id })
+              }
             />
           </>
         )}
@@ -118,7 +120,7 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
         <textarea
           defaultValue={note.text}
           disabled={!isExpanded}
-          id={note.id}
+          id={note._id}
           onChange={(e) => setTextValue(e.target.value)}
           placeholder="Enter your notes..."
         />

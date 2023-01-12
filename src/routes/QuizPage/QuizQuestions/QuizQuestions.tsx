@@ -1,4 +1,4 @@
-import { QuestionsType, quizService } from "@services/QuizService";
+import { quizService } from "@services/QuizService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { paths } from "@utils/paths";
 import { ReactElement, useState } from "react";
@@ -27,9 +27,9 @@ const QuizQuestions = (): ReactElement => {
   const [resetTimer, setResetTimer] = useState(0);
 
   const navigate = useNavigate();
-  const difficulty = searchParams.get("difficulty");
+  const difficulty = searchParams.get("difficulty") || "";
 
-  const { data } = useQuery(["questions", difficulty], () =>
+  const { data } = useQuery(["quiz", difficulty], () =>
     quizService.getQuestions(difficulty)
   );
 
@@ -64,24 +64,26 @@ const QuizQuestions = (): ReactElement => {
   };
 
   const handleNextPage = () => {
-    if (args.currentPage + 1 < data.length) {
-      setArgs({
-        ...args,
-        currentPage: args.currentPage + 1,
-        isCorrect: undefined,
-      });
-      setResetTimer((prevState) => prevState + 1);
-      setIsChecked(false);
-    }
+    if (data) {
+      if (args.currentPage + 1 < data.length) {
+        setArgs({
+          ...args,
+          currentPage: args.currentPage + 1,
+          isCorrect: undefined,
+        });
+        setResetTimer((prevState) => prevState + 1);
+        setIsChecked(false);
+      }
 
-    if (args.currentPage + 1 === data.length) {
-      setArgs({
-        ...args,
-        isCompleted: true,
-        isCorrect: undefined,
-      });
-      setResetTimer((prevState) => prevState + 1);
-      setIsChecked(false);
+      if (args.currentPage + 1 === data.length) {
+        setArgs({
+          ...args,
+          isCompleted: true,
+          isCorrect: undefined,
+        });
+        setResetTimer((prevState) => prevState + 1);
+        setIsChecked(false);
+      }
     }
   };
 
@@ -136,20 +138,18 @@ const QuizQuestions = (): ReactElement => {
                 </Heading>
                 <p>{data[args.currentPage].questionText}</p>
                 <Questions isChecked={isChecked}>
-                  {data[args.currentPage].answerOptions.map(
-                    (answerOption: QuestionsType["answerOptions"]) => (
-                      <AnswerButton
-                        disabled={isChecked}
-                        isCorrect={isResponseCorrect(answerOption.isCorrect)}
-                        key={answerOption._id}
-                        onClick={() =>
-                          handleAnswerCorrectness(answerOption.isCorrect)
-                        }
-                      >
-                        {answerOption.answerText}
-                      </AnswerButton>
-                    )
-                  )}
+                  {data[args.currentPage].answerOptions.map((answerOption) => (
+                    <AnswerButton
+                      disabled={isChecked}
+                      isCorrect={isResponseCorrect(answerOption.isCorrect)}
+                      key={answerOption._id}
+                      onClick={() =>
+                        handleAnswerCorrectness(answerOption.isCorrect)
+                      }
+                    >
+                      {answerOption.answerText}
+                    </AnswerButton>
+                  ))}
                 </Questions>
                 {isChecked && (
                   <NextQuestion onClick={handleNextPage}>Next</NextQuestion>
