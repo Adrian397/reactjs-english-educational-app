@@ -1,7 +1,6 @@
 import { paths } from "@utils/paths";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
-import { DifficultyType } from "../QuizPage.utils";
 import {
   Difficulties,
   QuizIntroduction,
@@ -11,7 +10,7 @@ import {
 const QuizDifficulties = (): ReactElement => {
   const navigate = useNavigate();
 
-  const handleDifficultyChoice = (difficulty: DifficultyType) => {
+  const handleDifficultyChoice = (difficulty: string) => {
     navigate({
       pathname: paths.quizQuestions,
       search: `?difficulty=${difficulty}`,
@@ -42,7 +41,7 @@ const QuizDifficulties = (): ReactElement => {
               Advanced
             </button>
           </div>
-          <button onClick={() => handleDifficultyChoice("beginner")}>
+          <button onClick={() => handleDifficultyChoice("adjust")}>
             Adjust the level
           </button>
         </Difficulties>

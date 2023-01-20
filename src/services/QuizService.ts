@@ -10,6 +10,11 @@ export type QuestionsType = {
   questionText: string;
 };
 
+type UserScoreType = {
+  difficulty: string;
+  score: number;
+};
+
 const quizServiceDef = () => {
   const getQuestions = asyncWrapper(
     async (difficulty: string): Promise<QuestionsType[]> => {
@@ -26,13 +31,14 @@ const quizServiceDef = () => {
     }
   );
 
-  const setUserScore = asyncWrapper(async (score: number) => {
+  const setUserScore = asyncWrapper(async (args: UserScoreType) => {
     const token = localStorage.getItem("accessToken");
 
     const response = await axios.post(
       "/questions/setScore",
-      { score },
+      { score: args.score },
       {
+        params: { difficulty: args.difficulty },
         headers: {
           Authorization: token,
         },

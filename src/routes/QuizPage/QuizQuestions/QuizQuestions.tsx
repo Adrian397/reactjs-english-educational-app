@@ -1,9 +1,8 @@
 import { quizService } from "@services/QuizService";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { paths } from "@utils/paths";
+import { useQuery } from "@tanstack/react-query";
 import { ReactElement, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { ArgsType } from "../QuizPage.utils";
 import {
   AnswerButton,
@@ -11,9 +10,9 @@ import {
   NextQuestion,
   Questions,
   Quiz,
-  Score,
   Wrapper,
 } from "./QuizQuestions.styled";
+import { Result } from "./Result/Result";
 
 const QuizQuestions = (): ReactElement => {
   const [searchParams] = useSearchParams();
@@ -26,14 +25,11 @@ const QuizQuestions = (): ReactElement => {
   const [isChecked, setIsChecked] = useState(false);
   const [resetTimer, setResetTimer] = useState(0);
 
-  const navigate = useNavigate();
   const difficulty = searchParams.get("difficulty") || "";
 
   const { data } = useQuery(["quiz", difficulty], () =>
     quizService.getQuestions(difficulty)
   );
-
-  const { mutate } = useMutation(quizService.setUserScore);
 
   const handleAnswerCorrectness = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -87,27 +83,17 @@ const QuizQuestions = (): ReactElement => {
     }
   };
 
-  const handleUserScore = () => {
-    mutate(args.score);
-    navigate(paths.app, { replace: true });
-  };
-
   return (
     <Wrapper>
       {data && (
         <>
           <Quiz isCompleted={args.isCompleted}>
             {args.isCompleted ? (
-              <Score>
-                <p>
-                  You scored {args.score} out of {data.length}
-                </p>
-                <p>
-                  Based on your result, we encourage you to continue working on
-                  your progress at <strong>beginner</strong> difficulty.
-                </p>
-                <button onClick={handleUserScore}>Finish</button>
-              </Score>
+              <Result
+                dataLength={data.length}
+                difficulty={difficulty}
+                score={args.score}
+              />
             ) : (
               <>
                 <Heading>
@@ -117,7 +103,7 @@ const QuizQuestions = (): ReactElement => {
                   {!isChecked && (
                     <CountdownCircleTimer
                       colors="#be63f9"
-                      duration={10}
+                      duration={15}
                       isPlaying
                       key={resetTimer}
                       onComplete={() => {
