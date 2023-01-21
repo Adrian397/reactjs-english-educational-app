@@ -11,8 +11,31 @@ export type QuestionsType = {
 };
 
 type UserScoreType = {
-  difficulty: string;
-  score: number;
+  _id: string;
+  result: {
+    difficulty: string;
+    score: number;
+  };
+  username: string;
+};
+
+type UsersScoreReturnType = {
+  list: UserScoreType[];
+  numberOfPages: number;
+  numberOfRows: number;
+};
+
+type UserArgs = {
+  limit: number;
+  page: number;
+};
+
+const limitUsers = (list: UserScoreType[], limit?: number, page = 0) => {
+  if (limit) {
+    return list.slice(page * limit, page * limit + limit);
+  }
+
+  return list;
 };
 
 const quizServiceDef = () => {
@@ -31,7 +54,27 @@ const quizServiceDef = () => {
     }
   );
 
-  const setUserScore = asyncWrapper(async (args: UserScoreType) => {
+  const getUsersScore = asyncWrapper(
+    async (args: UserArgs): Promise<UsersScoreReturnType> => {
+      const token = localStorage.getItem("accessToken");
+
+      const response = await axios.get("/questions/getAllUsersScore", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      const limitedUsers = limitUsers(response.data, args.limit, args.page);
+      const paginatedUsers = Math.ceil(response.data.length / args.limit);
+
+      return {
+        list: limitedUsers,
+        numberOfRows: response.data.length,
+        numberOfPages: paginatedUsers,
+      };
+    }
+  );
+
+  const setUserScore = asyncWrapper(async (args: UserScoreType["result"]) => {
     const token = localStorage.getItem("accessToken");
 
     const response = await axios.post(
@@ -49,6 +92,7 @@ const quizServiceDef = () => {
 
   return {
     getQuestions,
+    getUsersScore,
     setUserScore,
   };
 };

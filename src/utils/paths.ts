@@ -7,4 +7,5 @@ export const paths = {
   quiz: "/app/quiz",
   vocabulary: "/app/vocabulary",
   quizQuestions: "/app/quiz/questions",
+  quizLeaderboard: "/app/quiz/leaderboard",
 };

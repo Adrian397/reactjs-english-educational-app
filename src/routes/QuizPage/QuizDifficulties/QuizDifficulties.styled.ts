@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
+  flex-direction: column;
 `;
 
 export const QuizIntroduction = styled.div`
@@ -55,4 +56,17 @@ export const Difficulties = styled.div`
     background-color: #f5e6fe;
     color: #be63f9;
   }
+`;
+
+export const Leaderboard = styled.button`
+  padding: 1rem 4rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #117960;
+  color: #f5e6fe;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 120ms ease;
+  text-transform: uppercase;
+  margin-top: 3rem;
 `;

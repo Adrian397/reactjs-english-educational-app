@@ -13,6 +13,10 @@ import ResetPasswordPage from "./ResetPasswordPage/ResetPasswordPage";
 const QuizQuestions = lazy(
   () => import("./QuizPage/QuizQuestions/QuizQuestions")
 );
+
+const QuizLeaderboard = lazy(
+  () => import("./QuizPage/QuizLeaderboard/QuizLeaderboard")
+);
 const VocabularyPage = lazy(() => import("./VocabularyPage/VocabularyPage"));
 
 export const Router = (): ReactElement => {
@@ -24,6 +28,14 @@ export const Router = (): ReactElement => {
           <Route element={<ChooseActivityPage />} index />
           <Route element={<QuizPage />} path={paths.quiz}>
             <Route element={<QuizDifficulties />} index />
+            <Route
+              element={
+                <Suspense fallback={null}>
+                  <QuizLeaderboard />
+                </Suspense>
+              }
+              path={paths.quizLeaderboard}
+            />
             <Route
               element={
                 <Suspense fallback={null}>

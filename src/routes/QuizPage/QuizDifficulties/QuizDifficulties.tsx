@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Difficulties,
+  Leaderboard,
   QuizIntroduction,
   Wrapper,
 } from "./QuizDifficulties.styled";
@@ -46,6 +47,9 @@ const QuizDifficulties = (): ReactElement => {
           </button>
         </Difficulties>
       </QuizIntroduction>
+      <Leaderboard onClick={() => navigate(paths.quizLeaderboard)}>
+        Leaderboard
+      </Leaderboard>
     </Wrapper>
   );
 };

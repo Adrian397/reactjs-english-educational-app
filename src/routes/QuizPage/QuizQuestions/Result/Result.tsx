@@ -1,5 +1,5 @@
 import { quizService } from "@services/QuizService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { paths } from "@utils/paths";
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,11 +19,17 @@ export const Result = ({
 }: Props): ReactElement => {
   const navigate = useNavigate();
 
-  const { mutate } = useMutation(quizService.setUserScore);
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(quizService.setUserScore, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["quiz"]);
+    },
+  });
 
   const handleUserScore = () => {
     mutate({ score, difficulty });
-    navigate(paths.app, { replace: true });
+    navigate(paths.quiz, { replace: true });
   };
 
   return (
@@ -32,7 +38,14 @@ export const Result = ({
         You scored {score} out of {dataLength}
       </p>
       <p>{resultText(difficulty, score)}</p>
-      <button onClick={handleUserScore}>Finish</button>
+
+      {difficulty !== "adjust" ? (
+        <button onClick={handleUserScore}>Finish</button>
+      ) : (
+        <button onClick={() => navigate(paths.quiz, { replace: true })}>
+          Finish
+        </button>
+      )}
     </Score>
   );
 };
