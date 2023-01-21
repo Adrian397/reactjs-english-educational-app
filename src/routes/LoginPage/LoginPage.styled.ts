@@ -21,6 +21,7 @@ export const LoginWrapper = styled.div`
   p:last-child {
     font-size: 0.875rem;
     color: #333;
+    font-weight: bold;
     z-index: 2137;
 
     span {
@@ -106,8 +107,8 @@ export const Password = styled.div<StyledProps>`
       display: ${({ isError }) => (isError ? "flex" : "none")};
 
       svg {
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
       }
     }
   }
@@ -126,7 +127,7 @@ export const Password = styled.div<StyledProps>`
     text-decoration: underline;
     font-weight: 700;
     margin-left: 0.2rem;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #825db3;
     cursor: pointer;
   }
@@ -158,8 +159,8 @@ export const TextInfo = styled.div<StyledProps>`
   }
 
   span {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     background: url("./assets/capsLock.svg") no-repeat center;
     display: ${({ isCapsLockOn }) => (isCapsLockOn ? "flex" : "none")};
 
@@ -168,8 +169,8 @@ export const TextInfo = styled.div<StyledProps>`
     }
   }
   img {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
   }
 `;
 

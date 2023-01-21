@@ -33,8 +33,8 @@ export const GamesInfo = styled.div`
   }
 
   img {
-    width: 64px;
-    height: 64px;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
     z-index: -1;
     top: -1rem;
@@ -45,7 +45,7 @@ export const GamesInfo = styled.div`
     margin-bottom: 2rem;
     line-height: 1.5;
     color: #524f4f;
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 `;
 

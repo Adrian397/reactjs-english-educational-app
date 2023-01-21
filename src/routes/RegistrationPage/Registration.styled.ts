@@ -22,6 +22,7 @@ export const RegistrationWrapper = styled.div`
     font-size: 0.875rem;
     color: #333;
     z-index: 2137;
+    font-weight: bold;
 
     span {
       text-decoration: underline;
@@ -107,13 +108,13 @@ export const Email = styled.div<StyledProps>`
       display: flex;
       align-items: center;
       margin-bottom: 0.5rem;
-      font-size: 14px;
+      font-size: 0.875rem;
       color: #fa233b !important;
 
       svg {
-        width: 17px;
-        height: 17px;
-        margin-right: 4px;
+        width: 1.0625rem;
+        height: 1.0625rem;
+        margin-right: 0.25rem;
         fill: #fa233b;
       }
     }
@@ -154,21 +155,21 @@ export const Username = styled.div<StyledProps>`
       display: ${({ isVisible, errors }) =>
         !isVisible && errors?.username ? "none" : "flex"};
       margin-bottom: 0.5rem;
-      font-size: 14px;
+      font-size: 0.875rem;
       color: #333;
     }
 
     p:nth-of-type(2) {
       align-items: center;
       margin-bottom: 0.5rem;
-      font-size: 14px;
+      font-size: 0.875rem;
       color: #fa233b !important;
       display: ${({ errors }) => (errors?.username ? "flex" : "none")};
 
       svg {
-        width: 17px;
-        height: 17px;
-        margin-right: 4px;
+        width: 1.0625rem;
+        height: 1.0625rem;
+        margin-right: 0.25rem;
         fill: #fa233b;
       }
     }
@@ -247,8 +248,8 @@ export const TextInfo = styled.div<StyledProps>`
   }
 
   span {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     background: url("./assets/capsLock.svg") no-repeat center;
     display: ${({ isCapsLockOn }) => (isCapsLockOn ? "flex" : "none")};
 
@@ -257,7 +258,7 @@ export const TextInfo = styled.div<StyledProps>`
     }
   }
   img {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
   }
 `;

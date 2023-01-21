@@ -10,7 +10,7 @@ export const FooterWrapper = styled.div`
   & > img:nth-of-type(1) {
     position: absolute;
     width: max-content;
-    height: 200px;
+    height: 12.5rem;
     top: 0;
     right: 0;
     z-index: -1;
@@ -18,7 +18,7 @@ export const FooterWrapper = styled.div`
   & > img:nth-of-type(2) {
     position: absolute;
     width: max-content;
-    height: 200px;
+    height: 12.5rem;
     bottom: 0;
     left: -1rem;
     z-index: -1;
@@ -27,20 +27,20 @@ export const FooterWrapper = styled.div`
   @media (max-width: 900px) {
     & > img {
       width: max-content;
-      height: 150px !important;
+      height: 9.375rem !important;
     }
   }
 
   @media (max-width: 665px) {
     & > img {
       width: max-content;
-      height: 100px !important;
+      height: 9.375rem !important;
     }
   }
 `;
 
 export const FooterInfo = styled.div`
-  height: 300px;
+  height: 18.75rem;
   display: flex;
   align-items: center;
   justify-content: center;

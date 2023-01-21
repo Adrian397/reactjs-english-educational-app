@@ -32,7 +32,7 @@ export const HeroInfo = styled.div`
   p {
     margin-bottom: 2rem;
     line-height: 1.5;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #524f4f;
   }
 

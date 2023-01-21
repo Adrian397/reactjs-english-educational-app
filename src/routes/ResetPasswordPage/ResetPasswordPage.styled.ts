@@ -46,7 +46,7 @@ export const ResetForm = styled.form`
     height: 1rem;
     width: 100%;
     padding: 0.2rem 0.7rem;
-    height: 30px;
+    height: 1.875rem;
   }
 
   input:focus-visible {
@@ -77,7 +77,6 @@ export const NewPassword = styled.div<StyledProps>`
 export const RepeatNewPassword = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
-  /* margin-bottom: 2rem; */
   position: relative;
 
   div {
@@ -102,8 +101,8 @@ export const RepeatNewPassword = styled.div<StyledProps>`
     margin-bottom: 19px;
 
     svg {
-      width: 18px;
-      height: 18px;
+      width: 1.125rem;
+      height: 1.125rem;
     }
   }
 `;
@@ -151,8 +150,8 @@ export const TextInfo = styled.div<StyledProps>`
   }
 
   span {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     background: transparent url(${({ imgSrc }) => imgSrc + "capsLock.svg"})
       no-repeat center;
     display: ${({ isCapsLockOn }) => (isCapsLockOn ? "flex" : "none")};
@@ -162,7 +161,7 @@ export const TextInfo = styled.div<StyledProps>`
     }
   }
   img {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
   }
 `;

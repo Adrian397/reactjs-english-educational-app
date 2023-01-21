@@ -16,21 +16,21 @@ export const ReasonsImg = styled.div`
   flex: 1;
 
   img {
-    width: 600px;
-    height: 600px;
+    width: 37.5rem;
+    height: 37.5rem;
   }
 
   @media (max-width: 620px) {
     img {
-      width: 450px;
-      height: 450px;
+      width: 28.125rem;
+      height: 28.125rem;
     }
   }
 
   @media (max-width: 470px) {
     img {
-      width: 350px;
-      height: 350px;
+      width: 21.875rem;
+      height: 21.875rem;
     }
   }
 `;
@@ -46,8 +46,8 @@ export const Reasons = styled.div`
   }
 
   img {
-    width: 64px;
-    height: 64px;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
     z-index: -1;
     top: -1rem;
@@ -69,7 +69,7 @@ export const Reasons = styled.div`
     align-items: center;
     gap: 1rem;
     color: #524f4f;
-    font-size: 20px;
+    font-size: 1.25rem;
 
     span {
       min-width: 2rem;

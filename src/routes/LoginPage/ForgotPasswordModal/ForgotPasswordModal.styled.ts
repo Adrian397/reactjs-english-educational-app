@@ -49,7 +49,7 @@ export const Email = styled.div<StyledProps>`
     height: 1rem;
     width: 100%;
     padding: 0.2rem 0.7rem;
-    height: 30px;
+    height: 1.875rem;
     border-color: ${({ errors, isError }) =>
       errors?.email || isError ? "#fa233b" : "#dbdeea"};
     margin-bottom: ${({ errors, isError }) =>
@@ -62,13 +62,13 @@ export const Email = styled.div<StyledProps>`
   p {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #fa233b !important;
 
     svg {
-      width: 17px;
-      height: 17px;
-      margin-right: 4px;
+      width: 1.0625rem;
+      height: 1.0625rem;
+      margin-right: 0.25rem;
       fill: #fa233b;
     }
   }

@@ -105,7 +105,7 @@ export const NavList = styled.ul`
     color: #524f4f;
     font-weight: 600;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   @media (max-width: 992px) {
