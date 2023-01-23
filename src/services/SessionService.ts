@@ -32,7 +32,7 @@ const sessionServiceDef = () => {
 
       return response;
     } catch (e) {
-      throw new Error("Custom");
+      throw new Error("Something went wrong");
     }
   };
 
@@ -51,7 +51,7 @@ const sessionServiceDef = () => {
 
       return response;
     } catch (e) {
-      throw new Error("Custom");
+      throw new Error("Something went wrong");
     }
   };
 
@@ -63,20 +63,16 @@ const sessionServiceDef = () => {
 
       return response;
     } catch (e) {
-      throw new Error("Custom");
+      throw new Error("Something went wrong");
     }
   };
 
   const resetPassword = async (args: ResetPasswordArgs) => {
-    try {
-      const response = await axios.patch(`/resetPassword/${args.token}`, {
-        password: args.newPassword,
-        passwordConfirm: args.newPasswordRepeat,
-      });
-      return response;
-    } catch (e) {
-      throw new Error("Custom");
-    }
+    const response = await axios.patch(`/resetPassword/${args.token}`, {
+      password: args.newPassword,
+      passwordConfirm: args.newPasswordRepeat,
+    });
+    return response;
   };
 
   const refreshToken = async () => {

@@ -22,7 +22,6 @@ export const RegistrationWrapper = styled.div`
     font-size: 0.875rem;
     color: #333;
     z-index: 2137;
-    font-weight: bold;
 
     span {
       text-decoration: underline;
@@ -261,4 +260,8 @@ export const TextInfo = styled.div<StyledProps>`
     width: 1.125rem;
     height: 1.125rem;
   }
+`;
+
+export const LastParagraph = styled.p`
+  font-weight: bold;
 `;

@@ -17,5 +17,5 @@ export const asyncWrapper =
       }
     }
 
-    throw new Error("Handle this");
+    throw new Error("Something went wrong");
   };

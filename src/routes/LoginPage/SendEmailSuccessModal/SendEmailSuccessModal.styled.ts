@@ -16,6 +16,7 @@ export const Modal = styled.div`
 
   p {
     color: #333;
+    font-weight: 400 !important;
   }
 
   position: relative;

@@ -20,6 +20,7 @@ import * as Yup from "yup";
 
 import {
   Email,
+  LastParagraph,
   Password,
   PasswordTips,
   RegistrationButton,
@@ -235,10 +236,10 @@ const RegistrationPage = (): ReactElement => {
           Register
         </RegistrationButton>
       </RegistrationForm>
-      <p>
+      <LastParagraph>
         Already have an account? {/* eslint-disable-next-line */}
         <span onClick={() => navigate(paths.login)}>Log in</span>
-      </p>
+      </LastParagraph>
     </RegistrationWrapper>
   );
 };
