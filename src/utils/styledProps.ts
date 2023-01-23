@@ -1,4 +1,4 @@
-import { NoteType } from "@routes/Protected/NotebookWidget/Notebook/Notebook.utils";
+import { NoteType } from "@services/NotesService";
 import { FormikErrors } from "formik/dist/types";
 
 export type StyledProps = {
