@@ -20,19 +20,10 @@ type ResetPasswordArgs = {
 const sessionServiceDef = () => {
   const login = async (args: LoginArgs) => {
     try {
-      const response = await axios.post(
-        "/login",
-        {
-          username: args.username,
-          password: args.password,
-        },
-        {
-          headers: {
-            /*eslint-disable-next-line*/
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
+      const response = await axios.post("/login", {
+        username: args.username,
+        password: args.password,
+      });
 
       const { data } = response;
       const { token } = data;
