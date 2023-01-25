@@ -30,8 +30,6 @@ const sessionServiceDef = () => {
 
       localStorage.setItem("accessToken", "Bearer " + token);
 
-      console.log(response);
-
       return response;
     } catch (e) {
       throw new Error("Something went wrong");
