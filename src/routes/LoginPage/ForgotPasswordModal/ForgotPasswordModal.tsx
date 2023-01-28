@@ -60,7 +60,7 @@ export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
             <CloseIcon />
           </Close>
           <form onSubmit={formik.handleSubmit}>
-            <h3>Forgot Password</h3>
+            <h3>Forgot password</h3>
             <p>We will send a password reset link to the following address</p>
             <Email errors={formik.errors} isError={isError}>
               <input
