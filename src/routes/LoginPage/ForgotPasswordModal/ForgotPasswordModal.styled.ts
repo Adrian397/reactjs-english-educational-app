@@ -64,6 +64,7 @@ export const Email = styled.div<StyledProps>`
     align-items: center;
     font-size: 0.875rem;
     color: #fa233b !important;
+    font-weight: 400 !important;
 
     svg {
       width: 1.0625rem;
