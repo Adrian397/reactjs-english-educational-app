@@ -2,6 +2,7 @@ import { PasswordTip } from "@components/PasswordTip/PasswordTip";
 import { useAuth } from "@hooks/useAuth";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import CircularProgress from "@mui/material/CircularProgress";
 import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
@@ -42,7 +43,7 @@ const RegistrationPage = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const { mutate } = useMutation(sessionService.register);
+  const { mutate, isLoading } = useMutation(sessionService.register);
 
   const formik = useFormik({
     initialValues: {
@@ -233,12 +234,18 @@ const RegistrationPage = (): ReactElement => {
           }
           type="submit"
         >
-          Register
+          <div>
+            {isLoading ? (
+              <CircularProgress color="inherit" size="23px" />
+            ) : (
+              "Register"
+            )}
+          </div>
         </RegistrationButton>
       </RegistrationForm>
       <LastParagraph>
-        Already have an account? {/* eslint-disable-next-line */}
-        <span onClick={() => navigate(paths.login)}>Log in</span>
+        Already have an account?
+        <button onClick={() => navigate(paths.login)}>Log in</button>
       </LastParagraph>
     </RegistrationWrapper>
   );

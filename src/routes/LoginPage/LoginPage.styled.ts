@@ -24,12 +24,14 @@ export const LoginWrapper = styled.div`
     font-weight: bold;
     z-index: 2137;
 
-    span {
+    button {
       text-decoration: underline;
       font-weight: 700;
       margin-left: 0.5rem;
       color: #825db3;
       cursor: pointer;
+      background: none;
+      border: none;
     }
   }
 `;
@@ -123,13 +125,15 @@ export const Password = styled.div<StyledProps>`
     margin-bottom: 1rem;
   }
 
-  & > span {
+  & > button {
     text-decoration: underline;
     font-weight: 700;
-    margin-left: 0.2rem;
     font-size: 0.75rem;
     color: #825db3;
     cursor: pointer;
+    width: 8rem;
+    background: none;
+    border: none;
   }
 `;
 
@@ -176,7 +180,7 @@ export const TextInfo = styled.div<StyledProps>`
 
 export const LoginButton = styled.button`
   width: 100%;
-  padding: 0.5rem 0rem;
+
   background-color: #825db3;
   color: white;
   font-weight: 700;
@@ -191,5 +195,12 @@ export const LoginButton = styled.button`
   &:disabled {
     background-color: #b3b6cc;
     color: #4a4f67;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 31px;
+    justify-content: center;
   }
 `;

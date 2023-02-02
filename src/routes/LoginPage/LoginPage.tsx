@@ -1,5 +1,6 @@
 import { useAuth } from "@hooks/useAuth";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import CircularProgress from "@mui/material/CircularProgress";
 import { sessionService } from "@services/SessionService";
 import { useMutation } from "@tanstack/react-query";
 import { KeyNames } from "@utils/keyNames";
@@ -29,7 +30,7 @@ const LoginPage = (): ReactElement => {
 
   const navigate = useNavigate();
 
-  const { mutate } = useMutation(sessionService.login);
+  const { mutate, isLoading } = useMutation(sessionService.login);
 
   const formik = useFormik({
     initialValues: {
@@ -111,8 +112,7 @@ const LoginPage = (): ReactElement => {
               <span />
             </TextInfo>
           </div>
-          {/* eslint-disable-next-line */}
-          <span onClick={() => setIsOpen(true)}>Forgot a password?</span>
+          <button onClick={() => setIsOpen(true)}>Forgot a password?</button>
         </Password>
 
         <LoginButton
@@ -122,13 +122,18 @@ const LoginPage = (): ReactElement => {
           }
           type="submit"
         >
-          Log in
+          <div>
+            {isLoading ? (
+              <CircularProgress color="inherit" size="23px" />
+            ) : (
+              "Log in"
+            )}
+          </div>
         </LoginButton>
       </LoginForm>
       <p>
         Don't have an account? {/* eslint-disable-line */}
-        {/* eslint-disable-next-line */}
-        <span onClick={() => navigate(paths.register)}>Register</span>
+        <button onClick={() => navigate(paths.register)}>Register</button>
       </p>
     </LoginWrapper>
   );

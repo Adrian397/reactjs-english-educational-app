@@ -23,12 +23,14 @@ export const RegistrationWrapper = styled.div`
     color: #333;
     z-index: 2137;
 
-    span {
+    button {
       text-decoration: underline;
       font-weight: 700;
       margin-left: 0.5rem;
       color: #825db3;
       cursor: pointer;
+      background: none;
+      border: none;
     }
   }
 `;
@@ -73,7 +75,6 @@ export const RegistrationForm = styled.form`
 
 export const RegistrationButton = styled.button`
   width: 100%;
-  padding: 0.5rem 0rem;
   background-color: #825db3;
   color: white;
   font-weight: 700;
@@ -88,6 +89,13 @@ export const RegistrationButton = styled.button`
   &:disabled {
     background-color: #b3b6cc;
     color: #4a4f67;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 31px;
+    justify-content: center;
   }
 `;
 
