@@ -112,7 +112,9 @@ const LoginPage = (): ReactElement => {
               <span />
             </TextInfo>
           </div>
-          <button onClick={() => setIsOpen(true)}>Forgot a password?</button>
+          <button onClick={() => setIsOpen(true)} type="button">
+            Forgot a password?
+          </button>
         </Password>
 
         <LoginButton
