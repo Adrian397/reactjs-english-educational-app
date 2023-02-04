@@ -122,6 +122,7 @@ const LoginPage = (): ReactElement => {
             !(formik.values.username && formik.values.password) ||
             !formik.isValid
           }
+          isLoading={isLoading}
           type="submit"
         >
           <div>

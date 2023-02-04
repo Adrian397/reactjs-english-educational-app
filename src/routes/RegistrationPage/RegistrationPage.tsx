@@ -232,6 +232,7 @@ const RegistrationPage = (): ReactElement => {
               formik.values.email
             ) || !formik.isValid
           }
+          isLoading={isLoading}
           type="submit"
         >
           <div>

@@ -20,6 +20,7 @@ export type StyledProps = {
   isCorrect?: boolean;
   isError?: boolean;
   isExpanded?: boolean;
+  isLoading?: boolean;
   isValidated?: boolean;
   isVisible?: boolean;
 };

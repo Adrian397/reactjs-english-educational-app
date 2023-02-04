@@ -178,10 +178,10 @@ export const TextInfo = styled.div<StyledProps>`
   }
 `;
 
-export const LoginButton = styled.button`
+export const LoginButton = styled.button<StyledProps>`
   width: 100%;
-
-  background-color: #825db3;
+  background-color: ${({ isLoading }) =>
+    isLoading ? "rgba(130, 93, 179, 0.7)" : "#825db3"};
   color: white;
   font-weight: 700;
   border: none;
