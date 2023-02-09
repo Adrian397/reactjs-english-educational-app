@@ -10,7 +10,7 @@ export const BenefitsSection = (): ReactElement => {
   const { t } = useTranslation("common", { keyPrefix: "BenefitsSection" });
 
   return (
-    <BenefitsWrapper id="reasons">
+    <BenefitsWrapper id="benefits">
       <BenefitsImg>
         <img alt="benefits" src="./assets/benefits.svg" />
       </BenefitsImg>
