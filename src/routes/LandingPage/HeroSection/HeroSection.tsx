@@ -1,13 +1,16 @@
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import { HeroImg, HeroInfo, HeroWrapper } from "./HeroSection.styled";
 export const HeroSection = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "HeroSection" });
+
   return (
     <HeroWrapper>
       <HeroInfo>
         <h1>
           Learning English can be <span>easy</span> and <span>enjoyable</span>
         </h1>
-        <p>It is simply about what materials you use and how you learn...</p>
+        <p>{t("desc")}</p>
         <a href="#about">Read more</a>
       </HeroInfo>
       <HeroImg>
