@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Activities,
   ActivitiesInfo,
@@ -6,21 +7,21 @@ import {
 } from "./ActivitiesSection.styled";
 
 export const ActivitiesSection = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "ActivitiesSection" });
+
   return (
     <ActivitiesWrapper id="activities">
       <ActivitiesInfo>
-        <span>Activities</span>
+        <span>{t("activities")}</span>
         <h2>
-          How does the learning look{" "}
+          {t("headerPartOne")}
           <span>
-            like? <img alt="circle" src="./assets/circle.svg" />
+            {t("headerPartTwo")} <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
         <p>
-          Take part in a grammar quiz or test your knowladge of vocabulary. In
-          both cases you have access to the notebook widget that allows you to
-          make important notes and then export them in .txt files if needed.{" "}
-          <strong>Go challenge yourself!</strong>
+          {t("desc")}
+          <strong>{t("challenge")}</strong>
         </p>
       </ActivitiesInfo>
 
@@ -31,7 +32,7 @@ export const ActivitiesSection = (): ReactElement => {
         </div>
         <div>
           <img alt="test" src="./assets/vocabulary.svg" />
-          <h4>VOCABULARY</h4>
+          <h4>{t("vocabulary")}</h4>
         </div>
       </Activities>
     </ActivitiesWrapper>

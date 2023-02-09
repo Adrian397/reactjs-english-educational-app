@@ -4,12 +4,12 @@ import { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { AboutSection } from "./AboutSection/AboutSection";
 import { ActivitiesSection } from "./ActivitiesSection/ActivitiesSection";
+import { BenefitsSection } from "./BenefitsSection/BenefitsSection";
 import { Footer } from "./Footer/Footer";
 import { GamesSection } from "./GamesSection/GamesSection";
 import { HeroSection } from "./HeroSection/HeroSection";
 import { Wrapper } from "./LandingPage.styled";
 import { Navbar } from "./Navbar/Navbar";
-import { ReasonsSection } from "./ReasonsSection/ReasonsSection";
 
 const LandingPage = (): ReactElement => {
   const { sessionState } = useAuth();
@@ -23,7 +23,7 @@ const LandingPage = (): ReactElement => {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <ReasonsSection />
+      <BenefitsSection />
       <ActivitiesSection />
       <GamesSection />
       <Footer />

@@ -4,6 +4,7 @@ import GlobalStyles from "./globalStyles";
 import { Router } from "./routes/Router";
 
 const queryClient = new QueryClient();
+
 const App = (): ReactElement => {
   return (
     <>

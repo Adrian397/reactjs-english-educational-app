@@ -1,7 +1,11 @@
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import i18n from "@utils/i18next";
 import { paths } from "@utils/paths";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
+  Buttons,
   Logo,
   NavButtons,
   NavList,
@@ -10,48 +14,104 @@ import {
 } from "./Navbar.styled";
 
 export const Navbar = (): ReactElement => {
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const { t } = useTranslation("common", { keyPrefix: "Navbar" });
+
+  const [isMenuVisible, setIsMenuVisible] = useState({
+    mobile: false,
+    language: false,
+  });
+  const [currentLanguage, setCurrentLanguage] = useState("pl");
+
+  useEffect(() => {
+    const language = localStorage.getItem("language");
+    if (language) {
+      setCurrentLanguage(language);
+      i18n.changeLanguage(language);
+    }
+  }, []);
 
   const navigate = useNavigate();
+
+  const handleLanguageChange = () => {
+    if (currentLanguage === "pl") {
+      setCurrentLanguage("en");
+      i18n.changeLanguage("en");
+      localStorage.setItem("language", "en");
+    } else {
+      setCurrentLanguage("pl");
+      i18n.changeLanguage("pl");
+      localStorage.setItem("language", "pl");
+    }
+    setIsMenuVisible({ ...isMenuVisible, language: false });
+  };
 
   return (
     <NavWrapper>
       <Logo>
-        <h1>Englify</h1>
+        <h1>{t("logo")}</h1>
       </Logo>
       <NavList>
         <li>
-          <a href="#about">About</a>
+          <a href="#about">{t("about")}</a>
         </li>
         <li>
-          <a href="#reasons">Reasons</a>
+          <a href="#reasons">{t("benefits")}</a>
         </li>
         <li>
-          <a href="#activities">Activities</a>
+          <a href="#activities">{t("activities")}</a>
         </li>
         <li>
-          <a href="#games">Games</a>
+          <a href="#games">{t("games")}</a>
         </li>
       </NavList>
       <div>
-        <NavButtons>
-          <button onClick={() => navigate(paths.login)}>Log in</button>
-          <button onClick={() => navigate(paths.register)}>Register</button>
-        </NavButtons>
-        <NavListMobile isVisible={isMenuVisible}>
-          <button onClick={() => setIsMenuVisible((prevState) => !prevState)} />
+        <Buttons isVisible={isMenuVisible.language}>
+          <NavButtons>
+            <button onClick={() => navigate(paths.login)}>{t("logIn")}</button>
+            <button onClick={() => navigate(paths.register)}>
+              {t("register")}
+            </button>
+          </NavButtons>
+          <div>
+            <button
+              onClick={() =>
+                setIsMenuVisible({
+                  ...isMenuVisible,
+                  language: !isMenuVisible.language,
+                })
+              }
+            >
+              {currentLanguage} <KeyboardArrowDownIcon />
+            </button>
+            <div>
+              <button onClick={handleLanguageChange}>
+                {currentLanguage === "en" ? "pl" : "en"}
+              </button>
+            </div>
+          </div>
+        </Buttons>
+
+        <NavListMobile isVisible={isMenuVisible.mobile}>
+          <button
+            onClick={() =>
+              setIsMenuVisible({
+                ...isMenuVisible,
+                mobile: !isMenuVisible.mobile,
+              })
+            }
+          />
           <ul>
             <li>
-              <a href="#about">About</a>
+              <a href="#about">{t("about")}</a>
             </li>
             <li>
-              <a href="#reasons">Reasons</a>
+              <a href="#reasons">{t("reasons")}</a>
             </li>
             <li>
-              <a href="#activities">Activities</a>
+              <a href="#activities">{t("activities")}</a>
             </li>
             <li>
-              <a href="#games">Games</a>
+              <a href="#games">{t("games")}</a>
             </li>
           </ul>
         </NavListMobile>

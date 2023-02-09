@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FooterContact,
   FooterInfo,
@@ -7,6 +8,8 @@ import {
 } from "./Footer.styled";
 
 export const Footer = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "FooterSection" });
+
   return (
     <FooterWrapper>
       <img alt="abstract" src="./assets/abstract2.svg" />
@@ -21,7 +24,7 @@ export const Footer = (): ReactElement => {
             </div>
           </FooterContact>
           <FooterSocials>
-            <h4>Socials</h4>
+            <h4>{t("socials")}</h4>
             <div>
               {/* eslint-disable-next-line */}
               <a href="#">

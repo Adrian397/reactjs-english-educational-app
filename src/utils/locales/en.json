@@ -1,5 +1,63 @@
 {
+  "Navbar": {
+    "about": "About",
+    "reasons": "Reasons",
+    "activities": "Activities",
+    "games": "Games",
+    "logIn": "Log in",
+    "register": "Register"
+  },
   "HeroSection": {
-    "desc": "test"
+    "headerPartOne": "Learning English can be ",
+    "headerPartTwo": " and ",
+    "easy": "easy",
+    "enjoyable": "enjoyable",
+    "desc": "It is simply about what materials you use and how you learn..."
+  },
+  "AboutSection": {
+    "about": "about",
+    "whatIs": "What is ",
+    "desc": "It is a service that provides an educational activities for people who want step up with their english skills based on their actual level. Proven and qualitative educational materials are our hallmark. Feel free to explore!",
+    "quality": "Quality",
+    "qualityDesc": "Guarantee of good quality of the transferred material, checked by an English native speaker",
+    "upToDate": "Up-to-date",
+    "upToDateDesc": "Rapidly developing application with systematic updates and news",
+    "rating": "Rating",
+    "ratingDesc": "Letting user know what level they are currently at based on their performance",
+    "entertainment": "Entertainment",
+    "entertainmentDesc": "Activities made not only to test yourself but to compete with your friends and have fun together"
+  },
+  "BenefitsSection": {
+    "benefits": "benefits",
+    "why": "Why would you start learning ",
+    "english": "English?",
+    "1": "1",
+    "popularity": "It is most widely spoken language in the world",
+    "2": "2",
+    "media": "It is a language of the media",
+    "3": "3",
+    "job": "Increase your chances of getting a good job",
+    "4": "4",
+    "traveling": "Travel around the world with no worry of being misunderstood"
+  },
+  "ActivitiesSection": {
+    "activities": "activities",
+    "headerPartOne": "How does the learning look ",
+    "headerPartTwo": "like?",
+    "desc": "Take part in a grammar quiz or test your knowladge of vocabulary. In both cases you have access to the notebook widget that allows you to make important notes and then export them in .txt files if needed. ",
+    "challenge": "Go challenge yourself!",
+    "vocabulary": "vocabulary"
+  },
+  "GamesSection": {
+    "games": "games",
+    "bonus": "As a bonus for completing a ",
+    "quiz": "quiz...",
+    "desc": "After finishing a quiz you will be awarded with availability to sign in into our external games section. You will be able to play the games whose level of difficulty are adjusted to the score you achieved in the quiz."
+  },
+  "FooterSection": {
+    "socials": "Socials"
+  },
+  "LoginPage": {
+    "login": "Login"
   }
 }

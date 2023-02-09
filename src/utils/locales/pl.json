@@ -1,5 +1,65 @@
 {
+  "Navbar": {
+    "logo": "Englify",
+    "about": "O portalu",
+    "benefits": "Korzyści",
+    "activities": "Aktywności",
+    "games": "Gry",
+    "logIn": "Zaloguj",
+    "register": "Zarejestruj"
+  },
   "HeroSection": {
-    "desc": "It is simply about what materials you use and how you learn..."
+    "headerPartOne": "Nauka angielskiego może być ",
+    "headerPartTwo": " i ",
+    "easy": "łatwa",
+    "enjoyable": "przyjemna",
+    "desc": "Chodzi po prostu o to, z jakich materiałów korzystasz i jak się uczysz...",
+    "readMore": "Czytaj więcej"
+  },
+  "AboutSection": {
+    "about": "o portalu",
+    "whatIs": "Czym jest ",
+    "desc": "Jest to serwis, który zapewnia aktywności edukacyjne dla osób, które chcą podnieść swoje umiejętności w zakresie języka angielskiego w oparciu o ich aktualny poziom. Sprawdzone i jakościowe materiały edukacyjne to nasz znak rozpoznawczy. Zapraszamy do odkrywania!",
+    "quality": "Jakość",
+    "qualityDesc": "Gwarancja dobrej jakości przekazywanych materiałów",
+    "upToDate": "Nowości",
+    "upToDateDesc": "Szybko rozwijająca się aplikacja z systematycznymi aktualizacjami i nowościami",
+    "rating": "Ocena",
+    "ratingDesc": "Informowanie użytkownika o poziomie, na którym aktualnie się znajduje na podstawie jego wyników",
+    "entertainment": "Rozrywka",
+    "entertainmentDesc": "Aktywności są nie tylko po to, by się sprawdzić, ale by rywalizować z przyjaciółmi i wspólnie się bawić"
+  },
+  "BenefitsSection": {
+    "benefits": "korzyści",
+    "why": "Dlaczego miałbyś zacząć uczyć się języka ",
+    "english": "angielskiego?",
+    "1": "1",
+    "popularity": "Jest to najczęściej używany język na świecie",
+    "2": "2",
+    "media": "Jest to język mediów",
+    "3": "3",
+    "job": "Zwiększ swoje szanse na zdobycie dobrej pracy",
+    "4": "4",
+    "traveling": "Podróżuj po świecie bez obaw, że zostaniesz źle zrozumiany"
+  },
+  "ActivitiesSection": {
+    "activities": "aktywności",
+    "headerPartOne": "Jak wygląda ",
+    "headerPartTwo": "nauka?",
+    "desc": "Weź udział w quizie gramatycznym lub sprawdź swoją znajomość słownictwa. W obu przypadkach masz dostęp do widżetu notatnika, który pozwala na robienie ważnych notatek, a następnie eksportowanie ich w plikach .txt w razie potrzeby. ",
+    "challenge": "Podejmij wyzwanie!",
+    "vocabulary": "nauka słownictwa"
+  },
+  "GamesSection": {
+    "games": "gry",
+    "bonus": "Jako bonus za wzięcie udziału w ",
+    "quiz": "quizie...",
+    "desc": "Po ukończeniu quizu otrzymasz możliwość zalogowania się do naszej sekcji gier zewnętrznych. Będziesz mógł zagrać w gry, których poziom trudności jest dostosowany do wyniku, jaki uzyskałeś w quizie."
+  },
+  "FooterSection": {
+    "socials": "Media"
+  },
+  "LoginPage": {
+    "login": "Logowanie"
   }
 }

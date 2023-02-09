@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ReasonsWrapper = styled.section`
+export const BenefitsWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@ export const ReasonsWrapper = styled.section`
   }
 `;
 
-export const ReasonsImg = styled.div`
+export const BenefitsImg = styled.div`
   flex: 1;
 
   img {
@@ -35,7 +35,7 @@ export const ReasonsImg = styled.div`
   }
 `;
 
-export const Reasons = styled.div`
+export const Benefits = styled.div`
   flex: 1;
 
   & > span {

@@ -70,7 +70,7 @@ export const NavWrapper = styled.div`
   width: 100%;
   padding-right: 3rem;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1170px) {
     div:nth-of-type(2) {
       display: flex;
       gap: 2rem;
@@ -99,6 +99,7 @@ export const NavList = styled.ul`
   display: flex;
   align-items: center;
   gap: 5rem;
+  margin-left: 7rem;
 
   a {
     text-decoration: none;
@@ -108,7 +109,7 @@ export const NavList = styled.ul`
     font-size: 1.125rem;
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 1170px) {
     display: none;
   }
 `;
@@ -117,6 +118,7 @@ export const NavButtons = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  margin-right: 1rem;
 
   button {
     background: none;
@@ -139,5 +141,50 @@ export const NavButtons = styled.div`
 
   @media (max-width: 600px) {
     display: none;
+  }
+`;
+
+export const Buttons = styled.div<StyledProps>`
+  display: flex;
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    transform: ${({ isVisible }) =>
+      isVisible ? "rotate(-180deg)" : "rotate(0deg)"};
+    margin-left: 2px;
+    transition: transform 120ms ease;
+  }
+
+  div:last-child {
+    position: relative;
+    button {
+      text-transform: uppercase;
+      width: 3.5rem;
+      border: 2px solid #825db3;
+      background-color: white;
+      padding: 0.5rem;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #825db3;
+      font-weight: bold;
+    }
+
+    div {
+      position: absolute;
+      width: 100%;
+      bottom: -2.5rem;
+      visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+      transform: ${({ isVisible }) =>
+        isVisible ? "translateY(0%)" : "translateY(-20%)"};
+      opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+      transition: all 120ms ease;
+      button {
+        width: 100%;
+      }
+    }
   }
 `;

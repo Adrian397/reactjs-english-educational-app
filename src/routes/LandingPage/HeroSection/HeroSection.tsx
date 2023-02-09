@@ -8,7 +8,10 @@ export const HeroSection = (): ReactElement => {
     <HeroWrapper>
       <HeroInfo>
         <h1>
-          Learning English can be <span>easy</span> and <span>enjoyable</span>
+          {t("headerPartOne")}
+          <span>{t("easy")}</span>
+          {t("headerPartTwo")}
+          <span>{t("enjoyable")}</span>
         </h1>
         <p>{t("desc")}</p>
         <a href="#about">Read more</a>

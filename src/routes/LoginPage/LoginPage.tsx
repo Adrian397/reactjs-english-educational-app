@@ -7,6 +7,7 @@ import { KeyNames } from "@utils/keyNames";
 import { paths } from "@utils/paths";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { ForgotPasswordModal } from "./ForgotPasswordModal/ForgotPasswordModal";
@@ -20,6 +21,8 @@ import {
 } from "./LoginPage.styled";
 
 const LoginPage = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "LoginPage" });
+
   const { sessionState, setSessionState } = useAuth();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -81,7 +84,7 @@ const LoginPage = (): ReactElement => {
       {isOpen && <ForgotPasswordModal onOpenChange={setIsOpen} />}
       <img alt="england" src="./assets/england.svg" />
       <LoginForm autoComplete="off" onSubmit={formik.handleSubmit}>
-        <h2>Login</h2>
+        <h2>{t("login")}</h2>
         <Username isError={isError}>
           <label htmlFor="username">Username:</label>
           <input

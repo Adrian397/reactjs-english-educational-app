@@ -1,23 +1,21 @@
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import { GamesImg, GamesInfo, GamesWrapper } from "./GamesSection.styled";
 
 export const GamesSection = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "GamesSection" });
+
   return (
     <GamesWrapper id="games">
       <GamesInfo>
-        <span>Games</span>
+        <span>{t("games")}</span>
         <h2>
-          As a bonus for completing a{" "}
+          {t("bonus")}
           <span>
-            quiz... <img alt="circle" src="./assets/circle.svg" />
+            {t("quiz")} <img alt="circle" src="./assets/circle.svg" />
           </span>
         </h2>
-        <p>
-          After finishing a quiz you will be awarded with availability to sign
-          in into our external games section. You will be able to play the games
-          whose level of difficulty are adjusted to the score you achieved in
-          the quiz.
-        </p>
+        <p>{t("desc")}</p>
       </GamesInfo>
       <GamesImg>
         <img alt="games" src="./assets/games.svg" />

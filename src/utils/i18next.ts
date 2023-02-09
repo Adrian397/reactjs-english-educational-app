@@ -16,10 +16,6 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
-  detection: {
-    order: ["navigator"],
-    lookupLocalStorage: "i18nextLng",
-  },
 });
 
 export default i18n;
