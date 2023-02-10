@@ -86,26 +86,26 @@ const LoginPage = (): ReactElement => {
       <LoginForm autoComplete="off" onSubmit={formik.handleSubmit}>
         <h2>{t("login")}</h2>
         <Username isError={isError}>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">{t("username")}</label>
           <input
             id="username"
-            placeholder="Enter your username..."
+            placeholder={t("enterUsername")}
             type="username"
             {...formik.getFieldProps("username")}
           />
         </Username>
         <Password isCapsLockOn={isCapsLockOn} isError={isError}>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">{t("password")}</label>
           <div>
             <input
               id="password"
               onKeyUp={(e) => checkCapsLock(e)}
-              placeholder="Enter your password..."
+              placeholder={t("enterPassword")}
               type={isVisible ? "text" : "password"}
               {...formik.getFieldProps("password")}
             />
             <p>
-              <ErrorOutlineIcon /> Wrong username or password
+              <ErrorOutlineIcon /> {t("wrongCredentials")}
             </p>
             <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
               <button
@@ -116,7 +116,7 @@ const LoginPage = (): ReactElement => {
             </TextInfo>
           </div>
           <button onClick={() => setIsOpen(true)} type="button">
-            Forgot a password?
+            {t("forgotPassword")}
           </button>
         </Password>
 
@@ -132,14 +132,16 @@ const LoginPage = (): ReactElement => {
             {isLoading ? (
               <CircularProgress color="inherit" size="23px" />
             ) : (
-              "Log in"
+              t("log in")
             )}
           </div>
         </LoginButton>
       </LoginForm>
       <p>
-        Don't have an account? {/* eslint-disable-line */}
-        <button onClick={() => navigate(paths.register)}>Register</button>
+        {t("noAccount")} {/* eslint-disable-line */}
+        <button onClick={() => navigate(paths.register)}>
+          {t("register")}
+        </button>
       </p>
     </LoginWrapper>
   );

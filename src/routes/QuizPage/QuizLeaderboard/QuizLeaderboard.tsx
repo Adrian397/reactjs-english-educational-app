@@ -11,6 +11,7 @@ import {
 import { quizService } from "@services/QuizService";
 import { useQuery } from "@tanstack/react-query";
 import { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   CustomizedTableCell,
   CustomizedTableRow,
@@ -18,6 +19,8 @@ import {
 } from "./QuizLeaderboard.styled";
 
 const QuizLeaderboard = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Leaderboard" });
+
   const [args, setArgs] = useState({
     limit: 6,
     page: 0,
@@ -34,11 +37,13 @@ const QuizLeaderboard = (): ReactElement => {
             <TableHead>
               <CustomizedTableRow>
                 <CustomizedTableCell align="center">
-                  Username
+                  {t("username")}
                 </CustomizedTableCell>
-                <CustomizedTableCell align="center">Score</CustomizedTableCell>
                 <CustomizedTableCell align="center">
-                  Difficulty
+                  {t("score")}
+                </CustomizedTableCell>
+                <CustomizedTableCell align="center">
+                  {t("difficulty")}
                 </CustomizedTableCell>
               </CustomizedTableRow>
             </TableHead>
@@ -50,7 +55,7 @@ const QuizLeaderboard = (): ReactElement => {
                     <TableCell align="center">{user.username}</TableCell>
                     <TableCell align="center">{user.result.score}</TableCell>
                     <TableCell align="center">
-                      {user.result.difficulty}
+                      {t(user.result.difficulty)}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -61,6 +66,7 @@ const QuizLeaderboard = (): ReactElement => {
           <TablePagination
             component="div"
             count={data.numberOfRows}
+            labelRowsPerPage={t("rowsPerPage")}
             onPageChange={(e, newPage) => setArgs({ ...args, page: newPage })}
             onRowsPerPageChange={(e) =>
               setArgs({ ...args, limit: +e.target.value })

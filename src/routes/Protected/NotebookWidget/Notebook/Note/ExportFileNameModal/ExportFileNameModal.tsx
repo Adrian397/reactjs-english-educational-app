@@ -2,6 +2,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { imgBasePath } from "@utils/imgs";
 import { useFormik } from "formik";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import {
   Close,
@@ -26,6 +27,8 @@ export const ExportFileNameModal = ({
   onNoteExport,
   onVisibilityChange,
 }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Notebook" });
+
   const formik = useFormik({
     initialValues: {
       fileName: "",
@@ -63,10 +66,10 @@ export const ExportFileNameModal = ({
           <img alt="export icon" src={imgBasePath + "/exportColoured.svg"} />
         </Export>
 
-        <p>Enter a name for the exported text file</p>
+        <p>{t("exportInfo")}</p>
         <form onSubmit={formik.handleSubmit}>
           <input
-            placeholder="Enter file name..."
+            placeholder={t("enterFileName")}
             {...formik.getFieldProps("fileName")}
           />
           <div>
@@ -79,13 +82,13 @@ export const ExportFileNameModal = ({
               }
               type="button"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               disabled={!formik.values.fileName || !formik.isValid}
               type="submit"
             >
-              Export
+              {t("export")}
             </button>
           </div>
         </form>

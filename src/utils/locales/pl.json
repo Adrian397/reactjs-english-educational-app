@@ -1,6 +1,5 @@
 {
   "Navbar": {
-    "logo": "Englify",
     "about": "O portalu",
     "benefits": "Korzyści",
     "activities": "Aktywności",
@@ -60,6 +59,95 @@
     "socials": "Media"
   },
   "LoginPage": {
-    "login": "Logowanie"
+    "login": "Logowanie",
+    "username": "Nazwa użytkownika:",
+    "password": "Hasło:",
+    "forgotPassword": "Nie pamiętasz hasła?",
+    "log in": "Zaloguj",
+    "noAccount": "Nie posiadasz konta?",
+    "register": "Zarejestruj",
+    "enterUsername": "Wprowadź nazwę użytkownika...",
+    "enterPassword": "Wprowadź hasło...",
+    "wrongCredentials": "Niepoprawna nazwa użytkownika lub hasło"
+  },
+  "ForgotPasswordModal": {
+    "forgotPassword": "Zapomnienie hasła",
+    "info": "Wyślemy link do resetu hasła na następujący adres:",
+    "noUser": "Nie ma użytkownika o tym adresie e-mail",
+    "incorrectEmailFormat": "Niepoprawny email format",
+    "enterEmail": "Wprowadź swój email...",
+    "send": "Wyślij"
+  },
+  "RegistrationPage": {
+    "registration": "Rejestracja",
+    "email": "Email:",
+    "enterEmail": "Wprowadź email...",
+    "wrongEmailFormat": "Niepoprawny email format",
+    "emailTaken": "Ten email jest już zajęty",
+    "username": "Nazwa użytkownika:",
+    "enterUsername": "Wprowadź nazwę użytkownika...",
+    "usernameInfo": "Min. 6, Max. 32, bez polskich znaków",
+    "password": "Hasło:",
+    "enterPassword": "Wprowadź hasło...",
+    "capital": "Wielka litera",
+    "lowercase": "Mała litera",
+    "digit": "Cyfra",
+    "min8Chars": "Min. 8 znaków",
+    "usernameToLong": "Maksymalna liczba znaków osiągnięta",
+    "usernameToShort": "Nie wystarczająca ilość znaków - min. 6",
+    "wrongChar": "Niedozwolone znaki zostały użyte",
+    "register": "Zarejestruj",
+    "accountExist": "Posiadasz konto?",
+    "log in": "Zaloguj"
+  },
+  "ChooseActivityPage": {
+    "quiz": "Quiz",
+    "vocabulary": "Nauka słownictwa"
+  },
+
+  "Notebook": {
+    "addNote": "Dodaj notatkę",
+    "enterNotes": "Wprowadź tekst...",
+    "exportInfo": "Nadaj nazwę eksportowanemu plikowi",
+    "enterFileName": "Wprowadź nazwę...",
+    "cancel": "Anuluj",
+    "export": "Eksport",
+    "deletion": "Usuwanie",
+    "deletionInfo": "Jesteś pewien, że chcesz usunąć tę notatkę?",
+    "delete": "Usuń"
+  },
+  "Quiz": {
+    "welcome": "Witaj w quizie!",
+    "quizInfo": "Quiz zawiera 3 poziomy trudności, po 10 pytań na każdy.",
+    "quizDiffInfo": "Możesz bezpośrednio wybrać jeden z poziomów lub dostosować go po udzieleniu odpowiedzi na mieszaną partię pytań.",
+    "beginner": "początkujący",
+    "intermediate": "średnio zaawansowany",
+    "advanced": "zaawansowany",
+    "adjust": "dostosuj poziom",
+    "leaderboard": "tabela wyników",
+    "next": "Następne",
+    "finish": "Zakończ",
+    "scoreFirstPart": "Zdobyłeś ",
+    "scoreSecondPart": " z ",
+    "points": " punktów"
+  },
+  "Vocabulary": {
+    "vocabularyInfo": "Wybierz poprawną odpowiedź dla każdej z luk...",
+    "check": "sprawdź"
+  },
+  "Leaderboard": {
+    "username": "Nazwa użytkownika",
+    "score": "Punktacja",
+    "difficulty": "Poziom zaawansowania",
+    "rowsPerPage": "Wiersze na stronę",
+    "beginner": "początkujący",
+    "intermediate": "średnio zaawansowany",
+    "advanced": "zaawansowany"
+  },
+  "Logout": {
+    "logout": "Wylogowanie",
+    "logoutInfo": "Jesteś pewien, że chcesz się wylogować?",
+    "log out": "Wyloguj",
+    "cancel": "Anuluj"
   }
 }

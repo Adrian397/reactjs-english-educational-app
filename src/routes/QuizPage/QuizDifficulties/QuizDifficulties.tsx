@@ -1,5 +1,6 @@
 import { paths } from "@utils/paths";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
   Difficulties,
@@ -9,6 +10,8 @@ import {
 } from "./QuizDifficulties.styled";
 
 const QuizDifficulties = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Quiz" });
+
   const navigate = useNavigate();
 
   const handleDifficultyChoice = (difficulty: string) => {
@@ -21,34 +24,28 @@ const QuizDifficulties = (): ReactElement => {
   return (
     <Wrapper>
       <QuizIntroduction>
-        <h1>Welcome to the quiz!</h1>
-        <p>
-          The quiz consists of 3 levels of difficulty and 10 questions for each
-          level.
-        </p>
-        <p>
-          You can directly select one of the levels or adjust it after answering
-          a mixed batch of questions.
-        </p>
+        <h1>{t("welcome")}</h1>
+        <p>{t("quizInfo")}</p>
+        <p>{t("quizDiffInfo")}</p>
         <Difficulties>
           <div>
             <button onClick={() => handleDifficultyChoice("beginner")}>
-              Beginner
+              {t("beginner")}
             </button>
             <button onClick={() => handleDifficultyChoice("intermediate")}>
-              Intermediate
+              {t("intermediate")}
             </button>
             <button onClick={() => handleDifficultyChoice("advanced")}>
-              Advanced
+              {t("advanced")}
             </button>
           </div>
           <button onClick={() => handleDifficultyChoice("adjust")}>
-            Adjust the level
+            {t("adjust")}
           </button>
         </Difficulties>
       </QuizIntroduction>
       <Leaderboard onClick={() => navigate(paths.quizLeaderboard)}>
-        Leaderboard
+        {t("leaderboard")}
       </Leaderboard>
     </Wrapper>
   );

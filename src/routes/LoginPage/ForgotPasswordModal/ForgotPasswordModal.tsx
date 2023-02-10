@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { emailValidation } from "@utils/validationSchema";
 import { useFormik } from "formik";
 import { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { SendEmailSuccessModal } from "../SendEmailSuccessModal/SendEmailSuccessModal";
 
@@ -21,6 +22,8 @@ type Props = {
 };
 
 export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "ForgotPasswordModal" });
+
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -60,21 +63,21 @@ export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
             <CloseIcon />
           </Close>
           <form onSubmit={formik.handleSubmit}>
-            <h3>Forgot password</h3>
-            <p>We will send a password reset link to the following address</p>
+            <h3>{t("forgotPassword")}</h3>
+            <p>{t("info")}</p>
             <Email errors={formik.errors} isError={isError}>
               <input
-                placeholder="Enter your e-mail..."
+                placeholder={t("enterEmail")}
                 {...formik.getFieldProps("email")}
               />
               {isError && (
                 <p>
-                  <ErrorOutlineIcon /> There is no user with that email address
+                  <ErrorOutlineIcon /> {t("noUser")}
                 </p>
               )}
               {formik.errors.email && (
                 <p>
-                  <ErrorOutlineIcon /> Incorrect e-mail format
+                  <ErrorOutlineIcon /> {t("incorrectEmailFormat")}
                 </p>
               )}
             </Email>
@@ -83,7 +86,7 @@ export const ForgotPasswordModal = ({ onOpenChange }: Props): ReactElement => {
                 disabled={!formik.values.email || !formik.isValid}
                 type="submit"
               >
-                Send
+                {t("send")}
               </button>
             </SendEmail>
           </form>

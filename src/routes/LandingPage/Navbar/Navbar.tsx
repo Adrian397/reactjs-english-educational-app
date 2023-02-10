@@ -1,7 +1,8 @@
+import AuthContext from "@context/AuthContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import i18n from "@utils/i18next";
 import { paths } from "@utils/paths";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,31 +17,24 @@ import {
 export const Navbar = (): ReactElement => {
   const { t } = useTranslation("common", { keyPrefix: "Navbar" });
 
+  const { currentLanguage, setCurrentLanguage } = useContext(AuthContext);
+
   const [isMenuVisible, setIsMenuVisible] = useState({
     mobile: false,
     language: false,
   });
-  const [currentLanguage, setCurrentLanguage] = useState("pl");
-
-  useEffect(() => {
-    const language = localStorage.getItem("language");
-    if (language) {
-      setCurrentLanguage(language);
-      i18n.changeLanguage(language);
-    }
-  }, []);
 
   const navigate = useNavigate();
 
   const handleLanguageChange = () => {
-    if (currentLanguage === "pl") {
-      setCurrentLanguage("en");
-      i18n.changeLanguage("en");
-      localStorage.setItem("language", "en");
-    } else {
+    if (currentLanguage === "en") {
       setCurrentLanguage("pl");
       i18n.changeLanguage("pl");
       localStorage.setItem("language", "pl");
+    } else {
+      setCurrentLanguage("en");
+      i18n.changeLanguage("en");
+      localStorage.setItem("language", "en");
     }
     setIsMenuVisible({ ...isMenuVisible, language: false });
   };
@@ -48,7 +42,7 @@ export const Navbar = (): ReactElement => {
   return (
     <NavWrapper>
       <Logo>
-        <h1>{t("logo")}</h1>
+        <h1>Englify</h1>
       </Logo>
       <NavList>
         <li>

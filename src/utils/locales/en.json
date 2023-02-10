@@ -58,6 +58,94 @@
     "socials": "Socials"
   },
   "LoginPage": {
-    "login": "Login"
+    "login": "Login",
+    "username": "Username:",
+    "password": "Password:",
+    "forgotPassword": "Forgot a password?",
+    "log in": "Log in",
+    "noAccount": "Don't have an account?",
+    "register": "Regiser",
+    "enterUsername": "Enter your username...",
+    "enterPassword": "Enter your password...",
+    "wrongCredentials": "Wrong username or password"
+  },
+  "ForgotPasswordModal": {
+    "forgotPassword": "Forgot Password",
+    "info": "We will send a password reset link to the following address",
+    "noUser": "There is no user with that email address",
+    "incorrectEmailFormat": "Incorrect e-mail format",
+    "enterEmail": "Enter your email...",
+    "send": "Send"
+  },
+  "RegistrationPage": {
+    "registration": "Registration",
+    "email": "Email:",
+    "enterEmail": "Enter your email...",
+    "wrongEmailFormat": "Incorrect e-mail format",
+    "emailTaken": "This email is already taken",
+    "username": "Username:",
+    "enterUsername": "Enter your username...",
+    "usernameInfo": "Min. 6, Max. 32, without Polish characters",
+    "password": "Hasło:",
+    "enterPassword": "Enter your password...",
+    "capital": "Capital",
+    "lowercase": "Lowercase",
+    "digit": "Digit",
+    "min8Chars": "Min. 8 characters",
+    "usernameToLong": "Maximum number of characters used",
+    "usernameToShort": "Insufficient number of characters - min. 6",
+    "wrongChar": "Unauthorized characters were used",
+    "register": "Register",
+    "accountExist": "Already have an account?",
+    "log in": "Log in"
+  },
+  "ChooseActivityPage": {
+    "quiz": "Quiz",
+    "vocabulary": "Vocabulary"
+  },
+  "Notebook": {
+    "addNote": "Add a note",
+    "enterNotes": "Enter your notes...",
+    "exportInfo": "Enter a name for the exported text file",
+    "enterFileName": "Enter file name...",
+    "cancel": "Cancel",
+    "export": "Export",
+    "deletion": "Deletion",
+    "deletionInfo": "Are you sure you want to delete this note?",
+    "delete": "Delete"
+  },
+  "Quiz": {
+    "welcome": "Welcome to the quiz!",
+    "quizInfo": "The quiz consists of 3 levels of difficulty and 10 questions for each level.",
+    "quizDiffInfo": "You can directly select one of the levels or adjust it after answering a mixed batch of questions.",
+    "beginner": "beginner",
+    "intermediate": "intermediate",
+    "advanced": "advanced",
+    "adjust": "adjust the level",
+    "leaderboard": "leaderboard",
+    "next": "Next",
+    "finish": "Finish",
+    "scoreFirstPart": "You scored ",
+    "scoreSecondPart": " out of "
+  },
+
+  "Vocabulary": {
+    "vocabularyInfo": "Choose the correct option for each blank...",
+    "check": "check"
+  },
+  "Leaderboard": {
+    "username": "Username",
+    "score": "Score",
+    "difficulty": "Difficulty",
+    "rowsPerPage": "Rows per page",
+    "beginner": "beginner",
+    "intermediate": "intermediate",
+    "advanced": "advanced"
+  },
+  "Logout": {
+    "logout": "Logout",
+    "logoutInfo": "Are you sure you want to log out?",
+    "log out": "Log out",
+    "cancel": "Cancel"
   }
 }

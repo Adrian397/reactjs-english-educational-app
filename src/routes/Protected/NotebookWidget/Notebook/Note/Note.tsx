@@ -2,6 +2,7 @@ import { notesService, NoteType } from "@services/NotesService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal/DeleteConfirmationModal";
 import { ExportFileNameModal } from "./ExportFileNameModal/ExportFileNameModal";
 import { Close, Delete, Export, NoteWrapper, Save } from "./Note.styled";
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Notebook" });
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [textValue, setTextValue] = useState("");
 
@@ -122,7 +125,7 @@ export const Note = ({ note, onExpandCheck }: Props): ReactElement => {
           disabled={!isExpanded}
           id={note._id}
           onChange={(e) => setTextValue(e.target.value)}
-          placeholder="Enter your notes..."
+          placeholder={t("enterNotes")}
         />
       </NoteWrapper>
     </>

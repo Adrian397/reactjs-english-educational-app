@@ -2,6 +2,7 @@ import { SessionStateType } from "@context/AuthContext";
 import CloseIcon from "@mui/icons-material/Close";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Close,
   Logout,
@@ -18,6 +19,8 @@ export const LogoutConfirmationModal = ({
   onVisibilityChange,
   onSessionStateChange,
 }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Logout" });
+
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     onSessionStateChange({ status: "anon", accessToken: null });
@@ -32,11 +35,13 @@ export const LogoutConfirmationModal = ({
         <Logout>
           <img alt="logout icon" src={imgBasePath + "/logoutModal.svg"} />
         </Logout>
-        <h3>Logout</h3>
-        <p>Are you sure you want to log out?</p>
+        <h3>{t("logout")}</h3>
+        <p>{t("logoutInfo")}</p>
         <div>
-          <button onClick={() => onVisibilityChange(false)}>Cancel</button>
-          <button onClick={handleLogout}>Log out</button>
+          <button onClick={() => onVisibilityChange(false)}>
+            {t("cancel")}
+          </button>
+          <button onClick={handleLogout}>{t("log out")}</button>
         </div>
       </Modal>
     </ModalWrapper>

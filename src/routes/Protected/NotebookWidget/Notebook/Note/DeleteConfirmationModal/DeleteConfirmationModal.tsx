@@ -3,6 +3,7 @@ import { notesService } from "@services/NotesService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Close,
   Modal,
@@ -24,6 +25,8 @@ export const DeleteConfirmationModal = ({
   noteId,
   onVisibilityChange,
 }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Notebook" });
+
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(notesService.deleteNote, {
@@ -60,8 +63,8 @@ export const DeleteConfirmationModal = ({
         <Warning>
           <img alt="warning icon" src={imgBasePath + "/warning.svg"} />
         </Warning>
-        <h3>Deletion</h3>
-        <p>Are you sure you want to delete this note?</p>
+        <h3>{t("deletion")}</h3>
+        <p>{t("deletionInfo")}</p>
         <div>
           <button
             onClick={() =>
@@ -71,9 +74,11 @@ export const DeleteConfirmationModal = ({
               }))
             }
           >
-            Cancel
+            {t("cancel")}
           </button>
-          <button onClick={(e) => handleNoteDelete(noteId, e)}>Delete</button>
+          <button onClick={(e) => handleNoteDelete(noteId, e)}>
+            {t("delete")}
+          </button>
         </div>
       </Modal>
     </ModalWrapper>

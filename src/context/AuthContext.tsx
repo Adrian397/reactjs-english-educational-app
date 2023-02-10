@@ -1,3 +1,4 @@
+import i18n from "@utils/i18next";
 import {
   createContext,
   Dispatch,
@@ -20,13 +21,17 @@ export type SessionStateType = {
 };
 
 export type ContextType = {
+  currentLanguage: string;
   sessionState: SessionStateType;
+  setCurrentLanguage: Dispatch<SetStateAction<string>>;
   setSessionState: Dispatch<SetStateAction<SessionStateType>>;
 };
 
 const AuthContext = createContext<ContextType>({
+  currentLanguage: "",
   sessionState: { status: "anon", accessToken: null },
   setSessionState: () => {} /* eslint-disable-line*/,
+  setCurrentLanguage: () => {} /* eslint-disable-line*/,
 });
 
 export const AuthProvider = ({ children }: Props): ReactElement => {
@@ -35,11 +40,20 @@ export const AuthProvider = ({ children }: Props): ReactElement => {
     accessToken: null,
   });
 
-  // persist user on page refresh
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+
+  // persist user on page refresh and manage language
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       setSessionState({ status: "auth", accessToken: token });
+    }
+
+    const language = localStorage.getItem("language");
+
+    if (language) {
+      setCurrentLanguage(language);
+      i18n.changeLanguage(language);
     }
   }, []);
 
@@ -60,7 +74,14 @@ export const AuthProvider = ({ children }: Props): ReactElement => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ sessionState, setSessionState }}>
+    <AuthContext.Provider
+      value={{
+        sessionState,
+        currentLanguage,
+        setSessionState,
+        setCurrentLanguage,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

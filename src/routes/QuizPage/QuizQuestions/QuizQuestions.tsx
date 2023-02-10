@@ -2,6 +2,7 @@ import { quizService } from "@services/QuizService";
 import { useQuery } from "@tanstack/react-query";
 import { ReactElement, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { ArgsType } from "../QuizPage.utils";
 import {
@@ -15,6 +16,8 @@ import {
 import { Result } from "./Result/Result";
 
 const QuizQuestions = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Quiz" });
+
   const [searchParams] = useSearchParams();
   const [args, setArgs] = useState<ArgsType>({
     currentPage: 0,
@@ -138,7 +141,9 @@ const QuizQuestions = (): ReactElement => {
                   ))}
                 </Questions>
                 {isChecked && (
-                  <NextQuestion onClick={handleNextPage}>Next</NextQuestion>
+                  <NextQuestion onClick={handleNextPage}>
+                    {t("next")}
+                  </NextQuestion>
                 )}
               </>
             )}

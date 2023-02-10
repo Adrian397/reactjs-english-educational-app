@@ -2,6 +2,7 @@ import { vocabularyService } from "@services/VocabularyService";
 import { useQuery } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Heading,
   Sentence,
@@ -11,6 +12,8 @@ import {
 } from "./VocabularyPage.styled";
 
 const VocabularyPage = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Vocabulary" });
+
   const [isAnimated, setIsAnimated] = useState(false);
   const [isCorrect, setIsCorrect] = useState({});
   const [isChecked, setIsChecked] = useState(false);
@@ -48,7 +51,7 @@ const VocabularyPage = (): ReactElement => {
     <Wrapper>
       <Vocabulary>
         <Heading imgSrc={imgBasePath + "/refresh.svg"} isAnimated={isAnimated}>
-          <h3>Choose the correct option for each blank...</h3>
+          <h3>{t("vocabularyInfo")}</h3>
           <button
             onAnimationEnd={() => setIsAnimated(false)}
             onClick={handleReset}
@@ -84,7 +87,7 @@ const VocabularyPage = (): ReactElement => {
               </Sentence>
             ))}
         </Sentences>
-        <button onClick={() => setIsChecked(true)}>Check</button>
+        <button onClick={() => setIsChecked(true)}>{t("check")}</button>
       </Vocabulary>
     </Wrapper>
   );

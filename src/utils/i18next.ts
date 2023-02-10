@@ -10,8 +10,8 @@ i18n.use(initReactI18next).init({
     en: { common: enCommon },
     pl: { common: plCommon },
   },
-  lng: "pl",
-  fallbackLng: "pl",
+  lng: "en",
+  fallbackLng: "en",
   supportedLngs,
   interpolation: {
     escapeValue: false,

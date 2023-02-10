@@ -16,6 +16,7 @@ import {
 
 import { useFormik } from "formik";
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -32,6 +33,8 @@ import {
 } from "./Registration.styled";
 
 const RegistrationPage = (): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "RegistrationPage" });
+
   const { sessionState, setSessionState } = useAuth();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -92,11 +95,11 @@ const RegistrationPage = (): ReactElement => {
 
   const errorTranslate =
     formik.errors.username === "UsernameToLong"
-      ? "Maximum number of characters used"
+      ? t("usernameToLong")
       : formik.errors.username === "UsernameToShort"
-      ? "Insufficient number of characters - min. 6"
+      ? t("usernameToShort")
       : formik.errors.username === "UsernameWrongChar"
-      ? "Unauthorized characters were used"
+      ? t("wrongChar")
       : undefined;
 
   if (sessionState.status === "auth") {
@@ -107,13 +110,13 @@ const RegistrationPage = (): ReactElement => {
     <RegistrationWrapper>
       <img alt="england" src="./assets/england.svg" />
       <RegistrationForm onSubmit={formik.handleSubmit}>
-        <h2>Registration</h2>
+        <h2>{t("registration")}</h2>
         <Email errors={formik.errors} isError={isError}>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">{t("email")}</label>
           <div>
             <input
               id="email"
-              placeholder="Enter your email..."
+              placeholder={t("enterEmail")}
               type="email"
               {...formik.getFieldProps("email")}
               onBlur={() => {
@@ -122,13 +125,13 @@ const RegistrationPage = (): ReactElement => {
             />
             {formik.errors.email && (
               <p>
-                <ErrorOutlineIcon /> Incorrect e-mail format
+                <ErrorOutlineIcon /> {t("wrongEmailFormat")}
               </p>
             )}
 
             {isError && (
               <p>
-                <ErrorOutlineIcon /> This email is already taken
+                <ErrorOutlineIcon /> {t("emailTaken")}
               </p>
             )}
 
@@ -148,11 +151,11 @@ const RegistrationPage = (): ReactElement => {
           errors={formik.errors}
           isVisible={isUsernameTip || formik.values.username.length >= 1}
         >
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">{t("username")}</label>
           <div>
             <input
               id="username"
-              placeholder="Enter your username..."
+              placeholder={t("enterUsername")}
               type="username"
               {...formik.getFieldProps("username")}
               onBlur={() => {
@@ -162,7 +165,7 @@ const RegistrationPage = (): ReactElement => {
               onFocus={() => setIsUsernameTip(true)}
             />
 
-            <p>Min. 6, Max. 32, without Polish characters</p>
+            <p>{t("usernameInfo")}</p>
 
             <p>
               <ErrorOutlineIcon /> {errorTranslate}
@@ -181,11 +184,11 @@ const RegistrationPage = (): ReactElement => {
           </div>
         </Username>
         <Password errors={formik.errors} isCapsLockOn={isCapsLockOn}>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">{t("password")}</label>
           <div>
             <input
               id="password"
-              placeholder="Enter your password..."
+              placeholder={t("enterPassword")}
               type={isVisible ? "text" : "password"}
               {...formik.getFieldProps("password")}
               onBlur={() => {
@@ -200,19 +203,19 @@ const RegistrationPage = (): ReactElement => {
             >
               <PasswordTip
                 isValidated={allErrors.errors?.includes("CapitalLetterError")}
-                text={"Wielka litera"}
+                text={t("capital")}
               />
               <PasswordTip
                 isValidated={allErrors.errors?.includes("LowerLetterError")}
-                text={"Mała litera"}
+                text={t("lowercase")}
               />
               <PasswordTip
                 isValidated={allErrors.errors?.includes("DigitError")}
-                text={"Cyfra"}
+                text={t("digit")}
               />
               <PasswordTip
                 isValidated={allErrors.errors?.includes("MinLength")}
-                text={"Min. 8 znaków"}
+                text={t("min8Chars")}
               />
             </PasswordTips>
             <TextInfo isCapsLockOn={isCapsLockOn} isVisible={isVisible}>
@@ -239,14 +242,14 @@ const RegistrationPage = (): ReactElement => {
             {isLoading ? (
               <CircularProgress color="inherit" size="23px" />
             ) : (
-              "Register"
+              t("register")
             )}
           </div>
         </RegistrationButton>
       </RegistrationForm>
       <LastParagraph>
-        Already have an account?
-        <button onClick={() => navigate(paths.login)}>Log in</button>
+        {t("accountExist")}
+        <button onClick={() => navigate(paths.login)}>{t("log in")}</button>
       </LastParagraph>
     </RegistrationWrapper>
   );

@@ -2,6 +2,7 @@ import { notesService } from "@services/NotesService";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { imgBasePath } from "@utils/imgs";
 import { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Note } from "./Note/Note";
 import {
   AddNote,
@@ -17,6 +18,8 @@ type Props = {
 };
 
 export const Notebook = ({ isVisible }: Props): ReactElement => {
+  const { t } = useTranslation("common", { keyPrefix: "Notebook" });
+
   const [inputValue, setInputValue] = useState("");
   const [isExpandedCheck, setIsExpandedCheck] = useState(false);
 
@@ -49,7 +52,7 @@ export const Notebook = ({ isVisible }: Props): ReactElement => {
       <NotesList>
         <Scroll data={data} isExpanded={isExpandedCheck}>
           {(!isExpandedCheck || (data && data.length === 0)) && (
-            <AddNote onClick={handleNoteAdd}>Add a note</AddNote>
+            <AddNote onClick={handleNoteAdd}>{t("addNote")}</AddNote>
           )}
 
           {data &&
