@@ -70,7 +70,7 @@ export const NavWrapper = styled.div`
   width: 100%;
   padding-right: 3rem;
 
-  @media (max-width: 1170px) {
+  @media (max-width: 1241px) {
     div:nth-of-type(2) {
       display: flex;
       gap: 2rem;
@@ -99,7 +99,7 @@ export const NavList = styled.ul`
   display: flex;
   align-items: center;
   gap: 5rem;
-  margin-left: 7rem;
+  margin-left: 8rem;
 
   a {
     text-decoration: none;
@@ -109,7 +109,7 @@ export const NavList = styled.ul`
     font-size: 1.125rem;
   }
 
-  @media (max-width: 1170px) {
+  @media (max-width: 1241px) {
     display: none;
   }
 `;
