@@ -99,7 +99,7 @@ export const Navbar = (): ReactElement => {
               <a href="#about">{t("about")}</a>
             </li>
             <li>
-              <a href="#reasons">{t("reasons")}</a>
+              <a href="#reasons">{t("benefits")}</a>
             </li>
             <li>
               <a href="#activities">{t("activities")}</a>
