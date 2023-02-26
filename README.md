@@ -3,14 +3,14 @@
 Tools I have used:
 * front-end:
   * React.js
-  * styled-components
+  * styled-components (styling)
   * Formik and Yup (form validations)
   * tanstack react-query v4 (managing server state)
 
 * back-end: (not included in this repo)
   * Node.js
   * Express.js
-  * mongoose
+  * mongoose (modeling data)
 
 * database:
   * MongoDB
