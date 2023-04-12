@@ -15,8 +15,6 @@ Tools I have used:
 * database:
   * MongoDB
 
-Live demo: https://english-educational-app.vercel.app/
-
 ![Design preview for the english-educational-app](./public/assets/preview.png)
 
 
